@@ -384,6 +384,13 @@ image-slot{--slot-bg:var(--bg-alt)}
 @keyframes fadeUp{from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none}}
 @media (prefers-reduced-motion:no-preference){ .reveal{animation:fadeUp .7s ease both} }
 
+/* Landing fills the screen on desktop: 3 x 4 tiles sized to the window height; width follows so tiles stay ~2.5:1 */
+@media(min-width:981px) and (min-height:560px){
+  :root{--maxw:min(100vw, calc(1.875 * (100svh - var(--mtop,140px) - 48px) + 24px + 2 * var(--pad)))}
+  .mosaic{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:repeat(4, max(150px, calc((100svh - var(--mtop,140px) - 48px) / 4))); grid-auto-flow:column; gap:12px; columns:auto; padding-bottom:12px; min-height:calc(100svh - var(--mtop,140px))}
+  .mosaic .tile{margin:0}
+  .mosaic .tile image-slot{height:100% !important; aspect-ratio:auto !important}
+}
 /* ============ RESPONSIVE ============ */
 @media(max-width:980px){ .mosaic{columns:2} .bio-hero .inner{grid-template-columns:1fr; align-content:end} .bio-hero .dim{background:linear-gradient(180deg, rgba(8,9,12,.2), rgba(8,9,12,.72) 60%)} .strange .grid{grid-template-columns:1fr} .psi-hero .vgrid{grid-template-columns:1fr} .improv .igrid,.band .bgrid,.ds-grid{grid-template-columns:1fr !important} nav.links{gap:18px} }
 @media(max-width:760px){
@@ -930,6 +937,10 @@ document.querySelectorAll('.vp-item').forEach(b=> b.addEventListener('click', ()
   b.setAttribute('aria-current','true');
   document.getElementById('vp-frame').src = 'https://www.youtube.com/embed/'+b.dataset.id+'?start='+b.dataset.start+'&rel=0&autoplay=1';
 }));
+
+// ---- landing: measure what sits above the mosaic so the tiles fill the rest of the screen ----
+const setMtop=()=> document.documentElement.style.setProperty('--mtop', document.getElementById('explore').getBoundingClientRect().top + scrollY + 'px');
+setMtop(); addEventListener('resize', setMtop); document.fonts && document.fonts.ready.then(setMtop);
 
 // ---- home button on every section ----
 document.querySelectorAll('section.detail').forEach(sec=>{
