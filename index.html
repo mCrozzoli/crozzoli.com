@@ -246,6 +246,19 @@ p{max-width:64ch}
 .ds-grid .lead{margin:0 0 16px}.ds-grid p.muted{margin:0 0 16px}
 .ds-links{display:flex; gap:22px; flex-wrap:wrap; margin-top:8px}
 .ds-links a{font-family:var(--font-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); border-bottom:1px solid currentColor; padding-bottom:2px}
+.ds-site{position:relative; display:flex; flex-direction:column; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#ede4da; box-shadow:0 18px 50px rgba(0,0,0,.14); transition:transform .3s, box-shadow .3s}
+.ds-site:hover{transform:translateY(-4px); box-shadow:0 26px 60px rgba(0,0,0,.22)}
+.ds-chrome{display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--panel); border-bottom:1px solid var(--line); font-family:var(--font-mono); font-size:11px; color:var(--muted)}
+.ds-dots{display:flex; gap:6px}.ds-dots i{width:9px; height:9px; border-radius:50%; background:var(--line)}
+.ds-url{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; background:var(--bg); border-radius:100px; padding:4px 12px}
+.ds-open{color:var(--accent); letter-spacing:.08em; text-transform:uppercase}
+.ds-view{position:relative; flex:1; overflow:hidden; pointer-events:none}
+.ds-view iframe{position:absolute; top:0; left:0; width:200%; height:200%; border:0; transform:scale(.5); transform-origin:0 0}
+.ds-cta{position:absolute; left:50%; bottom:22px; transform:translate(-50%,8px); opacity:0; background:var(--accent); color:#fff; font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:12px 20px; border-radius:100px; white-space:nowrap; transition:.3s; box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.ds-site:hover .ds-cta, .ds-site:focus-visible .ds-cta{opacity:1; transform:translate(-50%,0)}
+@media(hover:none){ .ds-cta{opacity:1; transform:translate(-50%,0)} }
+.ds-btn{display:inline-flex; align-items:center; gap:8px; margin:6px 0 18px; background:var(--accent); color:#fff; font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:14px 22px; border-radius:100px; transition:transform .2s, filter .2s}
+.ds-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 .collab-box{display:flex; gap:14px; align-items:flex-start; border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:12px; background:var(--panel); padding:16px 18px; margin:6px 0 18px}
 .collab-box .k{font-family:var(--font-mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); white-space:nowrap; padding-top:3px}
 .collab-box p{font-size:14.5px; color:var(--muted); margin:0}
@@ -264,6 +277,7 @@ section.detail[hidden]{display:none}
 .ds-grid .lead{margin-top:0}
 .collab-box{flex-direction:column; gap:8px}
 .ds-grid > image-slot, .ds-grid > .ds-media{width:100%; display:block; height:clamp(320px,62vh,680px) !important}
+.ds-grid > a.ds-site{display:flex}
 .home-btn{white-space:nowrap}
 
 /* Improviser video playlist */
@@ -626,11 +640,16 @@ image-slot{--slot-bg:var(--bg-alt)}
     <div class="eyebrow">PhD project · Intelligent Instruments Lab</div>
     <h2 class="title">Dark Sonification.</h2>
     <div class="ds-grid">
-      <image-slot id="ds-hero" style="width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#141418" fit="cover" src="assets/darksonification.png" placeholder="Dark Sonification — drop the iil.is featured image"></image-slot>
+      <a class="ds-site ds-media" href="https://mcrozzoli.github.io/darksonification-web/" target="_blank" rel="noopener" aria-label="Open the Dark Sonification project website in a new tab">
+        <span class="ds-chrome"><span class="ds-dots"><i></i><i></i><i></i></span><span class="ds-url">mcrozzoli.github.io/darksonification-web</span><span class="ds-open">Open ↗</span></span>
+        <span class="ds-view"><iframe src="https://mcrozzoli.github.io/darksonification-web/" loading="lazy" tabindex="-1" aria-hidden="true" title="Dark Sonification website preview" sandbox="allow-scripts allow-same-origin"></iframe></span>
+        <span class="ds-cta">Explore the designs ↗</span>
+      </a>
       <div>
         <p class="lead">A multimodal data display design system for entangled human–data relations.</p>
         <p class="muted">My PhD project at the Intelligent Instruments Lab, University of Iceland, investigating how interactive multimodal systems can turn data exploration into an affective, embodied practice, where data is felt rather than just read.</p>
-        <div class="ds-links"><a href="https://mcrozzoli.github.io/darksonification-web/" target="_blank" rel="noopener">Project website ↗</a><a href="https://iil.is/research/darksonification" target="_blank" rel="noopener">Intelligent Instruments Lab ↗</a></div>
+        <a class="ds-btn" href="https://mcrozzoli.github.io/darksonification-web/" target="_blank" rel="noopener">Visit the project website ↗</a>
+        <div class="ds-links"><a href="https://iil.is/research/darksonification" target="_blank" rel="noopener">Intelligent Instruments Lab ↗</a></div>
       </div>
     </div>
   </div>
