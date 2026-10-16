@@ -55,20 +55,8 @@ a{color:inherit; text-decoration:none}
 .mono{font-family:var(--font-mono); letter-spacing:.12em; text-transform:uppercase}
 .display{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); line-height:var(--dlh)}
 
-#stars{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .6s}
-html[data-theme="cosmic"] #stars{opacity:1}
 body > *:not(#stars){position:relative; z-index:1}
 
-/* ============ DIRECTION SWITCHER ============ */
-#switch{position:fixed; z-index:60; left:50%; bottom:22px; transform:translateX(-50%);
-  display:flex; align-items:center; gap:6px;
-  background:color-mix(in srgb, var(--panel) 86%, transparent);
-  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-  border:1px solid var(--line); border-radius:100px; padding:6px 6px 6px 16px; box-shadow:0 12px 40px rgba(0,0,0,.28)}
-#switch .lab{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-right:4px}
-#switch button{font-family:var(--font-mono); font-size:12px; color:var(--muted); background:transparent; border:0; cursor:pointer; padding:8px 14px; border-radius:100px; transition:.2s; white-space:nowrap}
-#switch button:hover{color:var(--ink)}
-#switch button[aria-pressed="true"]{background:var(--accent); color:#fff}
 
 /* ============ HEADER ============ */
 header.nav{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--bg) 84%, transparent);
@@ -299,6 +287,9 @@ section.detail[hidden]{display:none}
 /* Releases + Early work */
 .rel-feature{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,4vw,56px); align-items:start; padding-bottom:36px; margin-bottom:36px; border-bottom:1px solid var(--line)}
 .rel-cover img{display:block; width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:6px; box-shadow:0 18px 40px -20px rgba(0,0,0,.35)}
+.rel-cover,.rel-card > a:first-child{position:relative; display:block}
+.rel-tag{position:absolute; top:10px; right:10px; z-index:2; font-family:var(--font-mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--label-fg); background:var(--label-bg); border:1px solid var(--label-bd); padding:4px 8px; border-radius:100px; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px)}
 .rel-badge{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin-bottom:10px}
 .rel-info h3{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); font-size:clamp(30px,3.6vw,46px); line-height:1.05; margin:0 0 14px}
 .rel-info p.muted{margin:0 0 12px}
@@ -441,13 +432,11 @@ image-slot{--slot-bg:var(--bg-alt)}
   .embeds{grid-template-columns:1fr !important} .plist,.catgrid{grid-template-columns:1fr}
   .cat-cards{grid-template-columns:repeat(2,1fr)} .cat-cards.posters{grid-template-columns:repeat(2,1fr)}
   nav.links{display:none}
-  #switch{left:12px; right:12px; transform:none; justify-content:center; bottom:12px} #switch .lab{display:none}
 }
-@media(max-width:560px){ body{font-size:16.5px} #switch button{padding:8px 11px; font-size:11px} }
+@media(max-width:560px){ body{font-size:16.5px} }
 </style>
 </head>
 <body>
-<canvas id="stars"></canvas>
 
 <!-- ============ HEADER ============ -->
 <header class="nav">
@@ -766,7 +755,7 @@ image-slot{--slot-bg:var(--bg-alt)}
     <div class="eyebrow">Releases</div>
     <h2 class="title">Releases.</h2>
     <article class="rel-feature">
-      <a class="rel-cover" href="https://kairos-music.com/products/recording/0022047kai" target="_blank" rel="noopener"><img src="assets/sounding-numbers-cover.jpg" alt="Sounding Numbers album cover (KAIROS)"></a>
+      <a class="rel-cover" href="https://kairos-music.com/products/recording/0022047kai" target="_blank" rel="noopener"><img src="assets/sounding-numbers-cover.jpg" alt="Sounding Numbers album cover (KAIROS)"><span class="rel-tag">Contemporary</span></a>
       <div class="rel-info">
         <div class="rel-badge">Featured · KAIROS 0022047KAI · August 2024</div>
         <h3>Sounding Numbers</h3>
@@ -778,7 +767,7 @@ image-slot{--slot-bg:var(--bg-alt)}
     </article>
     <div class="rel-grid">
       <article class="rel-card">
-        <a href="https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights" target="_blank" rel="noopener"><img src="assets/cover-distant-lights.jpg" alt="Distant Lights cover" loading="lazy"></a>
+        <a href="https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights" target="_blank" rel="noopener"><img src="assets/cover-distant-lights.jpg" alt="Distant Lights cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
         <div class="rel-body"><h3>Distant Lights</h3><div class="rel-meta">2024 · Crozzoli / Muruaga / Filip · with Gon Muruaga (guitar) &amp; Axel Filip (drums)</div>
         <p class="rel-desc">Modern jazz close to free improvisation, after Dewey Redman, Bill Frisell, Paul Motian and Tony Malaby, with an unexpected echo of Argentine folk music.</p>
         <blockquote class="rel-quote" lang="es">“Gran trabajo de los tres músicos, destacándose especialmente el saxo de Crozzoli.” <span>Review</span></blockquote>
@@ -786,7 +775,7 @@ image-slot{--slot-bg:var(--bg-alt)}
         <div class="rel-links"><a href="https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
       </article>
       <article class="rel-card">
-        <a href="https://barefootrecords.bandcamp.com/album/radio-pulsars" target="_blank" rel="noopener"><img src="assets/cover-pulsars.jpg" alt="Radio Pulsars cover" loading="lazy"></a>
+        <a href="https://barefootrecords.bandcamp.com/album/radio-pulsars" target="_blank" rel="noopener"><img src="assets/cover-pulsars.jpg" alt="Radio Pulsars cover" loading="lazy"><span class="rel-tag">Experimental Contemporary</span></a>
         <div class="rel-body"><h3>Radio Pulsars</h3><div class="rel-meta">2020 · The Strangement Society · Barefoot Records</div>
         <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=268755320/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Radio Pulsars on Bandcamp"></iframe>
         <div class="rel-links"><a href="https://barefootrecords.bandcamp.com/album/radio-pulsars" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
@@ -806,25 +795,25 @@ image-slot{--slot-bg:var(--bg-alt)}
     </div>
     <div class="rel-grid four">
       <article class="rel-card">
-        <a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-luz" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3868692366_10.jpg" alt="Ciclos de Luz cover" loading="lazy"></a>
+        <a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-luz" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3868692366_10.jpg" alt="Ciclos de Luz cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
         <div class="rel-body"><h3>Ciclos de Luz</h3><div class="rel-meta">2013 · Miguel Crozzoli · KUAI MUSIC</div>
         <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=4130369726/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Ciclos de Luz on Bandcamp"></iframe>
         <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-luz" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
       </article>
       <article class="rel-card">
-        <a href="https://miguelcrozzoli.bandcamp.com/album/i-serie-gr-fica-equilibrios-colapsados" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3600449326_10.jpg" alt="I serie gráfica. Equilibrios Colapsados. cover" loading="lazy"></a>
+        <a href="https://miguelcrozzoli.bandcamp.com/album/i-serie-gr-fica-equilibrios-colapsados" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3600449326_10.jpg" alt="I serie gráfica. Equilibrios Colapsados. cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
         <div class="rel-body"><h3>I serie gráfica. Equilibrios Colapsados.</h3><div class="rel-meta">2014 · Graphic scores · images by Carmen Villa</div>
         <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=4234447536/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="I serie gráfica. Equilibrios Colapsados. on Bandcamp"></iframe>
         <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/i-serie-gr-fica-equilibrios-colapsados" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
       </article>
       <article class="rel-card">
-        <a href="https://miguelcrozzoli.bandcamp.com/album/bosque-viento" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3851216881_10.jpg" alt="Bosque Viento cover" loading="lazy"></a>
+        <a href="https://miguelcrozzoli.bandcamp.com/album/bosque-viento" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3851216881_10.jpg" alt="Bosque Viento cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
         <div class="rel-body"><h3>Bosque Viento</h3><div class="rel-meta">2014 · Miguel Crozzoli / Francisco Cossavella</div>
         <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=1586142588/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Bosque Viento on Bandcamp"></iframe>
         <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/bosque-viento" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
       </article>
       <article class="rel-card">
-        <a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-estrellas" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a0714951892_10.jpg" alt="Ciclos de Estrellas cover" loading="lazy"></a>
+        <a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-estrellas" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a0714951892_10.jpg" alt="Ciclos de Estrellas cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
         <div class="rel-body"><h3>Ciclos de Estrellas</h3><div class="rel-meta">2015 · Miguel Crozzoli · a Fran Cossavella</div>
         <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=3039918872/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Ciclos de Estrellas on Bandcamp"></iframe>
         <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-estrellas" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
@@ -901,35 +890,8 @@ image-slot{--slot-bg:var(--bg-alt)}
   </div>
 </section>
 
-<!-- ============ DIRECTION SWITCHER ============ -->
-<div id="switch" role="group" aria-label="Design direction">
-  <span class="lab">Direction</span>
-  <button data-t="ink">Editorial Ink</button>
-  <button data-t="cosmic">Cosmic</button>
-  <button data-t="hybrid">Hybrid</button>
-</div>
-
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
-
-// ---- direction switcher ----
-const root = document.documentElement, KEY='crozzoli-theme-v2';
-function setTheme(t){
-  root.setAttribute('data-theme', t); localStorage.setItem(KEY, t);
-  document.querySelectorAll('#switch button').forEach(b=> b.setAttribute('aria-pressed', b.dataset.t===t));
-}
-document.querySelectorAll('#switch button').forEach(b=> b.addEventListener('click', ()=> setTheme(b.dataset.t)));
-setTheme(localStorage.getItem(KEY) || 'ink');
-
-// ---- starfield (cosmic only) ----
-const cv=document.getElementById('stars'), ctx=cv.getContext('2d'); let stars=[], w, h, raf;
-function resize(){ w=cv.width=innerWidth; h=cv.height=innerHeight;
-  stars=Array.from({length:Math.min(180, Math.floor(w*h/9000))}, ()=>({x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.3+0.2, a:Math.random(), s:Math.random()*0.015+0.003})); }
-function draw(){ ctx.clearRect(0,0,w,h);
-  for(const st of stars){ st.a+=st.s; const tw=0.4+Math.abs(Math.sin(st.a))*0.6;
-    ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 6.283); ctx.fillStyle=`rgba(220,230,245,${tw*0.7})`; ctx.fill(); }
-  raf=requestAnimationFrame(draw); }
-resize(); draw(); addEventListener('resize', resize);
 
 // ---- section sound system: auto-start on enter, button = mute switch ----
 // (browsers require one user gesture before audio can play; any click/tap/key
