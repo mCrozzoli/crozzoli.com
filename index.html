@@ -391,6 +391,49 @@ image-slot{--slot-bg:var(--bg-alt)}
   .mosaic .tile{margin:0}
   .mosaic .tile image-slot{height:100% !important; aspect-ratio:auto !important}
 }
+
+/* ============ NEWS BAR + RADIO ============ */
+.newsbar{margin-top:-8px; margin-bottom:12px}
+.nb-row{display:flex; align-items:stretch; gap:12px}
+.nb-radio{display:flex; align-items:center; gap:10px; flex:0 1 460px; min-width:0; border:1px solid var(--line); border-radius:100px; padding:3px 6px 3px 16px; background:var(--panel)}
+.nb-lab,.nb-type,.nb-date,.nb-more{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap}
+.nb-lab{color:var(--muted)}
+#nb-player{flex:1; min-width:0; height:42px; border:0; display:block}
+.nb-shuffle{flex:none; width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--muted); cursor:pointer; font-size:15px; line-height:1; transition:.2s}
+.nb-shuffle:hover{border-color:var(--accent); color:var(--accent); transform:rotate(180deg)}
+.nb-news{flex:1; min-width:0; display:flex; align-items:center; gap:12px; border:1px solid var(--line); border-radius:100px; padding:0 18px; background:var(--panel); color:var(--ink); font:inherit; font-size:15px; cursor:pointer; text-align:left; transition:border-color .2s}
+.nb-news:hover,.nb-news[aria-expanded="true"]{border-color:var(--accent)}
+.nb-dot{flex:none; width:9px; height:9px; border-radius:50%; background:var(--c,var(--accent)); box-shadow:0 0 0 4px color-mix(in srgb, var(--c,var(--accent)) 22%, transparent)}
+.nb-type{color:var(--c,var(--accent))}
+.nb-date{color:var(--faint)}
+.nb-text{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.nb-more{color:var(--muted)} .nb-more i{font-style:normal; display:inline-block; transition:transform .25s}
+.nb-news[aria-expanded="true"] .nb-more i{transform:rotate(180deg)}
+.nb-log{margin-top:10px; border:1px solid var(--line); border-radius:14px; background:var(--panel); padding:8px 18px 14px; max-height:min(60vh,520px); overflow:auto}
+.nb-log h4{font-family:var(--font-mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); font-weight:400; margin:14px 0 4px}
+.nb-log ul{list-style:none; margin:0; padding:0}
+.nb-log li{border-top:1px solid var(--line)} .nb-log h4 + ul li:first-child{border-top:0}
+.nb-log li > *{display:grid; grid-template-columns:110px 96px minmax(0,1fr) auto; align-items:baseline; gap:14px; padding:10px 0; color:var(--ink)}
+.nb-log a:hover .nb-ltext{color:var(--accent)}
+.nb-chip{justify-self:start; font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--c); border:1px solid var(--c); border-radius:100px; padding:3px 9px}
+.nb-ldate{font-family:var(--font-mono); font-size:11px; color:var(--muted)}
+.nb-ltext{font-size:15.5px; line-height:1.45}
+.nb-go{font-family:var(--font-mono); font-size:11px; color:var(--accent)}
+.nb-legend{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 0; padding-top:12px; border-top:1px solid var(--line)}
+@media(max-width:760px){
+  .newsbar{margin-top:0}
+  .nb-row{flex-direction:column}
+  .nb-radio{flex:none}
+  .nb-news{padding:10px 16px; border-radius:14px; flex-wrap:wrap; row-gap:4px}
+  .nb-text{flex-basis:100%; order:5; white-space:normal}
+  .nb-more{margin-left:auto}
+  .nb-log li > *{grid-template-columns:auto 1fr; gap:6px 12px}
+  .nb-ltext{grid-column:1/-1}
+  .nb-go{display:none}
+}
+.rel-desc{font-size:14px; line-height:1.5; color:var(--muted); margin:0}
+.rel-quote{margin:0; font-size:14px; line-height:1.5; font-style:italic; border-left:2px solid var(--accent); padding-left:10px}
+.rel-quote span{display:block; font-style:normal; font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-top:4px}
 /* ============ RESPONSIVE ============ */
 @media(max-width:980px){ .mosaic{columns:2} .bio-hero .inner{grid-template-columns:1fr; align-content:end} .bio-hero .dim{background:linear-gradient(180deg, rgba(8,9,12,.2), rgba(8,9,12,.72) 60%)} .strange .grid{grid-template-columns:1fr} .psi-hero .vgrid{grid-template-columns:1fr} .improv .igrid,.band .bgrid,.ds-grid{grid-template-columns:1fr !important} nav.links{gap:18px} }
 @media(max-width:760px){
@@ -425,6 +468,21 @@ image-slot{--slot-bg:var(--bg-alt)}
 
 <!-- ============ INTRO ============ -->
 <div class="intro wrap" id="top" style="padding:0;height:24px"></div>
+
+<!-- ============ NEWS BAR + RADIO ============ -->
+<div class="newsbar wrap" id="newsbar">
+  <div class="nb-row">
+    <div class="nb-radio">
+      <span class="nb-lab">Radio</span>
+      <iframe id="nb-player" title="Radio: a random track from Miguel's releases" loading="lazy"></iframe>
+      <button class="nb-shuffle" id="nb-shuffle" type="button" title="Another random track" aria-label="Load another random track">⤮</button>
+    </div>
+    <button class="nb-news" id="nb-toggle" type="button" aria-expanded="false" aria-controls="nb-log">
+      <span class="nb-dot"></span><span class="nb-type"></span><span class="nb-date"></span><span class="nb-text"></span><span class="nb-more">Log <i>▾</i></span>
+    </button>
+  </div>
+  <div class="nb-log" id="nb-log" hidden></div>
+</div>
 
 <!-- ============ MOSAIC ============ -->
 <main class="mosaic wrap" id="explore">
@@ -720,6 +778,14 @@ image-slot{--slot-bg:var(--bg-alt)}
     </article>
     <div class="rel-grid">
       <article class="rel-card">
+        <a href="https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights" target="_blank" rel="noopener"><img src="assets/cover-distant-lights.jpg" alt="Distant Lights cover" loading="lazy"></a>
+        <div class="rel-body"><h3>Distant Lights</h3><div class="rel-meta">2024 · Crozzoli / Muruaga / Filip · with Gon Muruaga (guitar) &amp; Axel Filip (drums)</div>
+        <p class="rel-desc">Modern jazz close to free improvisation, after Dewey Redman, Bill Frisell, Paul Motian and Tony Malaby, with an unexpected echo of Argentine folk music.</p>
+        <blockquote class="rel-quote" lang="es">“Gran trabajo de los tres músicos, destacándose especialmente el saxo de Crozzoli.” <span>Review</span></blockquote>
+        <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=2217042493/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Distant Lights on Bandcamp"></iframe>
+        <div class="rel-links"><a href="https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
+      </article>
+      <article class="rel-card">
         <a href="https://barefootrecords.bandcamp.com/album/radio-pulsars" target="_blank" rel="noopener"><img src="assets/cover-pulsars.jpg" alt="Radio Pulsars cover" loading="lazy"></a>
         <div class="rel-body"><h3>Radio Pulsars</h3><div class="rel-meta">2020 · The Strangement Society · Barefoot Records</div>
         <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=268755320/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Radio Pulsars on Bandcamp"></iframe>
@@ -937,6 +1003,59 @@ document.querySelectorAll('.vp-item').forEach(b=> b.addEventListener('click', ()
   b.setAttribute('aria-current','true');
   document.getElementById('vp-frame').src = 'https://www.youtube.com/embed/'+b.dataset.id+'?start='+b.dataset.start+'&rel=0&autoplay=1';
 }));
+
+// ---- NEWS LOG ----
+// Add new items at the top. date: 'YYYY-MM-DD' or 'YYYY-MM'. type: concert | release | review | recording | exhibition | other.
+// link is optional (tickets, review, listen…). Concerts with a future date are shown as "Upcoming".
+const NEWS = [
+  { date:'2024-10-04', type:'release', text:'Distant Lights — trio album with Gon Muruaga and Axel Filip', link:'https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights' },
+  { date:'2024-08', type:'release', text:'Sounding Numbers — out on KAIROS', link:'https://kairos-music.com/products/recording/0022047kai' },
+];
+const NEWS_TYPES = {
+  concert:   ['Concert',    'oklch(0.58 0.17 25)'],
+  release:   ['Release',    'oklch(0.62 0.13 65)'],
+  review:    ['Review',     'oklch(0.55 0.12 250)'],
+  recording: ['Recording',  'oklch(0.58 0.12 140)'],
+  exhibition:['Exhibition', 'oklch(0.55 0.14 310)'],
+  other:     ['News',       'oklch(0.58 0.02 80)'],
+};
+(function(){
+  const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const fmt=d=>{ const [y,m,dd]=d.split('-'); return (dd? +dd+' ':'')+M[+m-1]+' '+y; };
+  const key=d=> d.length===7 ? d+'-01' : d;
+  const today=new Date().toISOString().slice(0,10);
+  const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ty=n=> NEWS_TYPES[n.type]||NEWS_TYPES.other;
+  const items=NEWS.slice().sort((a,b)=> key(b.date).localeCompare(key(a.date)));
+  const upcoming=items.filter(n=> n.type==='concert' && key(n.date)>=today).reverse();
+  const rest=items.filter(n=> !upcoming.includes(n));
+  const head=upcoming[0]||rest[0];
+  const btn=document.getElementById('nb-toggle'), log=document.getElementById('nb-log');
+  if(!head){ btn.hidden=true; return; }
+  btn.style.setProperty('--c', ty(head)[1]);
+  btn.querySelector('.nb-type').textContent= upcoming[0] ? 'Upcoming '+ty(head)[0] : ty(head)[0];
+  btn.querySelector('.nb-date').textContent=fmt(head.date);
+  btn.querySelector('.nb-text').textContent=head.text;
+  const row=n=>{ const [lab,c]=ty(n); const inner='<span class="nb-chip" style="--c:'+c+'">'+lab+'</span><span class="nb-ldate">'+fmt(n.date)+'</span><span class="nb-ltext">'+esc(n.text)+'</span>'+(n.link?'<span class="nb-go">↗</span>':'<span></span>');
+    return '<li>'+(n.link? '<a href="'+esc(n.link)+'"'+(/^https?:/.test(n.link)?' target="_blank" rel="noopener"':'')+'>'+inner+'</a>' : '<div>'+inner+'</div>')+'</li>'; };
+  log.innerHTML=(upcoming.length?'<h4>Upcoming</h4><ul>'+upcoming.map(row).join('')+'</ul>':'')
+    +'<h4>'+(upcoming.length?'Log':'Latest')+'</h4><ul>'+rest.map(row).join('')+'</ul>'
+    +'<div class="nb-legend">'+Object.values(NEWS_TYPES).map(([l,c])=>'<span class="nb-chip" style="--c:'+c+'">'+l+'</span>').join('')+'</div>';
+  btn.addEventListener('click',()=>{ const open=log.hidden; log.hidden=!open; btn.setAttribute('aria-expanded',open); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !log.hidden){ log.hidden=true; btn.setAttribute('aria-expanded','false'); } });
+})();
+
+// ---- RADIO: a random track from the Bandcamp releases (album id, title, track ids) ----
+const RADIO = [[2217042493, "Distant Lights", [312798334, 105883018, 3291006174, 967768580, 1932377565]], [268755320, "Radio Pulsars", [4157150141, 406242865, 809207712, 4273158400, 3091013830, 1019740616]], [1586142588, "Bosque Viento", [4123136070, 1787667301, 3682609676, 233777527, 83555522]], [3039918872, "Ciclos de Estrellas", [3631506182, 1853484796, 2029790868, 183005615, 1494762405, 1420565358, 750231453, 776613903]], [4130369726, "Ciclos de Luz", [2872335550, 446954599, 1257419471, 2647497570, 601068790, 691353081, 2982363812, 2458389397]], [4234447536, "I serie gráfica. Equilibrios Colapsados.", [3327403090, 3869358812, 2916518374, 2739330115, 2358339199]], [558928402, "IMMERSE", [2790713058, 161710472, 1562357525, 2111348174, 3175360537, 180512234, 3964757536, 2812012554]], [996934546, "Melting Point", [3949152398, 2964141108, 2926562633, 1125944394, 4223544725, 1924130132, 451641446, 2829366097, 2339012427]]];
+(function(){
+  const frame=document.getElementById('nb-player'); let last=null;
+  // Bandcamp's player takes a background colour; match the bar (theme --panel), fall back to white/dark grey
+  const bg=()=>{ const c=getComputedStyle(document.documentElement).getPropertyValue('--panel').trim().replace('#',''); if(!/^[0-9a-f]{6}$/i.test(c)) return 'ffffff'; return c; };
+  const pick=()=>{ let a,t; do{ a=RADIO[Math.floor(Math.random()*RADIO.length)]; t=a[2][Math.floor(Math.random()*a[2].length)]; }while(t===last && RADIO.length>1); last=t;
+    frame.src='https://bandcamp.com/EmbeddedPlayer/album='+a[0]+'/size=small/bgcol='+bg()+'/linkcol=b8651f/track='+t+'/transparent=true/';
+    frame.title='Radio: '+a[1]; };
+  pick(); document.getElementById('nb-shuffle').addEventListener('click',pick);
+})();
 
 // ---- landing: measure what sits above the mosaic so the tiles fill the rest of the screen ----
 const setMtop=()=> document.documentElement.style.setProperty('--mtop', document.getElementById('explore').getBoundingClientRect().top + scrollY + 'px');
