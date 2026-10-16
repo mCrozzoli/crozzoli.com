@@ -395,6 +395,9 @@ image-slot{--slot-bg:var(--bg-alt)}
 .nb-radio{min-height:44px; box-sizing:border-box}
 .nb-play{flex:none; width:32px; height:32px; border-radius:50%; border:0; background:var(--accent); color:#fff; cursor:pointer; display:grid; place-items:center; transition:transform .2s}
 .nb-play:hover{transform:scale(1.08)}
+.nb-radio.waiting .nb-play{animation:nbring 2.2s ease-out infinite}
+@keyframes nbring{0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent)} 70%,100%{box-shadow:0 0 0 12px color-mix(in srgb, var(--accent) 0%, transparent)}}
+@media(prefers-reduced-motion:reduce){ .nb-radio.waiting .nb-play{animation:none; box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent)} }
 .nb-play:focus{outline:none} .nb-play:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
 .nb-cover{flex:none; width:36px; height:36px; border-radius:4px; object-fit:cover; display:block; background:var(--bg-alt); box-shadow:0 2px 8px -2px rgba(0,0,0,.3)}
 .nb-cover:not([src]){visibility:hidden}
@@ -962,9 +965,9 @@ function makeSectionSound(btnId, sectionId, srcUrl, label){
   S.start = ()=>{
     if(!sndEnabled || !S.inView) return;
     if(!S.audio){ S.audio = new Audio(S.src); S.audio.loop = true; S.audio.volume = 0; }
-    S.audio.play().then(()=>{ S.pending = false; S.active = true; radio.duck(true); S.fadeTo(0.85); }).catch(()=>{ S.pending = true; });
+    S.audio.play().then(()=>{ S.pending = false; S.active = true; radio.duck('loop', true); S.fadeTo(0.85); }).catch(()=>{ S.pending = true; });
   };
-  S.stop = ()=>{ S.pending=false; S.active=false; if(!sndSections.some(x=>x.active)) radio.duck(false); if(S.audio) S.fadeTo(0, ()=> S.audio && S.audio.pause()); };
+  S.stop = ()=>{ S.pending=false; S.active=false; if(!sndSections.some(x=>x.active)) radio.duck('loop', false); if(S.audio) S.fadeTo(0, ()=> S.audio && S.audio.pause()); };
   S.ui = ()=>{
     S.btn.setAttribute('aria-pressed', sndEnabled ? 'true' : 'false');
     S.btn.querySelector('.snd-lab').textContent = sndEnabled ? 'Sound on · '+S.label+' — tap to mute' : 'Sound off · tap for sound';
@@ -1084,22 +1087,22 @@ const radio = (function(){
   const audio=new Audio(); audio.preload='none';
   let level=(+store('crozzoli-radio-vol') || 25)/100; vol.value=Math.round(level*100);
   let wanted = store('crozzoli-radio')!=='off';   // visitor hasn't switched it off
-  let ducked=false, fade=null, recent=[];
+  const ducks=new Set(); let fade=null, recent=[];   // reasons the radio is faded out: 'away' (off the home grid), section loops
   // iOS ignores audio.volume (hardware buttons only), so hide the slider there
   const probe=new Audio(); probe.volume=0.5; if(probe.volume!==0.5) vol.hidden=true;
   const fadeTo=(target,then)=>{ clearInterval(fade); fade=setInterval(()=>{ const d=target-audio.volume; if(Math.abs(d)<0.02){ audio.volume=target; clearInterval(fade); then&&then(); } else audio.volume=Math.min(1,Math.max(0,audio.volume+d*0.25)); },50); };
   const pick=()=>{ let i; do{ i=Math.floor(Math.random()*RADIO.length); }while(recent.includes(i) && recent.length<RADIO.length); recent.push(i); if(recent.length>8) recent.shift(); return RADIO[i]; };
   const cover=document.getElementById('nb-cover');
   const load=(tr)=>{ audio.src='assets/radio/'+tr.f; cover.src='assets/radio/covers/'+tr.f.replace(/-\d+\.mp3$/,'')+'.jpg'; cover.alt=tr.a+' cover'; now.href=tr.u; now.querySelector('.nb-tt').textContent=tr.t; now.querySelector('.nb-al').textContent=tr.a+(tr.by?' · '+tr.by:''); };
-  const ui=()=>{ const on=!audio.paused; box.classList.toggle('playing',on); play.setAttribute('aria-pressed',on); play.setAttribute('aria-label',on?'Pause radio':'Play radio'); };
-  const start=()=>{ if(!wanted || ducked) return; audio.volume=0; audio.play().then(()=>{ fadeTo(level); ui(); }).catch(()=>{}); };
+  const ui=()=>{ const on=!audio.paused; box.classList.toggle('playing',on); box.classList.toggle('waiting', !on && wanted && !ducks.size); play.setAttribute('aria-pressed',on); play.setAttribute('aria-label',on?'Pause radio':'Play radio'); };
+  const start=()=>{ if(!wanted || ducks.size) return; audio.volume=0; audio.play().then(()=>{ fadeTo(level); ui(); }).catch(()=>{}); };
   const stop=(then)=>{ fadeTo(0,()=>{ audio.pause(); ui(); then&&then(); }); };
   load(pick());
   audio.addEventListener('ended',()=>{ load(pick()); start(); });
   audio.addEventListener('pause',ui); audio.addEventListener('play',ui);
-  play.addEventListener('click',e=>{ e.stopPropagation(); wanted=audio.paused; store('crozzoli-radio',wanted?'on':'off'); if(wanted){ ducked=false; start(); } else stop(); });
+  play.addEventListener('click',e=>{ e.stopPropagation(); wanted=audio.paused; store('crozzoli-radio',wanted?'on':'off'); if(wanted){ ducks.clear(); start(); } else stop(); });
   document.getElementById('nb-shuffle').addEventListener('click',e=>{ e.stopPropagation(); const go=()=>{ load(pick()); wanted=true; store('crozzoli-radio','on'); start(); }; audio.paused?go():stop(go); });
-  vol.addEventListener('input',()=>{ level=vol.value/100; store('crozzoli-radio-vol',vol.value); if(!audio.paused && !ducked){ clearInterval(fade); audio.volume=level; } });
+  vol.addEventListener('input',()=>{ level=vol.value/100; store('crozzoli-radio-vol',vol.value); if(!audio.paused && !ducks.size){ clearInterval(fade); audio.volume=level; } });
   ['click','input','pointerdown'].forEach(ev=> vol.addEventListener(ev,e=>e.stopPropagation()));
   // browsers only allow sound after a first click/tap/key: start then
   // (a first click on the radio's own controls is left to those controls)
@@ -1107,7 +1110,11 @@ const radio = (function(){
   ['pointerdown','keydown','touchstart'].forEach(ev=>document.addEventListener(ev,first,{passive:true}));
   start();
   // section ambient loops take over: radio fades out, comes back after
-  return { duck(on){ if(on===ducked) return; ducked=on; if(on){ if(!audio.paused) stop(); } else start(); } };
+  // the radio belongs to the home grid: fade out when a section is opened, back in on return
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es=> es.forEach(en=> radio.duck('away', !en.isIntersecting)), {threshold:0.2}).observe(document.getElementById('explore'));
+  }
+  return { duck(reason,on){ const was=ducks.size>0; on?ducks.add(reason):ducks.delete(reason); const is=ducks.size>0; if(is===was) return; if(is){ if(!audio.paused) stop(); } else start(); ui(); } };
 })();
 
 // ---- landing: measure what sits above the mosaic so the tiles fill the rest of the screen ----
