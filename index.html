@@ -1095,7 +1095,7 @@ const radio = (function(){
   const cover=document.getElementById('nb-cover');
   const load=(tr)=>{ audio.src='assets/radio/'+tr.f; cover.src='assets/radio/covers/'+tr.f.replace(/-\d+\.mp3$/,'')+'.jpg'; cover.alt=tr.a+' cover'; now.href=tr.u; now.querySelector('.nb-tt').textContent=tr.t; now.querySelector('.nb-al').textContent=tr.a+(tr.by?' · '+tr.by:''); };
   const ui=()=>{ const on=!audio.paused; box.classList.toggle('playing',on); box.classList.toggle('waiting', !on && wanted && !ducks.size); play.setAttribute('aria-pressed',on); play.setAttribute('aria-label',on?'Pause radio':'Play radio'); };
-  const start=()=>{ if(!wanted || ducks.size) return; audio.volume=0; audio.play().then(()=>{ fadeTo(level); ui(); }).catch(()=>{}); };
+  const start=()=>{ if(!wanted || ducks.size) return; audio.volume=0; audio.play().then(()=>{ fadeTo(level); ui(); }).catch(ui); };  // blocked until a first click: ui() shows the pulse
   const stop=(then)=>{ fadeTo(0,()=>{ audio.pause(); ui(); then&&then(); }); };
   load(pick());
   audio.addEventListener('ended',()=>{ load(pick()); start(); });
