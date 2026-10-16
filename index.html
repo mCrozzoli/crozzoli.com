@@ -952,7 +952,7 @@ let sndEnabled = localStorage.getItem(SNDKEY) !== 'off';
 const sndSections = [];
 function makeSectionSound(btnId, sectionId, srcUrl, label){
   const btn = document.getElementById(btnId);
-  const S = {btn, src:srcUrl, label, audio:null, fadeTimer:null, inView:false, pending:false};
+  const S = {btn, src:srcUrl, label, audio:null, fadeTimer:null, inView:false, pending:false, done:false, dwell:null};
   S.fadeTo = (target, then)=>{
     clearInterval(S.fadeTimer);
     S.fadeTimer = setInterval(()=>{
@@ -963,8 +963,10 @@ function makeSectionSound(btnId, sectionId, srcUrl, label){
     }, 60);
   };
   S.start = ()=>{
-    if(!sndEnabled || !S.inView) return;
-    if(!S.audio){ S.audio = new Audio(S.src); S.audio.loop = true; S.audio.volume = 0; }
+    if(!sndEnabled || !S.inView || S.done) return;
+    // plays once per visit (no loop); leaving mid-way pauses it, coming back resumes
+    if(!S.audio){ S.audio = new Audio(S.src); S.audio.volume = 0;
+      S.audio.addEventListener('ended', ()=>{ S.done = true; S.active = false; if(!sndSections.some(x=>x.active)) radio.duck('loop', false); }); }
     S.audio.play().then(()=>{ S.pending = false; S.active = true; radio.duck('loop', true); S.fadeTo(0.85); }).catch(()=>{ S.pending = true; });
   };
   S.stop = ()=>{ S.pending=false; S.active=false; if(!sndSections.some(x=>x.active)) radio.duck('loop', false); if(S.audio) S.fadeTo(0, ()=> S.audio && S.audio.pause()); };
@@ -975,15 +977,20 @@ function makeSectionSound(btnId, sectionId, srcUrl, label){
   S.btn.addEventListener('click', (e)=>{
     e.stopPropagation();
     sndEnabled = !sndEnabled;
+    if(sndEnabled) sndSections.forEach(x=>{ if(x.done){ x.done=false; if(x.audio) x.audio.currentTime=0; } });   // turning sound on again = hear it again
     localStorage.setItem(SNDKEY, sndEnabled ? 'on' : 'off');
     sndSections.forEach(x=>{ x.ui(); if(sndEnabled) x.start(); else x.stop(); });
   });
   S.ui();
   if('IntersectionObserver' in window){
+    // only when the section is really being looked at: filling 60% of the screen for 1.2s,
+    // so scrolling past it on the way to another section stays silent
     new IntersectionObserver((es)=> es.forEach(en=>{
-      S.inView = en.isIntersecting;
-      if(S.inView) S.start(); else S.stop();
-    }), {threshold:0.25}).observe(document.getElementById(sectionId));
+      clearTimeout(S.dwell);
+      const fill = en.rootBounds ? en.intersectionRect.height / en.rootBounds.height : en.intersectionRatio;   // share of the screen it fills
+      if(fill >= 0.6){ if(!S.inView) S.dwell = setTimeout(()=>{ S.inView = true; S.start(); }, 1200); }
+      else if(S.inView){ S.inView = false; S.stop(); }
+    }), {threshold:[0,.1,.2,.3,.4,.5,.6,.7,.8,.9,1]}).observe(document.getElementById(sectionId));
   }
   sndSections.push(S);
   return S;
