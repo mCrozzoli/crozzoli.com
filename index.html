@@ -55,7 +55,8 @@ a{color:inherit; text-decoration:none}
 .mono{font-family:var(--font-mono); letter-spacing:.12em; text-transform:uppercase}
 .display{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); line-height:var(--dlh)}
 
-body > *:not(#stars){position:relative; z-index:1}
+body > *{position:relative; z-index:1}
+body > header.nav{position:relative; z-index:40}
 
 
 /* ============ HEADER ============ */
@@ -74,9 +75,9 @@ nav.links a:hover::after{width:100%}
 nav.links a.coffee{color:var(--accent)}
 /* social row */
 .social-row{display:flex; gap:9px; padding-bottom:14px}
-.social-row a{width:34px; height:34px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+.social-row > a{width:34px; height:34px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
   font-family:var(--font-mono); font-size:10px; letter-spacing:.02em; color:var(--muted); transition:.2s}
-.social-row a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px)}
+.social-row > a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px)}
 
 /* ============ INTRO ============ */
 .intro{text-align:center; padding:clamp(46px,7vw,84px) 0 clamp(30px,4vw,44px)}
@@ -385,7 +386,8 @@ image-slot{--slot-bg:var(--bg-alt)}
 }
 
 /* ============ NEWS BAR + RADIO ============ */
-.newsbar{margin-top:-8px; margin-bottom:12px}
+.social-row{align-items:center}
+.newsbar{flex:1; min-width:0; margin-left:14px; position:relative}
 .nb-row{display:flex; align-items:stretch; gap:12px}
 .nb-radio{display:flex; align-items:center; gap:10px; flex:0 1 460px; min-width:0; border:1px solid var(--line); border-radius:100px; padding:3px 6px 3px 16px; background:var(--panel)}
 .nb-lab,.nb-type,.nb-date,.nb-more{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap}
@@ -395,13 +397,14 @@ image-slot{--slot-bg:var(--bg-alt)}
 .nb-shuffle:hover{border-color:var(--accent); color:var(--accent); transform:rotate(180deg)}
 .nb-news{flex:1; min-width:0; display:flex; align-items:center; gap:12px; border:1px solid var(--line); border-radius:100px; padding:0 18px; background:var(--panel); color:var(--ink); font:inherit; font-size:15px; cursor:pointer; text-align:left; transition:border-color .2s}
 .nb-news:hover,.nb-news[aria-expanded="true"]{border-color:var(--accent)}
+.nb-news:focus{outline:none} .nb-news:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
 .nb-dot{flex:none; width:9px; height:9px; border-radius:50%; background:var(--c,var(--accent)); box-shadow:0 0 0 4px color-mix(in srgb, var(--c,var(--accent)) 22%, transparent)}
 .nb-type{color:var(--c,var(--accent))}
 .nb-date{color:var(--faint)}
 .nb-text{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .nb-more{color:var(--muted)} .nb-more i{font-style:normal; display:inline-block; transition:transform .25s}
 .nb-news[aria-expanded="true"] .nb-more i{transform:rotate(180deg)}
-.nb-log{margin-top:10px; border:1px solid var(--line); border-radius:14px; background:var(--panel); padding:8px 18px 14px; max-height:min(60vh,520px); overflow:auto}
+.nb-log{position:absolute; z-index:50; top:calc(100% + 8px); right:0; width:min(760px,100%); box-sizing:border-box; border:1px solid var(--line); border-radius:14px; background:var(--panel); padding:8px 18px 14px; max-height:min(65vh,560px); overflow:auto; box-shadow:0 24px 60px -20px rgba(0,0,0,.35)}
 .nb-log h4{font-family:var(--font-mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); font-weight:400; margin:14px 0 4px}
 .nb-log ul{list-style:none; margin:0; padding:0}
 .nb-log li{border-top:1px solid var(--line)} .nb-log h4 + ul li:first-child{border-top:0}
@@ -413,7 +416,9 @@ image-slot{--slot-bg:var(--bg-alt)}
 .nb-go{font-family:var(--font-mono); font-size:11px; color:var(--accent)}
 .nb-legend{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 0; padding-top:12px; border-top:1px solid var(--line)}
 @media(max-width:760px){
-  .newsbar{margin-top:0}
+  .social-row{flex-wrap:wrap; row-gap:10px}
+  .newsbar{flex-basis:100%; margin-left:0}
+  .nb-log{width:100%}
   .nb-row{flex-direction:column}
   .nb-radio{flex:none}
   .nb-news{padding:10px 16px; border-radius:14px; flex-wrap:wrap; row-gap:4px}
@@ -423,7 +428,7 @@ image-slot{--slot-bg:var(--bg-alt)}
   .nb-ltext{grid-column:1/-1}
   .nb-go{display:none}
 }
-.rel-press{display:flex; flex-direction:column; gap:12px; margin:0 0 18px}
+.rel-press{display:flex; flex-direction:column; gap:12px; margin:22px 0 0}
 .rel-quote a{color:inherit; border-bottom:1px solid currentColor}
 .rel-on-air{margin:0; font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; color:var(--muted)}
 .rel-on-air a{color:var(--accent); border-bottom:1px solid currentColor}
@@ -456,27 +461,26 @@ image-slot{--slot-bg:var(--bg-alt)}
     <div class="social-row">
       <a href="https://www.instagram.com/miguelcrozzoli/" target="_blank" rel="noopener" title="Instagram">IG</a>
       <a href="https://www.linkedin.com/in/miguelcrozzoli/" target="_blank" rel="noopener" title="LinkedIn">in</a>
+      <!-- news bar + radio -->
+    <div class="newsbar" id="newsbar">
+      <div class="nb-row">
+        <div class="nb-radio">
+          <span class="nb-lab">Radio</span>
+          <iframe id="nb-player" title="Radio: a random track from Miguel's releases" loading="lazy"></iframe>
+          <button class="nb-shuffle" id="nb-shuffle" type="button" title="Another random track" aria-label="Load another random track">⤮</button>
+        </div>
+        <button class="nb-news" id="nb-toggle" type="button" aria-expanded="false" aria-controls="nb-log">
+          <span class="nb-dot"></span><span class="nb-type"></span><span class="nb-date"></span><span class="nb-text"></span><span class="nb-more">Log <i>▾</i></span>
+        </button>
+      </div>
+      <div class="nb-log" id="nb-log" hidden></div>
+    </div>
     </div>
   </div>
 </header>
 
 <!-- ============ INTRO ============ -->
 <div class="intro wrap" id="top" style="padding:0;height:24px"></div>
-
-<!-- ============ NEWS BAR + RADIO ============ -->
-<div class="newsbar wrap" id="newsbar">
-  <div class="nb-row">
-    <div class="nb-radio">
-      <span class="nb-lab">Radio</span>
-      <iframe id="nb-player" title="Radio: a random track from Miguel's releases" loading="lazy"></iframe>
-      <button class="nb-shuffle" id="nb-shuffle" type="button" title="Another random track" aria-label="Load another random track">⤮</button>
-    </div>
-    <button class="nb-news" id="nb-toggle" type="button" aria-expanded="false" aria-controls="nb-log">
-      <span class="nb-dot"></span><span class="nb-type"></span><span class="nb-date"></span><span class="nb-text"></span><span class="nb-more">Log <i>▾</i></span>
-    </button>
-  </div>
-  <div class="nb-log" id="nb-log" hidden></div>
-</div>
 
 <!-- ============ MOSAIC ============ -->
 <main class="mosaic wrap" id="explore">
@@ -760,17 +764,19 @@ image-slot{--slot-bg:var(--bg-alt)}
     <div class="eyebrow">Releases</div>
     <h2 class="title">Releases.</h2>
     <article class="rel-feature">
-      <a class="rel-cover" href="https://kairos-music.com/products/recording/0022047kai" target="_blank" rel="noopener"><img src="assets/sounding-numbers-cover.jpg" alt="Sounding Numbers album cover (KAIROS)"><span class="rel-tag">Contemporary</span></a>
-      <div class="rel-info">
-        <div class="rel-badge">Featured · KAIROS 0022047KAI · August 2024</div>
-        <h3>Sounding Numbers</h3>
-        <p class="muted">Two works for ensemble, <i>I Am the Forest</i> (2021) and <i>I Am the Ocean</i> (2022), composed from sonified data on deforestation and ocean contamination.</p>
-        <p class="rel-credits">Calum Builder · Jūra Elena Šedytė · Valeria Miracapillo · Ida Nørby · Johannes Nästesjö · Miguel Angel Crozzoli</p>
+      <div class="rel-left">
+        <a class="rel-cover" href="https://kairos-music.com/products/recording/0022047kai" target="_blank" rel="noopener"><img src="assets/sounding-numbers-cover.jpg" alt="Sounding Numbers album cover (KAIROS)"><span class="rel-tag">Contemporary</span></a>
         <div class="rel-press">
           <blockquote class="rel-quote">“A wavering ’n’ wondering sound journey into more atmospherically set modern composition.” <span><a href="https://www.musiquemachine.com/reviews/miguel-angel-crozzoli-sounding-numbers-10731" target="_blank" rel="noopener">Roger Batty · Musique Machine · Oct 2024 ↗</a></span></blockquote>
           <blockquote class="rel-quote">“Impressive soundscapes that evoke emotions and move people to action against climate change.” <span>Reporters Online · Dec 2024 (translated from Dutch)</span></blockquote>
           <p class="rel-on-air">On air: <a href="https://www.rtve.es/play/audios/musica-viva/crisol-amin-maalouf-07-03-25/16479382/" target="_blank" rel="noopener">RTVE · Música Viva, 7 Mar 2025 ↗</a></p>
         </div>
+      </div>
+      <div class="rel-info">
+        <div class="rel-badge">Featured · KAIROS 0022047KAI · August 2024</div>
+        <h3>Sounding Numbers</h3>
+        <p class="muted">Two works for ensemble, <i>I Am the Forest</i> (2021) and <i>I Am the Ocean</i> (2022), composed from sonified data on deforestation and ocean contamination.</p>
+        <p class="rel-credits">Calum Builder · Jūra Elena Šedytė · Valeria Miracapillo · Ida Nørby · Johannes Nästesjö · Miguel Angel Crozzoli</p>
         <iframe loading="lazy" class="rel-spotify" src="https://open.spotify.com/embed/album/0Tpnt92BDHkxxk7T9OYqyw" title="Sounding Numbers on Spotify" allow="encrypted-media"></iframe>
         <div class="rel-links"><a href="https://kairos-music.com/products/recording/0022047kai" target="_blank" rel="noopener">KAIROS ↗</a><a href="https://open.spotify.com/album/0Tpnt92BDHkxxk7T9OYqyw" target="_blank" rel="noopener">Spotify ↗</a></div>
       </div>
@@ -978,9 +984,10 @@ document.querySelectorAll('.vp-item').forEach(b=> b.addEventListener('click', ()
 
 // ---- NEWS LOG ----
 // Add new items at the top. date: 'YYYY-MM-DD' or 'YYYY-MM'. type: concert | release | review | recording | exhibition | other.
+// (also: broadcast — radio/TV)
 // link is optional (tickets, review, listen…). Concerts with a future date are shown as "Upcoming".
 const NEWS = [
-  { date:'2025-03-07', type:'other', text:'RTVE · Música Viva — on air with my testimony on Sounding Numbers', link:'https://www.rtve.es/play/audios/musica-viva/crisol-amin-maalouf-07-03-25/16479382/' },
+  { date:'2025-03-07', type:'broadcast', text:'RTVE · Música Viva — on air with my testimony on Sounding Numbers', link:'https://www.rtve.es/play/audios/musica-viva/crisol-amin-maalouf-07-03-25/16479382/' },
   { date:'2024-12', type:'review', text:'Reporters Online (NL) — feature on Sounding Numbers: science and music' },
   { date:'2024-10-18', type:'review', text:'Musique Machine — Roger Batty reviews Sounding Numbers', link:'https://www.musiquemachine.com/reviews/miguel-angel-crozzoli-sounding-numbers-10731' },
   { date:'2024-10-04', type:'release', text:'Distant Lights — trio album with Gon Muruaga and Axel Filip', link:'https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights' },
@@ -993,6 +1000,7 @@ const NEWS_TYPES = {
   review:    ['Review',     'oklch(0.55 0.12 250)'],
   recording: ['Recording',  'oklch(0.58 0.12 140)'],
   exhibition:['Exhibition', 'oklch(0.55 0.14 310)'],
+  broadcast: ['Broadcast',  'oklch(0.56 0.10 195)'],
   other:     ['News',       'oklch(0.58 0.02 80)'],
 };
 (function(){
@@ -1019,6 +1027,7 @@ const NEWS_TYPES = {
     +'<div class="nb-legend">'+Object.values(NEWS_TYPES).map(([l,c])=>'<span class="nb-chip" style="--c:'+c+'">'+l+'</span>').join('')+'</div>';
   btn.addEventListener('click',()=>{ const open=log.hidden; log.hidden=!open; btn.setAttribute('aria-expanded',open); });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !log.hidden){ log.hidden=true; btn.setAttribute('aria-expanded','false'); } });
+  document.addEventListener('click',e=>{ if(!log.hidden && !document.getElementById('newsbar').contains(e.target)){ log.hidden=true; btn.setAttribute('aria-expanded','false'); } });
 })();
 
 // ---- RADIO: a random track from the Bandcamp releases (album id, title, track ids) ----
