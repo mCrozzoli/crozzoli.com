@@ -288,6 +288,7 @@ section.detail[hidden]{display:none}
 .rel-feature{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,4vw,56px); align-items:start; padding-bottom:36px; margin-bottom:36px; border-bottom:1px solid var(--line)}
 .rel-cover img{display:block; width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:6px; box-shadow:0 18px 40px -20px rgba(0,0,0,.35)}
 .rel-cover,.rel-card > a:first-child{position:relative; display:block}
+.ccard .rel-tag{top:8px; right:8px}
 .rel-tag{position:absolute; top:10px; right:10px; z-index:2; font-family:var(--font-mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
   color:var(--label-fg); background:var(--label-bg); border:1px solid var(--label-bd); padding:4px 8px; border-radius:100px; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px)}
 .rel-badge{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin-bottom:10px}
@@ -422,6 +423,10 @@ image-slot{--slot-bg:var(--bg-alt)}
   .nb-ltext{grid-column:1/-1}
   .nb-go{display:none}
 }
+.rel-press{display:flex; flex-direction:column; gap:12px; margin:0 0 18px}
+.rel-quote a{color:inherit; border-bottom:1px solid currentColor}
+.rel-on-air{margin:0; font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; color:var(--muted)}
+.rel-on-air a{color:var(--accent); border-bottom:1px solid currentColor}
 .rel-desc{font-size:14px; line-height:1.5; color:var(--muted); margin:0}
 .rel-quote{margin:0; font-size:14px; line-height:1.5; font-style:italic; border-left:2px solid var(--accent); padding-left:10px}
 .rel-quote span{display:block; font-style:normal; font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-top:4px}
@@ -609,8 +614,8 @@ image-slot{--slot-bg:var(--bg-alt)}
     <div class="shelf" style="margin-top:48px">Compositions</div>
     <div class="cat-cards" id="str-comp">
       <button class="ccard" data-cd="cd-pulsars" style="--ac:oklch(0.55 0.16 30)"><img src="assets/cover-pulsars.jpg" alt="Radio Pulsars album cover"><span class="cinfo"><span class="ct">Radio Pulsars</span><span class="cy">2020</span></span></button>
-      <button class="ccard" data-cd="cd-transients" style="--ac:oklch(0.45 0.05 260)"><img src="assets/cover-transients.jpg" alt="Cosmic Transients artwork"><span class="cinfo"><span class="ct">Cosmic Transients</span><span class="cy">2019 · unreleased</span></span></button>
-      <button class="ccard" data-cd="cd-cmb" style="--ac:oklch(0.60 0.14 55)"><img src="assets/cover-cmb.png" alt="Cosmic Microwave Background album cover"><span class="cinfo"><span class="ct">Cosmic Microwave Background</span><span class="cy">2018</span></span></button>
+      <button class="ccard" data-cd="cd-transients" style="--ac:oklch(0.45 0.05 260)"><img src="assets/cover-transients.jpg" alt="Cosmic Transients artwork"><span class="rel-tag">Coming soon</span><span class="cinfo"><span class="ct">Cosmic Transients</span><span class="cy">2019</span></span></button>
+      <button class="ccard" data-cd="cd-cmb" style="--ac:oklch(0.60 0.14 55)"><img src="assets/cover-cmb.png" alt="Cosmic Microwave Background album cover"><span class="rel-tag">Coming soon</span><span class="cinfo"><span class="ct">Cosmic Microwave Background</span><span class="cy">2018</span></span></button>
     </div>
     <div id="str-panel" class="catpanel"></div>
   </div>
@@ -761,6 +766,11 @@ image-slot{--slot-bg:var(--bg-alt)}
         <h3>Sounding Numbers</h3>
         <p class="muted">Two works for ensemble, <i>I Am the Forest</i> (2021) and <i>I Am the Ocean</i> (2022), composed from sonified data on deforestation and ocean contamination.</p>
         <p class="rel-credits">Calum Builder · Jūra Elena Šedytė · Valeria Miracapillo · Ida Nørby · Johannes Nästesjö · Miguel Angel Crozzoli</p>
+        <div class="rel-press">
+          <blockquote class="rel-quote">“A wavering ’n’ wondering sound journey into more atmospherically set modern composition.” <span><a href="https://www.musiquemachine.com/reviews/miguel-angel-crozzoli-sounding-numbers-10731" target="_blank" rel="noopener">Roger Batty · Musique Machine · Oct 2024 ↗</a></span></blockquote>
+          <blockquote class="rel-quote">“Impressive soundscapes that evoke emotions and move people to action against climate change.” <span>Reporters Online · Dec 2024 (translated from Dutch)</span></blockquote>
+          <p class="rel-on-air">On air: <a href="https://www.rtve.es/play/audios/musica-viva/crisol-amin-maalouf-07-03-25/16479382/" target="_blank" rel="noopener">RTVE · Música Viva, 7 Mar 2025 ↗</a></p>
+        </div>
         <iframe loading="lazy" class="rel-spotify" src="https://open.spotify.com/embed/album/0Tpnt92BDHkxxk7T9OYqyw" title="Sounding Numbers on Spotify" allow="encrypted-media"></iframe>
         <div class="rel-links"><a href="https://kairos-music.com/products/recording/0022047kai" target="_blank" rel="noopener">KAIROS ↗</a><a href="https://open.spotify.com/album/0Tpnt92BDHkxxk7T9OYqyw" target="_blank" rel="noopener">Spotify ↗</a></div>
       </div>
@@ -770,7 +780,7 @@ image-slot{--slot-bg:var(--bg-alt)}
         <a href="https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights" target="_blank" rel="noopener"><img src="assets/cover-distant-lights.jpg" alt="Distant Lights cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
         <div class="rel-body"><h3>Distant Lights</h3><div class="rel-meta">2024 · Crozzoli / Muruaga / Filip · with Gon Muruaga (guitar) &amp; Axel Filip (drums)</div>
         <p class="rel-desc">Modern jazz close to free improvisation, after Dewey Redman, Bill Frisell, Paul Motian and Tony Malaby, with an unexpected echo of Argentine folk music.</p>
-        <blockquote class="rel-quote" lang="es">“Gran trabajo de los tres músicos, destacándose especialmente el saxo de Crozzoli.” <span>Review</span></blockquote>
+        <blockquote class="rel-quote" lang="es">“Gran trabajo de los tres músicos, destacándose especialmente el saxo de Crozzoli.” <span><a href="https://info135.com.ar/2024/09/01/trios-noruegos-ucranianos-y-argentinos-con-el-mejor-jazz/" target="_blank" rel="noopener">info135 · Sep 2024 ↗</a></span></blockquote>
         <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=2217042493/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Distant Lights on Bandcamp"></iframe>
         <div class="rel-links"><a href="https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
       </article>
@@ -843,9 +853,9 @@ image-slot{--slot-bg:var(--bg-alt)}
       <button class="ccard" data-cd="cd-forest" style="--ac:oklch(0.50 0.10 150)"><img src="assets/cover-forest.jpg" alt="I Am The Forest graphic score"><span class="cinfo"><span class="ct">I Am The Forest</span><span class="cy">2021</span></span></button>
       <button class="ccard" data-cd="cd-ocean" style="--ac:oklch(0.52 0.10 230)"><img src="assets/ocean.png" alt="I Am The Ocean visuals"><span class="cinfo"><span class="ct">I Am The Ocean</span><span class="cy">2022</span></span></button>
       <button class="ccard" data-cd="cd-pulsars" style="--ac:oklch(0.55 0.16 30)"><img src="assets/cover-pulsars.jpg" alt="Radio Pulsars album cover"><span class="cinfo"><span class="ct">Radio Pulsars</span><span class="cy">2020</span></span></button>
-      <button class="ccard" data-cd="cd-transients" style="--ac:oklch(0.45 0.05 260)"><img src="assets/cover-transients.jpg" alt="Cosmic Transients artwork"><span class="cinfo"><span class="ct">Cosmic Transients</span><span class="cy">2019 · unreleased</span></span></button>
-      <button class="ccard" data-cd="cd-darkenergy" style="--ac:oklch(0.50 0.13 300)"><img src="assets/cover-darkenergy.png" alt="Dark Energy album cover"><span class="cinfo"><span class="ct">Dark Energy</span><span class="cy">2019</span></span></button>
-      <button class="ccard" data-cd="cd-cmb" style="--ac:oklch(0.60 0.14 55)"><img src="assets/cover-cmb.png" alt="Cosmic Microwave Background album cover"><span class="cinfo"><span class="ct">Cosmic Microwave Background</span><span class="cy">2018</span></span></button>
+      <button class="ccard" data-cd="cd-transients" style="--ac:oklch(0.45 0.05 260)"><img src="assets/cover-transients.jpg" alt="Cosmic Transients artwork"><span class="rel-tag">Coming soon</span><span class="cinfo"><span class="ct">Cosmic Transients</span><span class="cy">2019</span></span></button>
+      <button class="ccard" data-cd="cd-darkenergy" style="--ac:oklch(0.50 0.13 300)"><img src="assets/cover-darkenergy.png" alt="Dark Energy album cover"><span class="rel-tag">Coming soon</span><span class="cinfo"><span class="ct">Dark Energy</span><span class="cy">2019</span></span></button>
+      <button class="ccard" data-cd="cd-cmb" style="--ac:oklch(0.60 0.14 55)"><img src="assets/cover-cmb.png" alt="Cosmic Microwave Background album cover"><span class="rel-tag">Coming soon</span><span class="cinfo"><span class="ct">Cosmic Microwave Background</span><span class="cy">2018</span></span></button>
     </div>
     <div id="cat-panel" class="catpanel"></div>
 
@@ -871,9 +881,9 @@ image-slot{--slot-bg:var(--bg-alt)}
 <template id="cd-forest"><h3>I Am The Forest</h3><div class="pmeta">2021 · Electronic-acoustic · Sounding Numbers ensemble</div><p class="desc">Composed from 20 years of deforestation data (Global Forest Watch), sonified into textural nets and spiking chants — the forest's health as music.</p><iframe data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1471534231&color=%23342318&auto_play=false&visual=true" style="height:300px" title="I Am The Forest on SoundCloud" allow="autoplay"></iframe><div class="plinks"><a href="https://soundcloud.com/miguelcrozzoli/sets/i-am-the-forest-sounding-numbers" target="_blank" rel="noopener">SoundCloud ↗</a></div></template>
 <template id="cd-ocean"><h3>I Am The Ocean</h3><div class="pmeta">2022 · Electronic-acoustic · Sounding Numbers ensemble</div><p class="desc">Built on ocean-contamination and surface-water data (EU JRC, NASA Goddard) — the dark beauty of a changing ocean, offering awareness and hope.</p><iframe data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1471537741&color=%23342318&auto_play=false&visual=true" style="height:300px" title="I Am The Ocean on SoundCloud" allow="autoplay"></iframe><div class="plinks"><a href="https://soundcloud.com/miguelcrozzoli/sets/i-am-the-ocean-sounding-numbers" target="_blank" rel="noopener">SoundCloud ↗</a></div></template>
 <template id="cd-pulsars"><h3>Radio Pulsars</h3><div class="pmeta">2020 · Orchestral · The Strangement Society · Barefoot Records</div><p class="desc">A four-part meditation on neutron stars — synergies between science and music, released with The Strangement Society.</p><iframe data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/875817676&color=%23342318&auto_play=false&visual=true" style="height:300px" title="Radio Pulsars on SoundCloud" allow="autoplay"></iframe><div class="rp-vids"><iframe referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube.com/embed/3I3hDKYIn9A?rel=0" title="Radio Pulsars (teaser I)" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe><iframe referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube.com/embed/DquQBzoU-lU?rel=0" title="Radio Pulsars (teaser II)" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div><div class="plinks"><a href="https://soundcloud.com/miguelcrozzoli" target="_blank" rel="noopener">SoundCloud ↗</a><a href="https://barefootrecords.bandcamp.com/album/radio-pulsars" target="_blank" rel="noopener">Bandcamp ↗</a><a href="https://open.spotify.com/artist/3i8SAAkUrMcnq5evGgNYp6" target="_blank" rel="noopener">Spotify ↗</a></div></template>
-<template id="cd-transients"><h3>Cosmic Transients</h3><div class="pmeta">2019 · Orchestral · unreleased</div><p class="desc">On colliding black holes — composed in collaboration with Dr. Radoslaw Jan Wojtak of the DARK Cosmology Centre (Niels Bohr Institute).</p><iframe data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/753747829&color=%23342318&auto_play=false&visual=true" style="height:300px" title="Cosmic Transients on SoundCloud" allow="autoplay"></iframe><div class="plinks"><a href="https://soundcloud.com/miguelcrozzoli/cosmic-transients-excerpt-1" target="_blank" rel="noopener">SoundCloud ↗</a></div></template>
-<template id="cd-darkenergy"><h3>Dark Energy</h3><div class="pmeta">2019 · Orchestral · The Strangement Society</div><p class="desc">Orchestral work grown from sonifications of dark-energy research and sounds from our solar system.</p><iframe data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/635546748&color=%23342318&auto_play=false&visual=true" style="height:300px" title="Dark Energy on SoundCloud" allow="autoplay"></iframe><div class="plinks"><a href="https://soundcloud.com/miguelcrozzoli/dark-energy-and-sounds-from-our-solar-system-excerpt-1" target="_blank" rel="noopener">SoundCloud ↗</a><a href="https://nendodango.bandcamp.com/album/dark-energy" target="_blank" rel="noopener">Bandcamp ↗</a></div></template>
-<template id="cd-cmb"><h3>Cosmic Microwave Background</h3><div class="pmeta">2018 · Orchestral · The Strangement Society</div><p class="desc">The oldest light in the universe, scored for electronic-acoustic orchestra.</p><iframe data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/573148089&color=%23342318&auto_play=false&visual=true" style="height:300px" title="Cosmic Microwave Background on SoundCloud" allow="autoplay"></iframe><div class="plinks"><a href="https://soundcloud.com/miguelcrozzoli/excerpt-ii-from-the-cosmic" target="_blank" rel="noopener">SoundCloud ↗</a><a href="https://nendodango.bandcamp.com/album/the-cosmic-microwave-background" target="_blank" rel="noopener">Bandcamp ↗</a></div></template>
+<template id="cd-transients"><h3>Cosmic Transients</h3><div class="pmeta">2019 · Orchestral · release coming soon</div><p class="desc">On colliding black holes — composed in collaboration with Dr. Radoslaw Jan Wojtak of the DARK Cosmology Centre (Niels Bohr Institute).</p><iframe data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/753747829&color=%23342318&auto_play=false&visual=true" style="height:300px" title="Cosmic Transients on SoundCloud" allow="autoplay"></iframe><div class="plinks"><a href="https://soundcloud.com/miguelcrozzoli/cosmic-transients-excerpt-1" target="_blank" rel="noopener">SoundCloud ↗</a></div></template>
+<template id="cd-darkenergy"><h3>Dark Energy</h3><div class="pmeta">2019 · Orchestral · The Strangement Society · release coming soon</div><p class="desc">Orchestral work grown from sonifications of dark-energy research and sounds from our solar system.</p><iframe data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/635546748&color=%23342318&auto_play=false&visual=true" style="height:300px" title="Dark Energy on SoundCloud" allow="autoplay"></iframe><div class="plinks"><a href="https://soundcloud.com/miguelcrozzoli/dark-energy-and-sounds-from-our-solar-system-excerpt-1" target="_blank" rel="noopener">SoundCloud ↗</a></div></template>
+<template id="cd-cmb"><h3>Cosmic Microwave Background</h3><div class="pmeta">2018 · Orchestral · The Strangement Society · release coming soon</div><p class="desc">The oldest light in the universe, scored for electronic-acoustic orchestra.</p><iframe data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/573148089&color=%23342318&auto_play=false&visual=true" style="height:300px" title="Cosmic Microwave Background on SoundCloud" allow="autoplay"></iframe><div class="plinks"><a href="https://soundcloud.com/miguelcrozzoli/excerpt-ii-from-the-cosmic" target="_blank" rel="noopener">SoundCloud ↗</a></div></template>
 
 <!-- ============ COFFEE / CONTACT ============ -->
 <section class="detail coffee" id="contact">
@@ -970,7 +980,11 @@ document.querySelectorAll('.vp-item').forEach(b=> b.addEventListener('click', ()
 // Add new items at the top. date: 'YYYY-MM-DD' or 'YYYY-MM'. type: concert | release | review | recording | exhibition | other.
 // link is optional (tickets, review, listen…). Concerts with a future date are shown as "Upcoming".
 const NEWS = [
+  { date:'2025-03-07', type:'other', text:'RTVE · Música Viva — on air with my testimony on Sounding Numbers', link:'https://www.rtve.es/play/audios/musica-viva/crisol-amin-maalouf-07-03-25/16479382/' },
+  { date:'2024-12', type:'review', text:'Reporters Online (NL) — feature on Sounding Numbers: science and music' },
+  { date:'2024-10-18', type:'review', text:'Musique Machine — Roger Batty reviews Sounding Numbers', link:'https://www.musiquemachine.com/reviews/miguel-angel-crozzoli-sounding-numbers-10731' },
   { date:'2024-10-04', type:'release', text:'Distant Lights — trio album with Gon Muruaga and Axel Filip', link:'https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights' },
+  { date:'2024-09-01', type:'review', text:'info135 — Distant Lights among the best new jazz trios', link:'https://info135.com.ar/2024/09/01/trios-noruegos-ucranianos-y-argentinos-con-el-mejor-jazz/' },
   { date:'2024-08', type:'release', text:'Sounding Numbers — out on KAIROS', link:'https://kairos-music.com/products/recording/0022047kai' },
 ];
 const NEWS_TYPES = {
