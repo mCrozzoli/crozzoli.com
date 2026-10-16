@@ -389,12 +389,25 @@ image-slot{--slot-bg:var(--bg-alt)}
 .social-row{align-items:center}
 .newsbar{flex:1; min-width:0; margin-left:14px; position:relative}
 .nb-row{display:flex; align-items:stretch; gap:12px}
-.nb-radio{display:flex; align-items:center; gap:10px; flex:0 1 460px; min-width:0; border:1px solid var(--line); border-radius:100px; padding:3px 6px 3px 16px; background:var(--panel)}
+.nb-radio{display:flex; align-items:center; gap:10px; flex:0 1 580px; min-width:0; border:1px solid var(--line); border-radius:100px; padding:3px 6px 3px 16px; background:var(--panel)}
 .nb-lab,.nb-type,.nb-date,.nb-more{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap}
 .nb-lab{color:var(--muted)}
-#nb-player{flex:1; min-width:0; height:42px; border:0; display:block}
+.nb-radio{min-height:44px; box-sizing:border-box}
+.nb-play{flex:none; width:32px; height:32px; border-radius:50%; border:0; background:var(--accent); color:#fff; cursor:pointer; display:grid; place-items:center; transition:transform .2s}
+.nb-play:hover{transform:scale(1.08)}
+.nb-ico{width:0; height:0; border-left:9px solid currentColor; border-top:6px solid transparent; border-bottom:6px solid transparent; margin-left:2px}
+.nb-play[aria-pressed="true"] .nb-ico{width:9px; height:10px; border:0; margin:0; background:linear-gradient(90deg,currentColor 0 3px,transparent 3px 6px,currentColor 6px)}
+.nb-now{flex:1; min-width:0; display:flex; align-items:baseline; gap:8px; overflow:hidden; white-space:nowrap; color:var(--ink); font-size:14.5px}
+.nb-now:hover .nb-tt{color:var(--accent)}
+.nb-tt{overflow:hidden; text-overflow:ellipsis}
+.nb-al{flex:none; max-width:45%; overflow:hidden; text-overflow:ellipsis; font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint)}
+.nb-vol{flex:none; width:72px; accent-color:var(--accent); cursor:pointer}
+.nb-radio.playing .nb-lab{color:var(--accent)}
+.nb-radio.playing .nb-lab::after{content:""; display:inline-block; width:6px; height:6px; margin-left:6px; border-radius:50%; background:currentColor; vertical-align:middle; animation:nbpulse 1.2s ease-in-out infinite}
+@keyframes nbpulse{50%{opacity:.25}}
+@media(max-width:1300px){ .nb-al{display:none} }
 .nb-shuffle{flex:none; width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--muted); cursor:pointer; font-size:15px; line-height:1; transition:.2s}
-.nb-shuffle:hover{border-color:var(--accent); color:var(--accent); transform:rotate(180deg)}
+.nb-shuffle:hover{border-color:var(--accent); color:var(--accent)}
 .nb-news{flex:1; min-width:0; display:flex; align-items:center; gap:12px; border:1px solid var(--line); border-radius:100px; padding:0 18px; background:var(--panel); color:var(--ink); font:inherit; font-size:15px; cursor:pointer; text-align:left; transition:border-color .2s}
 .nb-news:hover,.nb-news[aria-expanded="true"]{border-color:var(--accent)}
 .nb-news:focus{outline:none} .nb-news:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
@@ -466,8 +479,10 @@ image-slot{--slot-bg:var(--bg-alt)}
       <div class="nb-row">
         <div class="nb-radio">
           <span class="nb-lab">Radio</span>
-          <iframe id="nb-player" title="Radio: a random track from Miguel's releases" loading="lazy"></iframe>
-          <button class="nb-shuffle" id="nb-shuffle" type="button" title="Another random track" aria-label="Load another random track">⤮</button>
+          <button class="nb-play" id="nb-play" type="button" aria-label="Play radio" aria-pressed="false"><span class="nb-ico"></span></button>
+          <a class="nb-now" id="nb-now" target="_blank" rel="noopener" title="Full track on Bandcamp"><span class="nb-tt">…</span><span class="nb-al"></span></a>
+          <input class="nb-vol" id="nb-vol" type="range" min="0" max="100" value="25" aria-label="Radio volume">
+          <button class="nb-shuffle" id="nb-shuffle" type="button" title="Next random track" aria-label="Next random track">⤮</button>
         </div>
         <button class="nb-news" id="nb-toggle" type="button" aria-expanded="false" aria-controls="nb-log">
           <span class="nb-dot"></span><span class="nb-type"></span><span class="nb-date"></span><span class="nb-text"></span><span class="nb-more">Log <i>▾</i></span>
@@ -943,9 +958,9 @@ function makeSectionSound(btnId, sectionId, srcUrl, label){
   S.start = ()=>{
     if(!sndEnabled || !S.inView) return;
     if(!S.audio){ S.audio = new Audio(S.src); S.audio.loop = true; S.audio.volume = 0; }
-    S.audio.play().then(()=>{ S.pending = false; S.fadeTo(0.85); }).catch(()=>{ S.pending = true; });
+    S.audio.play().then(()=>{ S.pending = false; S.active = true; radio.duck(true); S.fadeTo(0.85); }).catch(()=>{ S.pending = true; });
   };
-  S.stop = ()=>{ S.pending=false; if(S.audio) S.fadeTo(0, ()=> S.audio && S.audio.pause()); };
+  S.stop = ()=>{ S.pending=false; S.active=false; if(!sndSections.some(x=>x.active)) radio.duck(false); if(S.audio) S.fadeTo(0, ()=> S.audio && S.audio.pause()); };
   S.ui = ()=>{
     S.btn.setAttribute('aria-pressed', sndEnabled ? 'true' : 'false');
     S.btn.querySelector('.snd-lab').textContent = sndEnabled ? 'Sound on · '+S.label+' — tap to mute' : 'Sound off · tap for sound';
@@ -1055,17 +1070,37 @@ const NEWS_TYPES = {
   document.addEventListener('click',e=>{ if(!log.hidden && !document.getElementById('newsbar').contains(e.target)){ log.hidden=true; btn.setAttribute('aria-expanded','false'); } });
 })();
 
-// ---- RADIO: a random track from the Bandcamp releases (album id, title, track ids) ----
-// Curated: releases + Bosque Viento, I serie gráfica, Ciclos de Estrellas (Sounding Numbers is not on Bandcamp)
-const RADIO = [[2217042493, "Distant Lights", [312798334, 105883018, 3291006174, 967768580, 1932377565]], [268755320, "Radio Pulsars", [4157150141, 406242865, 809207712, 4273158400, 3091013830, 1019740616]], [996934546, "Melting Point", [3949152398, 2964141108, 2926562633, 1125944394, 4223544725, 1924130132, 451641446, 2829366097, 2339012427]], [558928402, "IMMERSE", [2790713058, 161710472, 1562357525, 2111348174, 3175360537, 180512234, 3964757536, 2812012554]], [1586142588, "Bosque Viento", [4123136070, 1787667301, 3682609676, 233777527, 83555522]], [4234447536, "I serie gráfica. Equilibrios Colapsados.", [3327403090, 3869358812, 2916518374, 2739330115, 2358339199]], [3039918872, "Ciclos de Estrellas", [3631506182, 1853484796, 2029790868, 183005615, 1494762405, 1420565358, 750231453, 776613903]]];
-(function(){
-  const frame=document.getElementById('nb-player'); let last=null;
-  // Bandcamp's player takes a background colour; match the bar (theme --panel), fall back to white/dark grey
-  const bg=()=>{ const c=getComputedStyle(document.documentElement).getPropertyValue('--panel').trim().replace('#',''); if(!/^[0-9a-f]{6}$/i.test(c)) return 'ffffff'; return c; };
-  const pick=()=>{ let a,t; do{ a=RADIO[Math.floor(Math.random()*RADIO.length)]; t=a[2][Math.floor(Math.random()*a[2].length)]; }while(t===last && RADIO.length>1); last=t;
-    frame.src='https://bandcamp.com/EmbeddedPlayer/album='+a[0]+'/size=small/bgcol='+bg()+'/linkcol=b8651f/track='+t+'/transparent=true/';
-    frame.title='Radio: '+a[1]; };
-  pick(); document.getElementById('nb-shuffle').addEventListener('click',pick);
+// ---- RADIO: 60-second excerpts from the releases, random order, 25% by default ----
+// f: file in assets/radio, t: track, a: album, by: artist, u: full track on Bandcamp
+const RADIO = [{"f": "distant-lights-01.mp3", "t": "Oleaje", "a": "Distant Lights", "by": "Crozzoli/Muruaga/Filip", "u": "https://crozzoli-muruaga-filip.bandcamp.com/track/oleaje"}, {"f": "distant-lights-02.mp3", "t": "El brillo de sus ojos", "a": "Distant Lights", "by": "Crozzoli/Muruaga/Filip", "u": "https://crozzoli-muruaga-filip.bandcamp.com/track/el-brillo-de-sus-ojos"}, {"f": "distant-lights-03.mp3", "t": "Procesión", "a": "Distant Lights", "by": "Crozzoli/Muruaga/Filip", "u": "https://crozzoli-muruaga-filip.bandcamp.com/track/procesi-n"}, {"f": "distant-lights-04.mp3", "t": "Vislumbrar", "a": "Distant Lights", "by": "Crozzoli/Muruaga/Filip", "u": "https://crozzoli-muruaga-filip.bandcamp.com/track/vislumbrar"}, {"f": "distant-lights-05.mp3", "t": "Sinuoso", "a": "Distant Lights", "by": "Crozzoli/Muruaga/Filip", "u": "https://crozzoli-muruaga-filip.bandcamp.com/track/sinuoso"}, {"f": "radio-pulsars-01.mp3", "t": "Wandering off into the night", "a": "Radio Pulsars", "by": "The Strangement Society", "u": "https://barefootrecords.bandcamp.com/track/wandering-off-into-the-night"}, {"f": "radio-pulsars-02.mp3", "t": "Whispering softly into the stars", "a": "Radio Pulsars", "by": "The Strangement Society", "u": "https://barefootrecords.bandcamp.com/track/whispering-softly-into-the-stars"}, {"f": "radio-pulsars-03.mp3", "t": "How many times did you think about the end?", "a": "Radio Pulsars", "by": "The Strangement Society", "u": "https://barefootrecords.bandcamp.com/track/how-many-times-did-you-think-about-the-end"}, {"f": "radio-pulsars-04.mp3", "t": "We dance, we gleam, we yearn", "a": "Radio Pulsars", "by": "The Strangement Society", "u": "https://barefootrecords.bandcamp.com/track/we-dance-we-gleam-we-yearn"}, {"f": "radio-pulsars-05.mp3", "t": "Hear me!", "a": "Radio Pulsars", "by": "The Strangement Society", "u": "https://barefootrecords.bandcamp.com/track/hear-me"}, {"f": "radio-pulsars-06.mp3", "t": "Until the end of our time", "a": "Radio Pulsars", "by": "The Strangement Society", "u": "https://barefootrecords.bandcamp.com/track/until-the-end-of-our-time"}, {"f": "melting-point-01.mp3", "t": "Sand clock", "a": "Melting Point", "by": "Duende", "u": "https://listentoduende.bandcamp.com/track/sand-clock"}, {"f": "melting-point-02.mp3", "t": "Dancing with the fading silhouettes", "a": "Melting Point", "by": "Duende", "u": "https://listentoduende.bandcamp.com/track/dancing-with-the-fading-silhouettes"}, {"f": "melting-point-03.mp3", "t": "High pressure", "a": "Melting Point", "by": "Duende", "u": "https://listentoduende.bandcamp.com/track/high-pressure"}, {"f": "melting-point-04.mp3", "t": "Old structures", "a": "Melting Point", "by": "Duende", "u": "https://listentoduende.bandcamp.com/track/old-structures"}, {"f": "melting-point-05.mp3", "t": "Mercury sea", "a": "Melting Point", "by": "Duende", "u": "https://listentoduende.bandcamp.com/track/mercury-sea"}, {"f": "melting-point-06.mp3", "t": "Forgotten portrait", "a": "Melting Point", "by": "Duende", "u": "https://listentoduende.bandcamp.com/track/forgotten-portrait"}, {"f": "melting-point-07.mp3", "t": "Collateral", "a": "Melting Point", "by": "Duende", "u": "https://listentoduende.bandcamp.com/track/collateral"}, {"f": "melting-point-08.mp3", "t": "New directions", "a": "Melting Point", "by": "Duende", "u": "https://listentoduende.bandcamp.com/track/new-directions"}, {"f": "melting-point-09.mp3", "t": "Graving vapor clouds with bare hands", "a": "Melting Point", "by": "Duende", "u": "https://listentoduende.bandcamp.com/track/graving-vapor-clouds-with-bare-hands"}, {"f": "immerse-01.mp3", "t": "You see, hear and contemplate", "a": "IMMERSE", "by": "UNLESS WE · Miguel Crozzoli, Pablo Díaz", "u": "https://nendodango.bandcamp.com/track/you-see-hear-and-contemplate"}, {"f": "immerse-02.mp3", "t": "Surface", "a": "IMMERSE", "by": "UNLESS WE · Miguel Crozzoli, Pablo Díaz", "u": "https://nendodango.bandcamp.com/track/surface"}, {"f": "immerse-03.mp3", "t": "Unknown paradigms", "a": "IMMERSE", "by": "UNLESS WE · Miguel Crozzoli, Pablo Díaz", "u": "https://nendodango.bandcamp.com/track/unknown-paradigms"}, {"f": "immerse-04.mp3", "t": "You jump", "a": "IMMERSE", "by": "UNLESS WE · Miguel Crozzoli, Pablo Díaz", "u": "https://nendodango.bandcamp.com/track/you-jump"}, {"f": "immerse-05.mp3", "t": "We see, hear and contemplate", "a": "IMMERSE", "by": "UNLESS WE · Miguel Crozzoli, Pablo Díaz", "u": "https://nendodango.bandcamp.com/track/we-see-hear-and-contemplate"}, {"f": "immerse-06.mp3", "t": "Essence of distance", "a": "IMMERSE", "by": "UNLESS WE · Miguel Crozzoli, Pablo Díaz", "u": "https://nendodango.bandcamp.com/track/essence-of-distance"}, {"f": "immerse-07.mp3", "t": "Reaching beyond", "a": "IMMERSE", "by": "UNLESS WE · Miguel Crozzoli, Pablo Díaz", "u": "https://nendodango.bandcamp.com/track/reaching-beyond"}, {"f": "immerse-08.mp3", "t": "Immerse", "a": "IMMERSE", "by": "UNLESS WE · Miguel Crozzoli, Pablo Díaz", "u": "https://nendodango.bandcamp.com/track/immerse"}, {"f": "bosque-viento-01.mp3", "t": "Copos de nieve", "a": "Bosque Viento", "by": "Miguel Crozzoli / Francisco Cossavella", "u": "https://miguelcrozzoli.bandcamp.com/track/copos-de-nieve"}, {"f": "bosque-viento-02.mp3", "t": "Tunnel mountain", "a": "Bosque Viento", "by": "Miguel Crozzoli / Francisco Cossavella", "u": "https://miguelcrozzoli.bandcamp.com/track/tunnel-mountain"}, {"f": "bosque-viento-03.mp3", "t": "Suspiro del sol", "a": "Bosque Viento", "by": "Miguel Crozzoli / Francisco Cossavella", "u": "https://miguelcrozzoli.bandcamp.com/track/suspiro-del-sol"}, {"f": "bosque-viento-04.mp3", "t": "Ponita", "a": "Bosque Viento", "by": "Miguel Crozzoli / Francisco Cossavella", "u": "https://miguelcrozzoli.bandcamp.com/track/ponita"}, {"f": "bosque-viento-05.mp3", "t": "Segunda meditación", "a": "Bosque Viento", "by": "Miguel Crozzoli / Francisco Cossavella", "u": "https://miguelcrozzoli.bandcamp.com/track/segunda-meditaci-n"}, {"f": "serie-grafica-01.mp3", "t": "Gráfico #1: El Todo en la expresión. El individuo en el todo. lo individual. lo dual del equilibrio. la dualidad del movimiento. la humanidad del todo. el todo de lo humano. el todo. el amor. la felicidad. el amor.", "a": "I serie gráfica. Equilibrios Colapsados.", "by": "Crozzoli Miguel", "u": "https://miguelcrozzoli.bandcamp.com/track/gr-fico-1-el-todo-en-la-expresi-n-el-individuo-en-el-todo-lo-individual-lo-dual-del-equilibrio-la-dualidad-del-movimiento-la-humanidad-del-todo-el-todo-de-lo-humano-el-todo-el-amor-la-felicidad-e"}, {"f": "serie-grafica-02.mp3", "t": "Gráfico #2: En la igualdad somos uno y su opuesto. concluye y comienza. comienza y concluye. nos expresamos en el espacio del suspiro.", "a": "I serie gráfica. Equilibrios Colapsados.", "by": "Crozzoli Miguel", "u": "https://miguelcrozzoli.bandcamp.com/track/gr-fico-2-en-la-igualdad-somos-uno-y-su-opuesto-concluye-y-comienza-comienza-y-concluye-nos-expresamos-en-el-espacio-del-suspiro"}, {"f": "serie-grafica-03.mp3", "t": "Gráfico #3: El movimiento del equilibrio es la energía de creación. 3 es 4 como 4 es 3.", "a": "I serie gráfica. Equilibrios Colapsados.", "by": "Crozzoli Miguel", "u": "https://miguelcrozzoli.bandcamp.com/track/gr-fico-3-el-movimiento-del-equilibrio-es-la-energ-a-de-creaci-n-3-es-4-como-4-es-3"}, {"f": "serie-grafica-04.mp3", "t": "Gráfico #4: Somos expresión de los universos encontrandose // Los opuestos son complementarios. son expresión particular del todo; donde se funden en uno.", "a": "I serie gráfica. Equilibrios Colapsados.", "by": "Crozzoli Miguel", "u": "https://miguelcrozzoli.bandcamp.com/track/gr-fico-4-somos-expresi-n-de-los-universos-encontrandose-los-opuestos-son-complementarios-son-expresi-n-particular-del-todo-donde-se-funden-en-uno"}, {"f": "serie-grafica-05.mp3", "t": "Gráfico #5: Somos particularidad que modfica la expresión del espacio y del tiempo.", "a": "I serie gráfica. Equilibrios Colapsados.", "by": "Crozzoli Miguel", "u": "https://miguelcrozzoli.bandcamp.com/track/gr-fico-5-somos-particularidad-que-modfica-la-expresi-n-del-espacio-y-del-tiempo"}, {"f": "ciclos-de-estrellas-01.mp3", "t": "M", "a": "Ciclos de Estrellas", "by": "Miguel Crozzoli", "u": "https://miguelcrozzoli.bandcamp.com/track/m"}, {"f": "ciclos-de-estrellas-02.mp3", "t": "cZ", "a": "Ciclos de Estrellas", "by": "Miguel Crozzoli", "u": "https://miguelcrozzoli.bandcamp.com/track/cz"}, {"f": "ciclos-de-estrellas-03.mp3", "t": "P", "a": "Ciclos de Estrellas", "by": "Miguel Crozzoli", "u": "https://miguelcrozzoli.bandcamp.com/track/p"}, {"f": "ciclos-de-estrellas-04.mp3", "t": "cD", "a": "Ciclos de Estrellas", "by": "Miguel Crozzoli", "u": "https://miguelcrozzoli.bandcamp.com/track/cd"}, {"f": "ciclos-de-estrellas-05.mp3", "t": "R", "a": "Ciclos de Estrellas", "by": "Miguel Crozzoli", "u": "https://miguelcrozzoli.bandcamp.com/track/r"}, {"f": "ciclos-de-estrellas-06.mp3", "t": "cI", "a": "Ciclos de Estrellas", "by": "Miguel Crozzoli", "u": "https://miguelcrozzoli.bandcamp.com/track/ci"}, {"f": "ciclos-de-estrellas-07.mp3", "t": "F", "a": "Ciclos de Estrellas", "by": "Miguel Crozzoli", "u": "https://miguelcrozzoli.bandcamp.com/track/f-2"}, {"f": "ciclos-de-estrellas-08.mp3", "t": "B", "a": "Ciclos de Estrellas", "by": "Miguel Crozzoli", "u": "https://miguelcrozzoli.bandcamp.com/track/b"}];
+const radio = (function(){
+  const box=document.querySelector('.nb-radio'), play=document.getElementById('nb-play'), now=document.getElementById('nb-now'), vol=document.getElementById('nb-vol');
+  const store=(k,v)=>{ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } };
+  const audio=new Audio(); audio.preload='none';
+  let level=(+store('crozzoli-radio-vol') || 25)/100; vol.value=Math.round(level*100);
+  let wanted = store('crozzoli-radio')!=='off';   // visitor hasn't switched it off
+  let ducked=false, fade=null, recent=[];
+  // iOS ignores audio.volume (hardware buttons only), so hide the slider there
+  const probe=new Audio(); probe.volume=0.5; if(probe.volume!==0.5) vol.hidden=true;
+  const fadeTo=(target,then)=>{ clearInterval(fade); fade=setInterval(()=>{ const d=target-audio.volume; if(Math.abs(d)<0.02){ audio.volume=target; clearInterval(fade); then&&then(); } else audio.volume=Math.min(1,Math.max(0,audio.volume+d*0.25)); },50); };
+  const pick=()=>{ let i; do{ i=Math.floor(Math.random()*RADIO.length); }while(recent.includes(i) && recent.length<RADIO.length); recent.push(i); if(recent.length>8) recent.shift(); return RADIO[i]; };
+  const load=(tr)=>{ audio.src='assets/radio/'+tr.f; now.href=tr.u; now.querySelector('.nb-tt').textContent=tr.t; now.querySelector('.nb-al').textContent=tr.a+(tr.by?' · '+tr.by:''); };
+  const ui=()=>{ const on=!audio.paused; box.classList.toggle('playing',on); play.setAttribute('aria-pressed',on); play.setAttribute('aria-label',on?'Pause radio':'Play radio'); };
+  const start=()=>{ if(!wanted || ducked) return; audio.volume=0; audio.play().then(()=>{ fadeTo(level); ui(); }).catch(()=>{}); };
+  const stop=(then)=>{ fadeTo(0,()=>{ audio.pause(); ui(); then&&then(); }); };
+  load(pick());
+  audio.addEventListener('ended',()=>{ load(pick()); start(); });
+  audio.addEventListener('pause',ui); audio.addEventListener('play',ui);
+  play.addEventListener('click',e=>{ e.stopPropagation(); wanted=audio.paused; store('crozzoli-radio',wanted?'on':'off'); if(wanted){ ducked=false; start(); } else stop(); });
+  document.getElementById('nb-shuffle').addEventListener('click',e=>{ e.stopPropagation(); const go=()=>{ load(pick()); wanted=true; store('crozzoli-radio','on'); start(); }; audio.paused?go():stop(go); });
+  vol.addEventListener('input',()=>{ level=vol.value/100; store('crozzoli-radio-vol',vol.value); if(!audio.paused && !ducked){ clearInterval(fade); audio.volume=level; } });
+  ['click','input','pointerdown'].forEach(ev=> vol.addEventListener(ev,e=>e.stopPropagation()));
+  // browsers only allow sound after a first click/tap/key: start then
+  const first=()=>{ ['pointerdown','keydown','touchstart'].forEach(ev=>document.removeEventListener(ev,first)); if(audio.paused) start(); };
+  ['pointerdown','keydown','touchstart'].forEach(ev=>document.addEventListener(ev,first,{passive:true}));
+  start();
+  // section ambient loops take over: radio fades out, comes back after
+  return { duck(on){ if(on===ducked) return; ducked=on; if(on){ if(!audio.paused) stop(); } else start(); } };
 })();
 
 // ---- landing: measure what sits above the mosaic so the tiles fill the rest of the screen ----
