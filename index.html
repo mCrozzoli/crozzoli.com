@@ -797,6 +797,18 @@ image-slot{--slot-bg:var(--bg-alt)}
         <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=268755320/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Radio Pulsars on Bandcamp"></iframe>
         <div class="rel-links"><a href="https://barefootrecords.bandcamp.com/album/radio-pulsars" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
       </article>
+      <article class="rel-card">
+        <a href="https://listentoduende.bandcamp.com/album/melting-point" target="_blank" rel="noopener"><img src="assets/cover-melting-point.jpg" alt="Melting Point cover" loading="lazy"><span class="rel-tag">Free Jazz</span></a>
+        <div class="rel-body"><h3>Melting Point</h3><div class="rel-meta">2020 · Duende · with Gon Muruaga Olguin (guitar &amp; effects)</div>
+        <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=996934546/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Melting Point on Bandcamp"></iframe>
+        <div class="rel-links"><a href="https://listentoduende.bandcamp.com/album/melting-point" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
+      </article>
+      <article class="rel-card">
+        <a href="https://nendodango.bandcamp.com/album/immerse" target="_blank" rel="noopener"><img src="assets/cover-immerse.jpg" alt="Immerse cover" loading="lazy"><span class="rel-tag">Free Jazz</span></a>
+        <div class="rel-body"><h3>Immerse</h3><div class="rel-meta">2020 · UNLESS WE · with Pablo Díaz (drums) · Nendodango Records</div>
+        <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=558928402/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Immerse on Bandcamp"></iframe>
+        <div class="rel-links"><a href="https://nendodango.bandcamp.com/album/immerse" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
+      </article>
     </div>
   </div>
 </section>
@@ -1044,7 +1056,8 @@ const NEWS_TYPES = {
 })();
 
 // ---- RADIO: a random track from the Bandcamp releases (album id, title, track ids) ----
-const RADIO = [[2217042493, "Distant Lights", [312798334, 105883018, 3291006174, 967768580, 1932377565]], [268755320, "Radio Pulsars", [4157150141, 406242865, 809207712, 4273158400, 3091013830, 1019740616]], [1586142588, "Bosque Viento", [4123136070, 1787667301, 3682609676, 233777527, 83555522]], [3039918872, "Ciclos de Estrellas", [3631506182, 1853484796, 2029790868, 183005615, 1494762405, 1420565358, 750231453, 776613903]], [4130369726, "Ciclos de Luz", [2872335550, 446954599, 1257419471, 2647497570, 601068790, 691353081, 2982363812, 2458389397]], [4234447536, "I serie gráfica. Equilibrios Colapsados.", [3327403090, 3869358812, 2916518374, 2739330115, 2358339199]], [558928402, "IMMERSE", [2790713058, 161710472, 1562357525, 2111348174, 3175360537, 180512234, 3964757536, 2812012554]], [996934546, "Melting Point", [3949152398, 2964141108, 2926562633, 1125944394, 4223544725, 1924130132, 451641446, 2829366097, 2339012427]]];
+// Curated: releases + Bosque Viento, I serie gráfica, Ciclos de Estrellas (Sounding Numbers is not on Bandcamp)
+const RADIO = [[2217042493, "Distant Lights", [312798334, 105883018, 3291006174, 967768580, 1932377565]], [268755320, "Radio Pulsars", [4157150141, 406242865, 809207712, 4273158400, 3091013830, 1019740616]], [996934546, "Melting Point", [3949152398, 2964141108, 2926562633, 1125944394, 4223544725, 1924130132, 451641446, 2829366097, 2339012427]], [558928402, "IMMERSE", [2790713058, 161710472, 1562357525, 2111348174, 3175360537, 180512234, 3964757536, 2812012554]], [1586142588, "Bosque Viento", [4123136070, 1787667301, 3682609676, 233777527, 83555522]], [4234447536, "I serie gráfica. Equilibrios Colapsados.", [3327403090, 3869358812, 2916518374, 2739330115, 2358339199]], [3039918872, "Ciclos de Estrellas", [3631506182, 1853484796, 2029790868, 183005615, 1494762405, 1420565358, 750231453, 776613903]]];
 (function(){
   const frame=document.getElementById('nb-player'); let last=null;
   // Bandcamp's player takes a background colour; match the bar (theme --panel), fall back to white/dark grey
