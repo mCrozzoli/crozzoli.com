@@ -518,6 +518,9 @@ a.ccard{text-decoration:none; color:inherit; display:block}
 /* ============ COLLABORATIONS ============ */
 .co-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:clamp(24px,4vw,40px)}
 .co-card{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--panel); display:flex; flex-direction:column}
+.co-card.co-wide{grid-column:1/-1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.co-card.co-wide .co-img{aspect-ratio:auto; min-height:100%}
+.co-card.co-wide .co-body{padding:24px 26px}
 .co-img{aspect-ratio:16/9; overflow:hidden; background:var(--bg-alt)} .co-img.co-dark{background:#05101c}
 .co-img img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s}
 .co-card:hover .co-img img{transform:scale(1.03)}
@@ -532,7 +535,7 @@ a.ccard{text-decoration:none; color:inherit; display:block}
 .co-links a{font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); border-bottom:1px solid currentColor}
 .rel-early{margin-top:clamp(40px,6vw,72px); padding-top:clamp(28px,4vw,44px); border-top:1px solid var(--line)}
 .rel-early-h{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); font-size:clamp(28px,3.4vw,42px); margin:6px 0 20px}
-@media(max-width:760px){ .co-grid{grid-template-columns:1fr} }
+@media(max-width:760px){ .co-grid{grid-template-columns:1fr} .co-card.co-wide{grid-template-columns:1fr} .co-card.co-wide .co-img{aspect-ratio:16/9} }
 
 /* ============ A WHALE'S HEART ============ */
 .whale{--ink:#e6eef5; --muted:rgba(214,230,242,.72); --faint:rgba(214,230,242,.5); --line:rgba(120,190,230,.18); --wh-blue:#2bc4ee; --wh-amber:#f0a632;
@@ -917,6 +920,16 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
     <h2 class="title">Collaborations.</h2>
     <p class="lead">Working alongside artists and researchers as a music technology collaborator: composing and performing, and building the technology that makes the work sound: data pipelines, sonification engines, electronics and software.</p>
     <div class="co-grid">
+      <article class="co-card co-wide">
+        <div class="co-img co-dark"><img src="assets/collab/space-we-hold-together.jpg" alt="The Space We Hold Together: six environmental pressures as lines from 1961 toward 2050, with a projected band" loading="lazy"></div>
+        <div class="co-body">
+          <div class="co-meta">2026 · work in progress · premiere Padova, November 2026</div>
+          <h3>The Space We Hold Together</h3>
+          <div class="co-with">with Nicola Privato and Fabio De Pascale · Intelligent Instruments Lab × Science Communication Lab, University of Padova</div>
+          <p>An interactive sound installation on biodiversity loss. Up to five visitors wear bracelets and walk through the room; where they stand together steers a live prediction of biodiversity from 1961 to 2050 across six pressures (CO₂, deforestation, fishing, pollution, invasive species, population), heard in the sound and seen on the wall and floor. No single position improves everything: the room has to share its attention.</p>
+          <ul class="co-roles"><li>Sonification engine</li><li>Sound design</li><li>Dark Sonification</li></ul>
+        </div>
+      </article>
       <article class="co-card">
         <div class="co-img"><img src="assets/collab/pdw-table.jpg" alt="Plant Data Worlds: a banana plant on a round table surrounded by small white sculptures" loading="lazy"></div>
         <div class="co-body">
