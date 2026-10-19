@@ -311,6 +311,18 @@ section.detail[hidden]{display:none}
 .early-video iframe{display:block; width:100%; aspect-ratio:16/9; border:0; border-radius:14px; background:#000}
 @media(max-width:980px){.rel-feature{grid-template-columns:1fr}.rel-grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.rel-grid.four{grid-template-columns:1fr}}
+/* narrow screens: the featured release reads cover → info → press */
+@media(max-width:980px){ .rel-left{display:contents} .rel-feature .rel-cover{order:1} .rel-feature .rel-info{order:2} .rel-feature .rel-press{order:3; margin-top:0} }
+/* phones: compact album cards, small cover beside title + meta, the rest full width below */
+@media(max-width:560px){
+  .rel-card{display:grid; grid-template-columns:104px minmax(0,1fr); grid-template-rows:auto auto 1fr; column-gap:14px; row-gap:6px; padding:12px; align-items:start}
+  .rel-card > a:first-child{grid-row:1 / span 3}
+  .rel-card > a:first-child img{border-radius:6px}
+  .rel-card .rel-body{display:contents}
+  .rel-card .rel-body > *{grid-column:1 / -1}
+  .rel-card .rel-body > h3,.rel-card .rel-body > .rel-meta{grid-column:2}
+  .rel-card .rel-tag{position:static; display:block; margin-top:6px; font-size:8.5px; letter-spacing:.08em; padding:3px 6px; text-align:center; white-space:normal; -webkit-backdrop-filter:none; backdrop-filter:none}
+}
 
 .fs-hero{display:block; width:100%; aspect-ratio:1000/466; object-fit:cover; border-radius:14px; margin:4px 0 28px}
 .fs-grid{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(24px,4vw,56px); align-items:start}
