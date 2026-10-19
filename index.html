@@ -454,6 +454,56 @@ image-slot{--slot-bg:var(--bg-alt)}
 .rel-desc{font-size:14px; line-height:1.5; color:var(--muted); margin:0}
 .rel-quote{margin:0; font-size:14px; line-height:1.5; font-style:italic; border-left:2px solid var(--accent); padding-left:10px}
 .rel-quote span{display:block; font-style:normal; font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-top:4px}
+
+/* ============ LOVE IS (2024) ============ */
+.loveis{--li-red:#ef5c64; --li-red2:#f8a9ae}
+.li-poem{font-family:var(--font-display); font-style:italic; font-size:clamp(17px,1.6vw,20px); line-height:1.5; color:var(--muted); margin:-6px 0 28px}
+.li-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,5vw,72px); align-items:start}
+.li-stage{display:flex; flex-direction:column; align-items:center; gap:14px; position:sticky; top:24px}
+.li-plate{position:relative; width:min(100%,460px); aspect-ratio:1; background:linear-gradient(145deg,#f6cf3c,#e9b917); border-radius:10% 10% 12% 9%; box-shadow:0 30px 60px -28px rgba(80,50,0,.55), inset 0 -6px 0 rgba(0,0,0,.08); display:grid; grid-template-columns:1fr 1fr; gap:4%; padding:6%; box-sizing:border-box; touch-action:none; -webkit-user-select:none; user-select:none}
+.li-logo{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-family:var(--font-mono); font-weight:600; font-size:clamp(16px,2.4vw,24px); letter-spacing:.06em; color:#2a2416; opacity:.8; pointer-events:none}
+.li-heart{--warm:0; position:relative; border:0; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent; z-index:1;
+  background:radial-gradient(circle at 34% 28%, color-mix(in srgb, #ffc2c4 calc(60% - var(--warm)*30%), transparent) 0 12%, transparent 40%),
+             radial-gradient(circle at 60% 70%, rgba(150,20,30,.28), transparent 60%),
+             color-mix(in srgb, var(--li-red2) calc(var(--warm)*70%), var(--li-red));
+  box-shadow:inset -8px -12px 22px rgba(120,10,20,.25), inset 6px 8px 14px rgba(255,220,220,.35), 0 10px 18px -8px rgba(90,10,10,.45);
+  transition:box-shadow .5s, background .8s}
+.li-heart:nth-of-type(1){border-radius:46% 54% 52% 48% / 55% 48% 52% 45%}
+.li-heart:nth-of-type(2){border-radius:52% 48% 44% 56% / 48% 56% 44% 52%}
+.li-heart:nth-of-type(3){border-radius:50% 50% 56% 44% / 46% 52% 48% 54%}
+.li-heart:nth-of-type(4){border-radius:44% 56% 50% 50% / 52% 46% 54% 48%}
+.li-heart:focus{outline:none} .li-heart:focus-visible{outline:3px solid #2a2416; outline-offset:4px}
+.li-eye{position:absolute; left:50%; top:38%; width:13%; aspect-ratio:1; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle,#f4fff2 0 22%,#d8e4d6 24% 100%); box-shadow:0 0 0 2px rgba(255,255,255,.5)}
+.li-eye::after{content:""; position:absolute; inset:28%; border-radius:50%; background:#2fd25a; box-shadow:0 0 8px 2px rgba(47,210,90,.55); transition:background .3s, box-shadow .3s}
+.li-heart[data-state="listening"] .li-eye::after{box-shadow:0 0 14px 5px rgba(47,210,90,.85); animation:liListen 1.1s ease-in-out infinite}
+.li-heart[data-state="listening"]{box-shadow:inset -8px -12px 22px rgba(120,10,20,.25), inset 6px 8px 14px rgba(255,220,220,.35), 0 0 0 6px rgba(47,210,90,.18), 0 10px 18px -8px rgba(90,10,10,.45)}
+@keyframes liListen{50%{opacity:.45}}
+.li-heart[data-state="beating"] .li-eye::after,.li-heart[data-state="fading"] .li-eye::after{background:#ff3b3b; box-shadow:0 0 10px 3px rgba(255,59,59,.7)}
+.li-heart[data-state="beating"],.li-heart[data-state="fading"]{box-shadow:inset -8px -12px 22px rgba(120,10,20,.2), inset 6px 8px 18px rgba(255,230,230,.45), 0 0 36px 4px rgba(255,70,70,.45), 0 10px 18px -8px rgba(90,10,10,.45)}
+.li-heart.li-flash .li-eye::after{animation:liFlash .45s ease-out}
+.li-heart.li-flash::before{content:""; position:absolute; inset:0; border-radius:inherit; background:radial-gradient(circle at 50% 45%, rgba(255,60,60,.55), transparent 65%); animation:liGlow .6s ease-out forwards; pointer-events:none}
+@keyframes liFlash{0%{background:#fff; box-shadow:0 0 18px 8px rgba(255,80,80,.95)}}
+@keyframes liGlow{from{opacity:1} to{opacity:0}}
+.li-hint{font-size:15px; color:var(--ink); text-align:center; min-height:3em; margin:4px 0 0; max-width:40ch}
+.li-note{font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); text-align:center; margin:0; max-width:46ch; line-height:1.6}
+.li-text .lead{margin-top:0}
+.li-photos{display:grid; grid-auto-flow:dense; grid-template-columns:repeat(4,minmax(0,1fr)); grid-auto-rows:clamp(150px,16vw,240px); gap:12px; margin:clamp(40px,6vw,72px) 0 10px}
+.li-ph{margin:0; position:relative; overflow:hidden; border-radius:12px; background:var(--bg-alt)}
+.li-ph img{width:100%; height:100%; object-fit:cover; display:block}
+.li-big{grid-row:span 2} .li-wide{grid-column:span 2}
+.li-pulse{position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 29% 52%, rgba(255,40,40,.75), rgba(255,40,40,0) 22%); mix-blend-mode:screen; animation:liPhoto var(--li-period,1s) ease-out infinite}
+@keyframes liPhoto{0%{opacity:.15} 12%{opacity:.9} 30%{opacity:.3} 42%{opacity:.7} 100%{opacity:.15}}
+.li-go{color:#ff9a9a; border-bottom:1px solid currentColor; font-family:var(--font-mono); font-size:12px; letter-spacing:.06em}
+.li-credit{font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin:0 0 clamp(32px,5vw,56px)}
+.li-versions{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+.li-versions article{border:1px solid var(--line); border-left:3px solid var(--ac); border-radius:12px; background:var(--panel); padding:20px 22px}
+.li-yr{font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; color:var(--ac)}
+.li-versions h3{font-family:var(--font-display); font-weight:var(--dw); font-size:22px; margin:4px 0 8px}
+.li-versions p{font-size:15px; color:var(--muted); margin:0 0 12px}
+.li-where{display:flex; flex-wrap:wrap; gap:8px 18px; margin:0 !important}
+.li-where a{font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; color:var(--accent); border-bottom:1px solid currentColor}
+@media(max-width:980px){ .li-grid{grid-template-columns:1fr} .li-stage{position:static} .li-photos{grid-template-columns:repeat(2,minmax(0,1fr))} .li-versions{grid-template-columns:1fr} }
+@media(prefers-reduced-motion:reduce){ .li-pulse{animation:none; opacity:.35} .li-heart[data-state="listening"] .li-eye::after{animation:none} }
 /* ============ RESPONSIVE ============ */
 @media(max-width:980px){ .mosaic{columns:2} .bio-hero .inner{grid-template-columns:1fr; align-content:end} .bio-hero .dim{background:linear-gradient(180deg, rgba(8,9,12,.2), rgba(8,9,12,.72) 60%)} .strange .grid{grid-template-columns:1fr} .psi-hero .vgrid{grid-template-columns:1fr} .improv .igrid,.band .bgrid,.ds-grid{grid-template-columns:1fr !important} nav.links{gap:18px} }
 @media(max-width:760px){
@@ -666,7 +716,7 @@ image-slot{--slot-bg:var(--bg-alt)}
     <div class="cards-lab">Catalog · open a poster to explore each installation</div>
     <div class="cat-cards posters" id="inst-cards">
       <button class="ccard poster" data-cd="in-forest" style="--ac:oklch(0.50 0.10 150)"><img src="assets/forest-poster.jpg" alt="I Am The Forest poster"><span class="cinfo"><span class="ct">I Am The Forest</span><span class="cy">2022</span></span></button>
-      <button class="ccard poster" data-cd="in-love" style="--ac:oklch(0.55 0.16 25)"><img src="assets/poster-love.jpg" alt="Love Is poster"><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2021</span></span></button>
+      <button class="ccard poster" data-cd="in-love" style="--ac:oklch(0.55 0.16 25)"><img src="assets/poster-love.jpg" alt="Love Is poster"><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2021 / 2024</span></span></button>
       <button class="ccard poster" data-cd="in-pulsars" style="--ac:oklch(0.55 0.16 30)"><img src="assets/poster-pulsars.jpg" alt="Radio Pulsars poster"><span class="cinfo"><span class="ct">Radio Pulsars</span><span class="cy">2020</span></span></button>
       <button class="ccard poster" data-cd="in-ocean" style="--ac:oklch(0.52 0.10 230)"><img src="assets/ocean-installation.jpg" alt="I Am The Ocean installation" style="aspect-ratio:724/1024"><span class="cinfo"><span class="ct">I Am The Ocean</span><span class="cy">in progress</span></span></button>
     </div>
@@ -674,8 +724,68 @@ image-slot{--slot-bg:var(--bg-alt)}
   </div>
 </section>
 
+<!-- ============ LOVE IS (2024) — the heart-machines ============ -->
+<section class="detail loveis" id="loveis" style="--ac:oklch(0.58 0.17 22)">
+  <div class="wrap">
+    <div class="eyebrow">Participatory Sound Installation · 2021 / 2024</div>
+    <h2 class="title">Love Is.</h2>
+    <p class="li-poem">heartbeats spanning heartbeats<br>traversing spaces<br>crossing bodies<br>in presence<br>as love is</p>
+    <div class="li-grid">
+      <div class="li-stage">
+        <div class="li-plate" role="group" aria-label="Four heart-machines on a plate. Press and hold one.">
+          <button class="li-heart" type="button" aria-label="Heart-machine one: press and hold" aria-pressed="false"><span class="li-eye"></span></button>
+          <button class="li-heart" type="button" aria-label="Heart-machine two: press and hold" aria-pressed="false"><span class="li-eye"></span></button>
+          <button class="li-heart" type="button" aria-label="Heart-machine three: press and hold" aria-pressed="false"><span class="li-eye"></span></button>
+          <button class="li-heart" type="button" aria-label="Heart-machine four: press and hold" aria-pressed="false"><span class="li-eye"></span></button>
+          <span class="li-logo" aria-hidden="true">iil</span>
+        </div>
+        <p class="li-hint" aria-live="polite">Press and hold a heart. Be patient, let the machine listen to you.</p>
+        <p class="li-note">Headphones help · the sound is the installation's own SuperCollider design, running in your browser</p>
+      </div>
+      <div class="li-text">
+        <p class="lead">These heart-like machines come alive when feeling your heart, sensing your pulse. <em>This is not your heart, but a raw state of love</em>, and by holding them, love is within, and yet expanding beyond.</p>
+        <p class="muted">Their soft, strange texture and the light coming from within lure you in. Cover the green eye long enough and the machine starts to beat; its light changes colour and a rhythm is created. Is this my rhythm? Theirs? In the headphones, what first seems a soundscape built on these beatings turns out to be the machines talking to each other, and to you.</p>
+        <ol class="steps">
+          <li>Pick up one of the heart-like shapes, hold it in your hand, and place a finger on the green light.</li>
+          <li>Be patient, let the machine listen to you. It will start to beat: <b>not your pulse, but the pulse you give to the heart-machine.</b></li>
+          <li>If it doesn't start beating, choose another finger, be patient, or gently return the heart and pick another one.</li>
+          <li>Grab a headphone: the sounding universe of all the active machines beating together as one entity.</li>
+          <li>Feel the heart-like machines, listen to them, and patiently fall into the experience.</li>
+          <li>When done, gently place the heart-like machine back in its original spot.</li>
+        </ol>
+        <ul class="specs"><li class="k">Materials</li><li>Pulse sensor</li><li>DC motor</li><li>LEDs</li><li>ESP32 · ESP-NOW</li><li>Silicone &amp; cornstarch</li><li>Thermochromic pigment</li><li class="k">Sound</li><li>SuperCollider</li></ul>
+      </div>
+    </div>
+
+    <div class="li-photos">
+      <figure class="li-ph li-big"><img src="assets/loveis/glow.jpg" alt="A hand squeezing a glowing red heart-machine" loading="lazy"><span class="li-pulse" aria-hidden="true"></span></figure>
+      <figure class="li-ph"><img src="assets/loveis/plate.jpg" alt="Four red heart-machines on a yellow plate, one with its green light on" loading="lazy"></figure>
+      <figure class="li-ph"><img src="assets/loveis/closeup.jpg" alt="Close-up of the heart-machines by the window" loading="lazy"></figure>
+      <figure class="li-ph li-wide"><img src="assets/loveis/window.jpg" alt="The listening station by the window: hearts and two headphones" loading="lazy"></figure>
+      <figure class="li-ph"><img src="assets/loveis/headphones.jpg" alt="Headphones beside the hearts" loading="lazy"></figure>
+      <figure class="li-ph"><img src="assets/loveis/wiring.jpg" alt="Behind the scenes: wiring, receivers and the hearts from above" loading="lazy"></figure>
+    </div>
+    <p class="li-credit">Photos: Hamraborg Festival · Gallery Kannski</p>
+
+    <div class="li-versions">
+      <article>
+        <div class="li-yr">2024</div>
+        <h3>The heart-machines</h3>
+        <p>Handheld silicone hearts with a pulse sensor and a motor inside, beating and glowing with the pulse you give them, and a shared soundscape on headphones.</p>
+        <p class="li-where"><a href="https://www.instagram.com/p/C_QCkEXsXHm/" target="_blank" rel="noopener">Hamraborg Festival · Bókasafn Kópavogs · 29 Aug – 5 Sep 2024 ↗</a><a href="https://www.instagram.com/p/DCB5MN7gkYU/" target="_blank" rel="noopener">Gallery Kannski · Nov 2024 ↗</a></p>
+      </article>
+      <article>
+        <div class="li-yr">2021</div>
+        <h3>The dark room</h3>
+        <p>Wearing a heartbeat monitor, participants move through a dark room; each beat transforms the soundscape, and ultrasound sensors flood the dark with new textures as people cross them.</p>
+        <p class="li-where"><a href="https://www.youtube.com/watch?v=RPfHJgMJKGQ" target="_blank" rel="noopener">Watch the 2021 version ↗</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <template id="in-forest"><h3>I Am The Forest</h3><div class="pmeta">2022 · Installation · climate emergencies</div><p class="desc">An installation on climate emergencies inviting the audience to listen to the health of our world's forests while engaging in a deforestation micro-activism practice. The sonifications use 20 years of data from <a href="https://www.globalforestwatch.org/" target="_blank" rel="noopener">Global Forest Watch</a>. Resilient by design: it works in gardens, forests, greenhouses — or a lonely tree in a shopping center.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/9JUZJV5tmdM?rel=0" style="aspect-ratio:16/9;height:auto" title="I Am The Forest teaser" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><blockquote class="ritual">Walk around and listen, this is your environment. See the colors and feel the textures surrounding you. <b>.breathe.</b> Put your ear against the trunk of the tree. <b>hear.</b> <b>.breathe again.</b> Plant some seeds with your bare hands.</blockquote><ol class="steps"><li><b>Entering the space.</b> People scan a QR code to access an online PDF with an introduction, instructions, and a reflective, informative text about deforestation.</li><li><b>Accessing the PDF.</b> Page one: introduction and instructions. Page two: a scientific text next to a poetic reflection on deforestation.</li><li><b>Hugging a tree.</b> The sonifications play through transducers connected to trees — the tree works as an amplifier. Hug it to feel the vibration; press your ear to the trunk to <b>hear</b> the sounds of deforestation.</li><li><b>Planting seeds.</b> Pots with soil and bags of seeds lie around the trees — plant them, water them, or take a pot home to grow a new potential forest.</li><li><b>After the installation.</b> The whole piece reduces to a box, so participants can take it home and plant a forest wherever they want.</li></ol><ul class="specs"><li class="k">Materials</li><li>Transducers + amplifier</li><li>Plant pots</li><li>Native seeds</li><li>Soil</li><li>MP3 player</li><li class="k">Coding</li><li>SuperCollider</li></ul></template>
-<template id="in-love"><h3>Love Is</h3><div class="pmeta">2021 · Installation · body &amp; perception</div><p class="desc">An installation on the perception of our body and the power of our hearts: presence becomes movement, emotion becomes the beating of our hearts. It needs only a dark room with space to move and a PA system — very simple and very powerful.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/RPfHJgMJKGQ?rel=0" style="aspect-ratio:16/9;height:auto" title="Love Is — participatory sound installation" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><ol class="steps"><li><b>Entering the space.</b> People scan a QR code to access an online PDF with an introduction, instructions, and quotes from Argentinian writer Julio Cortázar about love.</li><li><b>Accessing the PDF.</b> Introduction and instructions, next to a scientific text and a poetic reflection reinforcing the artwork's message.</li><li><b>Wearing the heartbeat monitor.</b> The monitor sends the heart rate to the computer once every second — each beat transforms the qualities of the soundscape being played.</li><li><b>Exploring the space.</b> Ultrasound sensors around the room trigger new sounds when a participant crosses them, flooding the dark with new-sounding textures.</li></ol><ul class="specs"><li class="k">Materials</li><li>Heartbeat monitor</li><li>Ultrasound sensors</li><li>Raspberry Pi</li><li>ESP32 wifi board</li><li class="k">Coding</li><li>Python</li><li>SuperCollider</li><li>Arduino</li></ul></template>
+<template id="in-love"><h3>Love Is</h3><div class="pmeta">2021 / 2024 · Installation · body &amp; perception</div><p class="desc"><a href="#loveis" class="li-go">Hold the 2024 heart-machines ↓</a></p><p class="desc">An installation on the perception of our body and the power of our hearts: presence becomes movement, emotion becomes the beating of our hearts. It needs only a dark room with space to move and a PA system — very simple and very powerful.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/RPfHJgMJKGQ?rel=0" style="aspect-ratio:16/9;height:auto" title="Love Is — participatory sound installation" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><ol class="steps"><li><b>Entering the space.</b> People scan a QR code to access an online PDF with an introduction, instructions, and quotes from Argentinian writer Julio Cortázar about love.</li><li><b>Accessing the PDF.</b> Introduction and instructions, next to a scientific text and a poetic reflection reinforcing the artwork's message.</li><li><b>Wearing the heartbeat monitor.</b> The monitor sends the heart rate to the computer once every second — each beat transforms the qualities of the soundscape being played.</li><li><b>Exploring the space.</b> Ultrasound sensors around the room trigger new sounds when a participant crosses them, flooding the dark with new-sounding textures.</li></ol><ul class="specs"><li class="k">Materials</li><li>Heartbeat monitor</li><li>Ultrasound sensors</li><li>Raspberry Pi</li><li>ESP32 wifi board</li><li class="k">Coding</li><li>Python</li><li>SuperCollider</li><li>Arduino</li></ul></template>
 <template id="in-pulsars"><h3>Radio Pulsars</h3><div class="pmeta">2020 · Installation · neutron stars</div><p class="desc">An installation about neutron stars, inspired by the scientific sonifications of the <a href="https://www.jodrellbank.net/explore/science/telescopes/" target="_blank" rel="noopener">Jodrell Bank Observatory</a>, using data from the European Pulsar Timing Array. A dark room, four speakers, and the playful side of scientific sound.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/_FfB5UmXyoQ?rel=0" style="aspect-ratio:16/9;height:auto" title="Radio Pulsars — participatory sound installation" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><ol class="steps"><li><b>Entering the space.</b> A QR code opens a PDF with instructions and poetic and scientific texts about neutron stars.</li><li><b>Accessing the PDF.</b> Introduction and instructions, plus science beside poetry to reinforce the message.</li><li><b>Entering a playful starry night.</b> Two MIDI controllers face each other; each button plays a star's sonification, and the knobs bend the data-reading speed — percussive pulses become strange melodies through curious interaction.</li><li><b>(in)Between the sounds of science.</b> The sounds are the same ones used in scientific research — the MIDI controllers build the bridge between the scientific and interactive potential of sonification.</li></ol><ul class="specs"><li class="k">Materials</li><li>Raspberry Pi</li><li>MIDI controllers</li><li>Pulsar data sets</li><li class="k">Coding</li><li>SuperCollider</li></ul></template>
 <template id="in-ocean"><h3>I Am The Ocean</h3><div class="pmeta">Work in progress · Installation · CO₂ &amp; the ocean</div><p class="desc">A forceful, immersive, and mysterious experience: listeners feel the changing, rising tides of our world through a live sonification driven by CO₂ measurement. Inspired by <i>Hyperobjects</i> (Timothy Morton); data from the EU Global Surface Water centre and NASA Goddard. Currently seeking funding — and a sound company concerned about climate emergencies willing to lend 10+ waterproof speakers.</p><audio data-src="assets/inst-ocean.mp3" controls preload="none"></audio><ol class="steps"><li><b>Floating speakers.</b> Ten waterproof speakers float in shallow waters (a lake, the sea, a pool), attached to plastic-bottle buoys and connected via Bluetooth to a Raspberry Pi playing the live sonification.</li><li><b>Measuring CO₂.</b> A sensor beside the computer captures the CO₂ in the atmosphere — the measurement drives the sonification in real time.</li><li><b>Immersing.</b> Participants walk among the speakers in the water, feel the vibration, scan a QR code for instructions — and can dive to hear the predictive sonifications underwater.</li></ol><ul class="specs"><li class="k">Materials</li><li>CO₂ sensor</li><li>Bluetooth waterproof speakers</li><li>Raspberry Pi</li><li class="k">Coding</li><li>SuperCollider</li><li>Machine learning</li></ol></template>
 
@@ -1037,10 +1147,10 @@ const NEWS = [
   { date:'2026-04-21', type:'other', text:'New collaboration with Florian Goeschke (TAMLab Linz): a site-specific live weather-data sculpture', link:'https://www.instagram.com/p/DXZIrmnjA11/' },
   { date:'2025-03-07', type:'broadcast', text:'RTVE · Música Viva — on air with my testimony on Sounding Numbers', link:'https://www.rtve.es/play/audios/musica-viva/crisol-amin-maalouf-07-03-25/16479382/' },
   { date:'2024-12', type:'review', text:'Reporters Online (NL) — feature on Sounding Numbers: science and music' },
-  { date:'2024-11-09', type:'exhibition', text:'Gallery Kannski — work shown in the group show opening 9 November', link:'https://www.instagram.com/p/DCB5MN7gkYU/' },
+  { date:'2024-11-09', type:'exhibition', text:'Gallery Kannski — LOVE IS heart-machines in the group show opening 9 November', link:'#loveis' },
   { date:'2024-10-18', type:'review', text:'Musique Machine — Roger Batty reviews Sounding Numbers', link:'https://www.musiquemachine.com/reviews/miguel-angel-crozzoli-sounding-numbers-10731' },
   { date:'2024-10-04', type:'release', text:'Distant Lights — trio album with Gon Muruaga and Axel Filip', link:'https://crozzoli-muruaga-filip.bandcamp.com/album/distant-lights' },
-  { date:'2024-08-29', type:'exhibition', text:'Hamraborg Festival 2024 — LOVE IS installation at Bókasafn Kópavogs (29 Aug – 5 Sep)', link:'https://www.instagram.com/p/C_QCkEXsXHm/' },
+  { date:'2024-08-29', type:'exhibition', text:'Hamraborg Festival 2024 — LOVE IS installation at Bókasafn Kópavogs (29 Aug – 5 Sep)', link:'#loveis' },
   { date:'2024-09-01', type:'review', text:'info135 — Distant Lights among the best new jazz trios', link:'https://info135.com.ar/2024/09/01/trios-noruegos-ucranianos-y-argentinos-con-el-mejor-jazz/' },
   { date:'2024-08', type:'release', text:'Sounding Numbers — out on KAIROS', link:'https://kairos-music.com/products/recording/0022047kai' },
   { date:'2023-04', type:'exhibition', text:'Climate Art Collection exhibition, Berlin — I AM THE FOREST installation and artist talk', link:'https://www.instagram.com/reel/CqfxiaGjFko/' },
@@ -1173,5 +1283,6 @@ if('IntersectionObserver' in window){
 <template id="__bundler_thumbnail">
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#0b0f17"/><rect x="20" y="20" width="26" height="34" rx="3" fill="#1b2336" stroke="#7fd6e8" stroke-width="1.5"/><rect x="52" y="20" width="28" height="22" rx="3" fill="#1b2336" stroke="#e8c97f" stroke-width="1.5"/><rect x="52" y="48" width="28" height="32" rx="3" fill="#1b2336" stroke="#7fd6e8" stroke-width="1.5"/><rect x="20" y="60" width="26" height="20" rx="3" fill="#1b2336" stroke="#e8c97f" stroke-width="1.5"/></svg>
 </template>
+<script src="loveis.js" defer></script>
 </body>
 </html>
