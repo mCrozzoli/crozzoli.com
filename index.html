@@ -494,16 +494,18 @@ image-slot{--slot-bg:var(--bg-alt)}
 .li-pulse{position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 29% 52%, rgba(255,40,40,.75), rgba(255,40,40,0) 22%); mix-blend-mode:screen; animation:liPhoto var(--li-period,1s) ease-out infinite}
 @keyframes liPhoto{0%{opacity:.15} 12%{opacity:.9} 30%{opacity:.3} 42%{opacity:.7} 100%{opacity:.15}}
 .li-go{color:#ff9a9a; border-bottom:1px solid currentColor; font-family:var(--font-mono); font-size:12px; letter-spacing:.06em}
+.li-shown{font-size:15px; color:var(--muted); margin:-4px 0 clamp(36px,5vw,60px)}
+.li-shown a{color:var(--accent); border-bottom:1px solid currentColor}
+.li-precedent{border-top:1px solid var(--line); padding-top:clamp(28px,4vw,44px)}
+.li-precedent h3{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); font-size:clamp(24px,2.6vw,32px); margin:6px 0 20px}
+.li-prec-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,4vw,48px); align-items:start}
+.li-prec-grid iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:12px; background:#000}
+.li-prec-grid .muted{margin-top:0}
+a.ccard{text-decoration:none; color:inherit; display:block}
+@media(max-width:980px){ .li-prec-grid{grid-template-columns:1fr} }
 .li-credit{font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin:0 0 clamp(32px,5vw,56px)}
-.li-versions{display:grid; grid-template-columns:1fr 1fr; gap:16px}
-.li-versions article{border:1px solid var(--line); border-left:3px solid var(--ac); border-radius:12px; background:var(--panel); padding:20px 22px}
 .li-yr{font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; color:var(--ac)}
-.li-versions h3{font-family:var(--font-display); font-weight:var(--dw); font-size:22px; margin:4px 0 8px}
-.li-versions p{font-size:15px; color:var(--muted); margin:0 0 12px}
-.li-where{display:flex; flex-wrap:wrap; gap:8px 18px; margin:0 !important}
-.li-where a{font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; color:var(--accent); border-bottom:1px solid currentColor}
-@media(max-width:980px){ .li-grid{grid-template-columns:1fr} .li-stage{position:static} .li-photos{grid-template-columns:repeat(2,minmax(0,1fr))} .li-versions{grid-template-columns:1fr} }
-@media(prefers-reduced-motion:reduce){ .li-pulse{animation:none; opacity:.35} .li-heart[data-state="listening"] .li-eye::after{animation:none} }
+@media(max-width:980px){ .li-grid{grid-template-columns:1fr} .li-stage{position:static} .li-photos{grid-template-columns:repeat(2,minmax(0,1fr))} @media(prefers-reduced-motion:reduce){ .li-pulse{animation:none; opacity:.35} .li-heart[data-state="listening"] .li-eye::after{animation:none} }
 
 /* ============ COLLABORATIONS ============ */
 .co-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:clamp(24px,4vw,40px)}
@@ -756,7 +758,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
     <div class="cards-lab">Catalog · open a poster to explore each installation</div>
     <div class="cat-cards posters" id="inst-cards">
       <button class="ccard poster" data-cd="in-forest" style="--ac:oklch(0.50 0.10 150)"><img src="assets/forest-poster.jpg" alt="I Am The Forest poster"><span class="cinfo"><span class="ct">I Am The Forest</span><span class="cy">2022</span></span></button>
-      <button class="ccard poster" data-cd="in-love" style="--ac:oklch(0.55 0.16 25)"><img src="assets/poster-love.jpg" alt="Love Is poster"><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2021 / 2024</span></span></button>
+      <a class="ccard poster" href="#loveis" style="--ac:oklch(0.55 0.16 25)"><img src="assets/loveis/poster-2024.jpg" alt="Love Is (2024) poster"><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2024 ↓</span></span></a>
       <button class="ccard poster" data-cd="in-pulsars" style="--ac:oklch(0.55 0.16 30)"><img src="assets/poster-pulsars.jpg" alt="Radio Pulsars poster"><span class="cinfo"><span class="ct">Radio Pulsars</span><span class="cy">2020</span></span></button>
       <button class="ccard poster" data-cd="in-ocean" style="--ac:oklch(0.52 0.10 230)"><img src="assets/ocean-installation.jpg" alt="I Am The Ocean installation" style="aspect-ratio:724/1024"><span class="cinfo"><span class="ct">I Am The Ocean</span><span class="cy">in progress</span></span></button>
     </div>
@@ -767,7 +769,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 <!-- ============ LOVE IS (2024) — the heart-machines ============ -->
 <section class="detail loveis" id="loveis" style="--ac:oklch(0.58 0.17 22)">
   <div class="wrap">
-    <div class="eyebrow">Participatory Sound Installation · 2021 / 2024</div>
+    <div class="eyebrow">Participatory Sound Installation · 2024</div>
     <h2 class="title">Love Is.</h2>
     <p class="li-poem">heartbeats spanning heartbeats<br>traversing spaces<br>crossing bodies<br>in presence<br>as love is</p>
     <div class="li-grid">
@@ -807,25 +809,24 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
     </div>
     <p class="li-credit">Photos: Hamraborg Festival · Gallery Kannski</p>
 
-    <div class="li-versions">
-      <article>
-        <div class="li-yr">2024</div>
-        <h3>The heart-machines</h3>
-        <p>Handheld silicone hearts with a pulse sensor and a motor inside, beating and glowing with the pulse you give them, and a shared soundscape on headphones.</p>
-        <p class="li-where"><a href="https://www.instagram.com/p/C_QCkEXsXHm/" target="_blank" rel="noopener">Hamraborg Festival · Bókasafn Kópavogs · 29 Aug – 5 Sep 2024 ↗</a><a href="https://www.instagram.com/p/DCB5MN7gkYU/" target="_blank" rel="noopener">Gallery Kannski · Nov 2024 ↗</a></p>
-      </article>
-      <article>
-        <div class="li-yr">2021</div>
-        <h3>The dark room</h3>
-        <p>Wearing a heartbeat monitor, participants move through a dark room; each beat transforms the soundscape, and ultrasound sensors flood the dark with new textures as people cross them.</p>
-        <p class="li-where"><a href="https://www.youtube.com/watch?v=RPfHJgMJKGQ" target="_blank" rel="noopener">Watch the 2021 version ↗</a></p>
-      </article>
+    <p class="li-shown">Shown at <a href="https://www.instagram.com/p/C_QCkEXsXHm/" target="_blank" rel="noopener">Hamraborg Festival · Bókasafn Kópavogs · 29 Aug – 5 Sep 2024 ↗</a> and <a href="https://www.instagram.com/p/DCB5MN7gkYU/" target="_blank" rel="noopener">Gallery Kannski · Nov 2024 ↗</a></p>
+
+    <div class="li-precedent">
+      <div class="li-yr">Precedent · 2021</div>
+      <h3>Love Is, in the dark room</h3>
+      <div class="li-prec-grid">
+        <iframe loading="lazy" referrerpolicy="origin" src="https://www.youtube.com/embed/RPfHJgMJKGQ?rel=0" title="Love Is (2021): participatory sound installation" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <div>
+          <p class="muted">The first <i>Love Is</i>: an installation on the perception of our body and the power of our hearts. Presence becomes movement, emotion becomes the beating of our hearts. It needs only a dark room with space to move and a PA system: very simple and very powerful.</p>
+          <ol class="steps"><li><b>Entering the space.</b> People scan a QR code to access an online PDF with an introduction, instructions, and quotes from Argentinian writer Julio Cortázar about love.</li><li><b>Accessing the PDF.</b> Introduction and instructions, next to a scientific text and a poetic reflection reinforcing the artwork's message.</li><li><b>Wearing the heartbeat monitor.</b> The monitor sends the heart rate to the computer once every second; each beat transforms the qualities of the soundscape being played.</li><li><b>Exploring the space.</b> Ultrasound sensors around the room trigger new sounds when a participant crosses them, flooding the dark with new-sounding textures.</li></ol>
+          <ul class="specs"><li class="k">Materials</li><li>Heartbeat monitor</li><li>Ultrasound sensors</li><li>Raspberry Pi</li><li>ESP32 wifi board</li><li class="k">Coding</li><li>Python</li><li>SuperCollider</li><li>Arduino</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <template id="in-forest"><h3>I Am The Forest</h3><div class="pmeta">2022 · Installation · climate emergencies</div><p class="desc">An installation on climate emergencies inviting the audience to listen to the health of our world's forests while engaging in a deforestation micro-activism practice. The sonifications use 20 years of data from <a href="https://www.globalforestwatch.org/" target="_blank" rel="noopener">Global Forest Watch</a>. Resilient by design: it works in gardens, forests, greenhouses — or a lonely tree in a shopping center.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/9JUZJV5tmdM?rel=0" style="aspect-ratio:16/9;height:auto" title="I Am The Forest teaser" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><blockquote class="ritual">Walk around and listen, this is your environment. See the colors and feel the textures surrounding you. <b>.breathe.</b> Put your ear against the trunk of the tree. <b>hear.</b> <b>.breathe again.</b> Plant some seeds with your bare hands.</blockquote><ol class="steps"><li><b>Entering the space.</b> People scan a QR code to access an online PDF with an introduction, instructions, and a reflective, informative text about deforestation.</li><li><b>Accessing the PDF.</b> Page one: introduction and instructions. Page two: a scientific text next to a poetic reflection on deforestation.</li><li><b>Hugging a tree.</b> The sonifications play through transducers connected to trees — the tree works as an amplifier. Hug it to feel the vibration; press your ear to the trunk to <b>hear</b> the sounds of deforestation.</li><li><b>Planting seeds.</b> Pots with soil and bags of seeds lie around the trees — plant them, water them, or take a pot home to grow a new potential forest.</li><li><b>After the installation.</b> The whole piece reduces to a box, so participants can take it home and plant a forest wherever they want.</li></ol><ul class="specs"><li class="k">Materials</li><li>Transducers + amplifier</li><li>Plant pots</li><li>Native seeds</li><li>Soil</li><li>MP3 player</li><li class="k">Coding</li><li>SuperCollider</li></ul></template>
-<template id="in-love"><h3>Love Is</h3><div class="pmeta">2021 / 2024 · Installation · body &amp; perception</div><p class="desc"><a href="#loveis" class="li-go">Hold the 2024 heart-machines ↓</a></p><p class="desc">An installation on the perception of our body and the power of our hearts: presence becomes movement, emotion becomes the beating of our hearts. It needs only a dark room with space to move and a PA system — very simple and very powerful.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/RPfHJgMJKGQ?rel=0" style="aspect-ratio:16/9;height:auto" title="Love Is — participatory sound installation" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><ol class="steps"><li><b>Entering the space.</b> People scan a QR code to access an online PDF with an introduction, instructions, and quotes from Argentinian writer Julio Cortázar about love.</li><li><b>Accessing the PDF.</b> Introduction and instructions, next to a scientific text and a poetic reflection reinforcing the artwork's message.</li><li><b>Wearing the heartbeat monitor.</b> The monitor sends the heart rate to the computer once every second — each beat transforms the qualities of the soundscape being played.</li><li><b>Exploring the space.</b> Ultrasound sensors around the room trigger new sounds when a participant crosses them, flooding the dark with new-sounding textures.</li></ol><ul class="specs"><li class="k">Materials</li><li>Heartbeat monitor</li><li>Ultrasound sensors</li><li>Raspberry Pi</li><li>ESP32 wifi board</li><li class="k">Coding</li><li>Python</li><li>SuperCollider</li><li>Arduino</li></ul></template>
 <template id="in-pulsars"><h3>Radio Pulsars</h3><div class="pmeta">2020 · Installation · neutron stars</div><p class="desc">An installation about neutron stars, inspired by the scientific sonifications of the <a href="https://www.jodrellbank.net/explore/science/telescopes/" target="_blank" rel="noopener">Jodrell Bank Observatory</a>, using data from the European Pulsar Timing Array. A dark room, four speakers, and the playful side of scientific sound.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/_FfB5UmXyoQ?rel=0" style="aspect-ratio:16/9;height:auto" title="Radio Pulsars — participatory sound installation" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><ol class="steps"><li><b>Entering the space.</b> A QR code opens a PDF with instructions and poetic and scientific texts about neutron stars.</li><li><b>Accessing the PDF.</b> Introduction and instructions, plus science beside poetry to reinforce the message.</li><li><b>Entering a playful starry night.</b> Two MIDI controllers face each other; each button plays a star's sonification, and the knobs bend the data-reading speed — percussive pulses become strange melodies through curious interaction.</li><li><b>(in)Between the sounds of science.</b> The sounds are the same ones used in scientific research — the MIDI controllers build the bridge between the scientific and interactive potential of sonification.</li></ol><ul class="specs"><li class="k">Materials</li><li>Raspberry Pi</li><li>MIDI controllers</li><li>Pulsar data sets</li><li class="k">Coding</li><li>SuperCollider</li></ul></template>
 <template id="in-ocean"><h3>I Am The Ocean</h3><div class="pmeta">Work in progress · Installation · CO₂ &amp; the ocean</div><p class="desc">A forceful, immersive, and mysterious experience: listeners feel the changing, rising tides of our world through a live sonification driven by CO₂ measurement. Inspired by <i>Hyperobjects</i> (Timothy Morton); data from the EU Global Surface Water centre and NASA Goddard. Currently seeking funding — and a sound company concerned about climate emergencies willing to lend 10+ waterproof speakers.</p><audio data-src="assets/inst-ocean.mp3" controls preload="none"></audio><ol class="steps"><li><b>Floating speakers.</b> Ten waterproof speakers float in shallow waters (a lake, the sea, a pool), attached to plastic-bottle buoys and connected via Bluetooth to a Raspberry Pi playing the live sonification.</li><li><b>Measuring CO₂.</b> A sensor beside the computer captures the CO₂ in the atmosphere — the measurement drives the sonification in real time.</li><li><b>Immersing.</b> Participants walk among the speakers in the water, feel the vibration, scan a QR code for instructions — and can dive to hear the predictive sonifications underwater.</li></ol><ul class="specs"><li class="k">Materials</li><li>CO₂ sensor</li><li>Bluetooth waterproof speakers</li><li>Raspberry Pi</li><li class="k">Coding</li><li>SuperCollider</li><li>Machine learning</li></ol></template>
 
@@ -1135,7 +1136,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
     <div class="shelf">Sound installations</div>
     <div class="cat-cards posters">
       <a class="ccard poster" href="#installations" style="--ac:oklch(0.50 0.10 150)"><img src="assets/forest-poster.jpg" alt="I Am The Forest poster"><span class="cinfo"><span class="ct">I Am The Forest</span><span class="cy">2022</span></span></a>
-      <a class="ccard poster" href="#installations" style="--ac:oklch(0.55 0.16 25)"><img src="assets/poster-love.jpg" alt="Love Is poster"><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2021</span></span></a>
+      <a class="ccard poster" href="#loveis" style="--ac:oklch(0.55 0.16 25)"><img src="assets/loveis/poster-2024.jpg" alt="Love Is (2024) poster"><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2024</span></span></a>
       <a class="ccard poster" href="#installations" style="--ac:oklch(0.55 0.16 30)"><img src="assets/poster-pulsars.jpg" alt="Radio Pulsars poster"><span class="cinfo"><span class="ct">Radio Pulsars</span><span class="cy">2020</span></span></a>
       <a class="ccard poster" href="#installations" style="--ac:oklch(0.52 0.10 230)"><img src="assets/ocean-installation.jpg" alt="I Am The Ocean installation" style="aspect-ratio:724/1024"><span class="cinfo"><span class="ct">I Am The Ocean</span><span class="cy">in progress</span></span></a>
     </div>
@@ -1383,6 +1384,7 @@ function wireCards(gridId, panelId){
   const cards = document.querySelectorAll('#'+gridId+' .ccard');
   const close = (card)=>{ panel.classList.remove('open'); panel.innerHTML=''; if(card) card.setAttribute('aria-expanded','false'); open=null; };
   cards.forEach(card=>{
+    if(!card.dataset.cd) return;   // a card that links somewhere instead of opening a panel
     card.addEventListener('click', ()=>{
       if(open === card) return close(card);
       cards.forEach(c=> c.setAttribute('aria-expanded','false'));
