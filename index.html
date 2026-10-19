@@ -1026,7 +1026,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 </section>
 
 <!-- ============ PLANT DATA WORLDS ============ -->
-<section class="detail pdw" id="pdw">
+<section class="detail pdw" id="pdw" data-parent="collab">
   <div class="wrap">
     <div class="eyebrow">Artistic research · data sculptures · Hamraborg Festival 2026</div>
     <h2 class="title">Plant Data Worlds.</h2>
@@ -1060,7 +1060,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 </section>
 
 <!-- ============ A WHALE'S HEART (work in progress) ============ -->
-<section class="detail whale" id="whale">
+<section class="detail whale" id="whale" data-parent="collab">
   <div class="wrap">
     <div class="eyebrow">Sound installation · work in progress · 2026</div>
     <h2 class="title">A Whale's Heart.</h2>
@@ -1493,7 +1493,24 @@ document.querySelectorAll('section.detail').forEach(sec=>{
   const back = document.createElement('a'); back.className='home-btn back-btn'; back.href='#'; back.hidden = true;
   const home = document.createElement('a'); home.className='home-btn'; home.href='#'; home.innerHTML='← Home';
   home.addEventListener('click', e=>{ e.preventDefault(); history.replaceState(null,'',location.pathname); window.scrollTo({top:0, behavior:'smooth'}); });
-  back.addEventListener('click', e=>{ e.preventDefault(); const y = +back.dataset.y; back.hidden = true; history.replaceState(null,'','#'+back.dataset.from); window.scrollTo({top:y, behavior:'smooth'}); });
+  // sub-pages (e.g. a project's own section) always offer the way back to their parent section
+  const parent = sec.dataset.parent && document.getElementById(sec.dataset.parent);
+  if(parent){ back.textContent = '← ' + sectionName(parent); back.dataset.from = parent.id; back.hidden = false; }
+  back.addEventListener('click', e=>{
+    e.preventDefault();
+    let y = back.dataset.y ? +back.dataset.y : null;
+    if(y === null){   // no remembered spot: go to this section's card in the parent, else the parent's top
+      const from = document.getElementById(back.dataset.from);
+      const links = from ? [...from.querySelectorAll('a[href="#'+sec.id+'"]')] : [];
+      const card = links.find(l=> /more about/i.test(l.textContent)) || links[0];   // the project's own card first
+      const el = card ? (card.closest('article') || card) : from;
+      if(el) y = el.getBoundingClientRect().top + scrollY - 24;
+    }
+    delete back.dataset.y;
+    if(parent){ back.textContent = '← ' + sectionName(parent); back.dataset.from = parent.id; } else back.hidden = true;
+    history.replaceState(null,'','#'+back.dataset.from);
+    window.scrollTo({top:y||0, behavior:'smooth'});
+  });
   nav.append(back, home); sec.prepend(nav);
 });
 // a link inside one section that leads to another section (e.g. "More about the piece ↓")
