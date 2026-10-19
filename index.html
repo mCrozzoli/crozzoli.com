@@ -553,6 +553,9 @@ a.ccard{text-decoration:none; color:inherit; display:block}
 .wh-data-h{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--wh-blue); margin-bottom:6px}
 .wh-data p{font-size:13px; line-height:1.55; color:var(--muted); margin:0 0 6px} .wh-data b{color:var(--ink); font-weight:500}
 .wh-data a{color:var(--wh-blue); border-bottom:1px solid currentColor}
+.wh-actions{display:flex; flex-wrap:wrap; gap:10px}
+.wh-btn.wh-btn-2{background:transparent; color:var(--wh-blue); border:1px solid var(--wh-blue)}
+.wh-note{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.04em; line-height:1.6; color:var(--faint); margin:12px 0 0}
 .wh-btn{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; padding:14px 22px; border-radius:100px; background:var(--wh-blue); color:#03121e; transition:transform .2s, filter .2s}
 a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 .wh-btn.is-soon{background:transparent; color:var(--wh-blue); border:1px dashed var(--wh-blue); cursor:default}
@@ -989,7 +992,8 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
           <p><b>Depth:</b> an Icelandic whale, one depth reading per second over 27 hours, 28–29 June 2018, down to 133 m. From Bryndís Snæbjörnsdóttir and Mark Wilson's project.</p>
           <p><b>Position:</b> Palacios, D. and Mate, B. “Blue and Fin Whale Movements from Tags Deployed in California (2014–2017) and in Oregon (2018).” Marine Mammal Institute, Oregon State University; Axiom Data Science. <a href="https://doi.org/10.24431/rw1k463" target="_blank" rel="noopener">doi:10.24431/rw1k463 ↗</a></p>
         </div>
-        <div class="wh-actions"><a class="wh-btn" id="wh-open" href="https://mcrozzoli.github.io/a-whales-heart/" target="_blank" rel="noopener">Project page ↗</a></div>
+        <div class="wh-actions"><a class="wh-btn" id="wh-open" href="https://mcrozzoli.github.io/a-whales-heart/prototype.html" target="_blank" rel="noopener">Interactive display ↗</a><a class="wh-btn wh-btn-2" href="https://mcrozzoli.github.io/a-whales-heart/" target="_blank" rel="noopener">Project page ↗</a></div>
+        <p class="wh-note">Sound runs live in the browser and starts on Play. Tested in Chrome on desktop; Safari and phones not yet.</p>
       </div>
     </div>
   </div>
