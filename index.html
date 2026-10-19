@@ -634,6 +634,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 }
 /* phones: photos in the two-column detail sections keep their own shape instead of a window-height block */
 @media(max-width:760px){ .ds-grid > image-slot{height:auto !important; aspect-ratio:4/3} }
+@media(max-width:760px){ .vp-list{flex-direction:column; gap:8px} .vp-item img{width:96px} .vp-item span{font-size:10.5px} }
 /* phones: room above each section for the floating ← Home button */
 @media(max-width:760px){ section.detail{padding-top:84px !important} }
 @media(max-width:980px){ .mosaic{columns:2} .bio-hero .inner{grid-template-columns:1fr; align-content:end} .bio-hero .dim{background:linear-gradient(180deg, rgba(8,9,12,.2), rgba(8,9,12,.72) 60%)} .strange .grid{grid-template-columns:1fr} .psi-hero .vgrid{grid-template-columns:1fr} .improv .igrid,.band .bgrid,.ds-grid{grid-template-columns:1fr !important} nav.links{gap:18px} }
