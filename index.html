@@ -521,6 +521,8 @@ a.ccard{text-decoration:none; color:inherit; display:block}
 .co-card.co-wide{grid-column:1/-1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
 .co-card.co-wide .co-img{aspect-ratio:auto; min-height:100%}
 .co-card.co-wide .co-body{padding:24px 26px}
+.co-card.co-soon .co-body{justify-content:center}
+.co-card.co-soon .co-img{aspect-ratio:16/9; min-height:0} .co-card.co-soon .co-img img{object-position:50% 62%}
 .co-img{aspect-ratio:16/9; overflow:hidden; background:var(--bg-alt)} .co-img.co-dark{background:#05101c}
 .co-img img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s}
 .co-card:hover .co-img img{transform:scale(1.03)}
@@ -999,6 +1001,16 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
           <p>A pipe organ built from solenoid valves, played from the browser. Paint a rhythm on the grid and each of up to eight pipes gets its row over ESP-NOW, ticking in perfect sync; the audience can join from their phones by QR code, and a simulated organ plays when no pipes are around.</p>
           <ul class="co-roles"><li>Software</li><li>ESP32 firmware</li><li>Simulated organ sound</li></ul>
           <div class="co-links"><a href="https://mcrozzoli.github.io/calum-organ/" target="_blank" rel="noopener">Open the sequencer ↗</a></div>
+        </div>
+      </article>
+      <article class="co-card co-wide co-soon">
+        <div class="co-img co-dark"><img src="assets/pdw/dark-data-worlds.jpg" alt="Render of a cast data sculpture with light passing through it" loading="lazy"></div>
+        <div class="co-body">
+          <div class="co-meta">In development · coming soon</div>
+          <h3>Dark Data Worlds</h3>
+          <div class="co-with">Miguel Angel Crozzoli and Thomas Pausz, in collaboration with AIRLab, IT University of Copenhagen</div>
+          <div class="co-links"><a href="#pdw">Grows out of Plant Data Worlds ↓</a></div>
+          <div class="co-credit">Image: render</div>
         </div>
       </article>
     </div>
