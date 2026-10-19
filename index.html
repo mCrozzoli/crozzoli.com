@@ -199,6 +199,11 @@ p{max-width:64ch}
 .psi-hero .wrap{position:relative; z-index:2}
 .psi-hero .vgrid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(22px,4vw,54px); align-items:center; margin:6px 0 30px}
 .psi-hero .vgrid iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:12px; display:block; background:#000}
+.ccard .ctitle{position:absolute; left:0; right:0; top:0; padding:16px 14px 44px; display:flex; flex-direction:column; align-items:flex-end; text-align:right; color:#fff; pointer-events:none;
+  background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,0)); font-family:"Karla",sans-serif}
+.ccard .ctitle b{font-weight:500; font-size:clamp(17px,2vw,26px); line-height:1.05; letter-spacing:.01em}
+.ccard .ctitle-love b{font-weight:400; font-size:clamp(24px,3vw,40px); line-height:.95}
+.ccard .ctitle small{font-size:10px; letter-spacing:.02em; opacity:.85; margin-top:4px}
 .psi-hero .ccard .ct{color:#1f1a14} .psi-hero .ccard .cy{color:#8a8070}
 .psi-hero .psi-lead{color:#f2f1ea; margin:0 0 clamp(26px,4vw,40px)}
 .psi-hero .fine{font-size:15px; max-width:88ch; margin:0 auto 14px; text-align:center; color:var(--muted)}
@@ -263,7 +268,10 @@ a.ds-card:hover .ds-go{color:#1d4a66}
 section.detail{min-height:100vh; min-height:100svh; display:flex; flex-direction:column; justify-content:center; position:relative; box-sizing:border-box}
 section.detail > .wrap{width:100%}
 section.detail[hidden]{display:none}
-.home-btn{position:absolute; top:22px; right:clamp(16px,3vw,40px); z-index:5; display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); background:var(--panel); border:1px solid var(--line); border-radius:100px; padding:9px 16px; text-decoration:none; transition:.2s}
+.sec-nav{position:absolute; top:22px; right:clamp(16px,3vw,40px); z-index:5; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; max-width:calc(100% - 32px)}
+.back-btn[hidden]{display:none !important}
+.back-btn{display:inline-block; max-width:min(58vw,340px); overflow:hidden; text-overflow:ellipsis}
+.home-btn{position:relative; display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); background:var(--panel); border:1px solid var(--line); border-radius:100px; padding:9px 16px; text-decoration:none; transition:.2s}
 .home-btn:hover{background:var(--ink); color:var(--bg); border-color:var(--ink)}
 .bio-hero .home-btn,.psi-hero .home-btn,.feature-dark .home-btn{color:#f2f1ea; background:rgba(0,0,0,.35); border-color:rgba(242,241,234,.35); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px)}
 .bio-hero .home-btn:hover,.psi-hero .home-btn:hover,.feature-dark .home-btn:hover{background:#f2f1ea; color:#111}
@@ -597,15 +605,9 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 .p-room{grid-column:span 3; grid-row:span 2} .p-room img{object-position:75% 50%} .p-vitrine{grid-row:span 2}
 .p-mirror{grid-column:span 2; grid-row:span 2} .p-world{grid-row:span 2} .p-shadow{grid-row:span 2}
 .p-worlds,.p-leaf{grid-column:span 2}
-.pdw-next{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(22px,4vw,48px); align-items:center; margin-top:clamp(40px,6vw,72px); padding-top:clamp(28px,4vw,44px); border-top:1px solid var(--line)}
-.pdw-next figure{margin:0; position:relative; border-radius:12px; overflow:hidden; background:#1a1310}
-.pdw-next img{width:100%; aspect-ratio:16/10; object-fit:cover; display:block}
-.pdw-next figcaption{position:absolute; left:10px; bottom:8px; font-family:var(--font-mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.6)}
-.pdw-next h3{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); font-size:clamp(26px,3vw,38px); margin:6px 0 10px}
-.pdw-next p{font-size:15px; color:var(--muted); margin:0; max-width:44ch}
 .pdw-credit{font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin:0}
 @media(max-width:980px){ .pdw-grid{grid-template-columns:1fr} .pdw-side{border-left:0; padding-left:0; border-top:1px solid var(--line); padding-top:20px} }
-@media(max-width:760px){ .pdw-next{grid-template-columns:1fr} .pdw-photos{grid-template-columns:repeat(2,minmax(0,1fr))} .p-room{grid-column:span 2} .p-mirror,.p-worlds,.p-leaf,.p-shadow{grid-column:span 2} .p-worlds,.p-leaf{grid-row:span 2} }
+@media(max-width:760px){ .pdw-photos{grid-template-columns:repeat(2,minmax(0,1fr))} .p-room{grid-column:span 2} .p-mirror,.p-worlds,.p-leaf,.p-shadow{grid-column:span 2} .p-worlds,.p-leaf{grid-row:span 2} }
 /* ============ RESPONSIVE ============ */
 /* phones: room above each section for the floating ← Home button */
 @media(max-width:760px){ section.detail{padding-top:84px !important} }
@@ -812,9 +814,9 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
     <div class="cards-lab">Catalog · open a poster to explore each installation</div>
     <div class="cat-cards posters" id="inst-cards">
       <button class="ccard poster" data-cd="in-forest" style="--ac:oklch(0.50 0.10 150)"><img src="assets/forest-poster.jpg" alt="I Am The Forest poster"><span class="cinfo"><span class="ct">I Am The Forest</span><span class="cy">2022</span></span></button>
-      <button class="ccard poster" id="loveis" data-cd="in-love" style="--ac:oklch(0.55 0.16 25)"><img src="assets/loveis/glow.jpg" alt="Love Is (2024): a hand holding a glowing heart-machine"><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2024</span></span></button>
+      <button class="ccard poster" id="loveis" data-cd="in-love" style="--ac:oklch(0.55 0.16 25)"><img src="assets/loveis/glow.jpg" alt="Love Is (2024): a hand holding a glowing heart-machine"><span class="ctitle ctitle-love" aria-hidden="true"><b>love is</b><small>Miguel Angel Crozzoli</small></span><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2024</span></span></button>
       <button class="ccard poster" data-cd="in-pulsars" style="--ac:oklch(0.55 0.16 30)"><img src="assets/poster-pulsars.jpg" alt="Radio Pulsars poster"><span class="cinfo"><span class="ct">Radio Pulsars</span><span class="cy">2020</span></span></button>
-      <button class="ccard poster" data-cd="in-ocean" style="--ac:oklch(0.52 0.10 230)"><img src="assets/ocean-installation.jpg" alt="I Am The Ocean installation" style="aspect-ratio:724/1024"><span class="cinfo"><span class="ct">I Am The Ocean</span><span class="cy">in progress</span></span></button>
+      <button class="ccard poster" data-cd="in-ocean" style="--ac:oklch(0.52 0.10 230)"><img src="assets/ocean-installation.jpg" alt="I Am The Ocean installation" style="aspect-ratio:724/1024"><span class="ctitle" aria-hidden="true"><b>I AM THE OCEAN</b><small>Miguel Angel Crozzoli</small></span><span class="cinfo"><span class="ct">I Am The Ocean</span><span class="cy">in progress</span></span></button>
     </div>
     <div id="inst-panel" class="catpanel"></div>
   </div>
@@ -1054,14 +1056,6 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
       <figure class="p-leaf"><img src="assets/pdw/leaf.jpg" alt="An arching dried leaf in a vitrine" loading="lazy"></figure>
     </div>
     <p class="pdw-credit">Photos: Hamraborg Festival</p>
-    <div class="pdw-next">
-      <figure><img src="assets/pdw/dark-data-worlds.jpg" alt="Render of a cast data sculpture with light passing through it" loading="lazy"><figcaption>Render</figcaption></figure>
-      <div>
-        <div class="pdw-k">Next · in development · coming soon</div>
-        <h3>Dark Data Worlds</h3>
-        <p>Miguel Angel Crozzoli and Thomas Pausz, in collaboration with AIRLab, IT University of Copenhagen.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1491,13 +1485,25 @@ if(location.hash==='#loveis') addEventListener('load', openLoveIs);
 const setMtop=()=> document.documentElement.style.setProperty('--mtop', document.getElementById('explore').getBoundingClientRect().top + scrollY + 'px');
 setMtop(); addEventListener('resize', setMtop); document.fonts && document.fonts.ready.then(setMtop);
 
-// ---- home button on every section ----
+// ---- home button on every section, plus a "back" button when you came from another section ----
+const sectionName = sec => { const t = sec.querySelector('.title, h2'); return t ? t.textContent.replace(/\.\s*$/,'').trim() : sec.id; };
 document.querySelectorAll('section.detail').forEach(sec=>{
   if(sec.id==='contact') return;
-  const a = document.createElement('a');
-  a.className='home-btn'; a.href='#'; a.innerHTML='← Home';
-  a.addEventListener('click', e=>{ e.preventDefault(); history.replaceState(null,'',location.pathname); window.scrollTo({top:0, behavior:'smooth'}); });
-  sec.prepend(a);
+  const nav = document.createElement('div'); nav.className='sec-nav';
+  const back = document.createElement('a'); back.className='home-btn back-btn'; back.href='#'; back.hidden = true;
+  const home = document.createElement('a'); home.className='home-btn'; home.href='#'; home.innerHTML='← Home';
+  home.addEventListener('click', e=>{ e.preventDefault(); history.replaceState(null,'',location.pathname); window.scrollTo({top:0, behavior:'smooth'}); });
+  back.addEventListener('click', e=>{ e.preventDefault(); const y = +back.dataset.y; back.hidden = true; history.replaceState(null,'','#'+back.dataset.from); window.scrollTo({top:y, behavior:'smooth'}); });
+  nav.append(back, home); sec.prepend(nav);
+});
+// a link inside one section that leads to another section (e.g. "More about the piece ↓")
+document.addEventListener('click', e=>{
+  const a = e.target.closest('a[href^="#"]'); if(!a || a.classList.contains('home-btn')) return;
+  const from = a.closest('section.detail'); const to = document.getElementById(a.getAttribute('href').slice(1));
+  const target = to && (to.matches('section.detail') ? to : to.closest('section.detail'));
+  if(!from || !target || from === target) return;
+  const back = target.querySelector(':scope > .sec-nav .back-btn'); if(!back) return;
+  back.textContent = '← ' + sectionName(from); back.dataset.from = from.id; back.dataset.y = Math.round(scrollY); back.hidden = false;
 });
 
 // ---- expand-in-place detail panels (catalog + installations) ----
