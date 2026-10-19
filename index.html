@@ -581,9 +581,15 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 .p-room{grid-column:span 3; grid-row:span 2} .p-room img{object-position:75% 50%} .p-vitrine{grid-row:span 2}
 .p-mirror{grid-column:span 2; grid-row:span 2} .p-world{grid-row:span 2} .p-shadow{grid-row:span 2}
 .p-worlds,.p-leaf{grid-column:span 2}
+.pdw-next{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(22px,4vw,48px); align-items:center; margin-top:clamp(40px,6vw,72px); padding-top:clamp(28px,4vw,44px); border-top:1px solid var(--line)}
+.pdw-next figure{margin:0; position:relative; border-radius:12px; overflow:hidden; background:#1a1310}
+.pdw-next img{width:100%; aspect-ratio:16/10; object-fit:cover; display:block}
+.pdw-next figcaption{position:absolute; left:10px; bottom:8px; font-family:var(--font-mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.6)}
+.pdw-next h3{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); font-size:clamp(26px,3vw,38px); margin:6px 0 10px}
+.pdw-next p{font-size:15px; color:var(--muted); margin:0; max-width:44ch}
 .pdw-credit{font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin:0}
 @media(max-width:980px){ .pdw-grid{grid-template-columns:1fr} .pdw-side{border-left:0; padding-left:0; border-top:1px solid var(--line); padding-top:20px} }
-@media(max-width:760px){ .pdw-photos{grid-template-columns:repeat(2,minmax(0,1fr))} .p-room{grid-column:span 2} .p-mirror,.p-worlds,.p-leaf,.p-shadow{grid-column:span 2} }
+@media(max-width:760px){ .pdw-next{grid-template-columns:1fr} .pdw-photos{grid-template-columns:repeat(2,minmax(0,1fr))} .p-room{grid-column:span 2} .p-mirror,.p-worlds,.p-leaf,.p-shadow{grid-column:span 2} }
 /* ============ RESPONSIVE ============ */
 /* phones: room above each section for the floating ← Home button */
 @media(max-width:760px){ section.detail{padding-top:84px !important} }
@@ -1018,8 +1024,6 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
         <ul class="co-roles"><li>Sound design</li><li>Software</li><li>3D mesh design</li><li>Data analysis</li></ul>
         <div class="pdw-k">Shown at</div>
         <p><a href="https://www.hamraborgfestival.is/en/event/gagnaverold-plantna" target="_blank" rel="noopener">Hamraborg Festival · Náttúrusafn Kópavogs (Natural History Museum of Kópavogur) · 28 Aug – 4 Sep 2026 ↗</a></p>
-        <div class="pdw-k">Next · in development</div>
-        <p><b>Dark Data Worlds</b>, growing out of Plant Data Worlds, again with Thomas Pausz: seasonal datasets cast as sculptures that visitors lift and hold, each sounding through a speaker array and resonating in the hand. At AIRLab, IT University of Copenhagen, 2026–27.</p>
       </aside>
     </div>
     <div class="pdw-photos">
@@ -1032,6 +1036,14 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
       <figure class="p-leaf"><img src="assets/pdw/leaf.jpg" alt="An arching dried leaf in a vitrine" loading="lazy"></figure>
     </div>
     <p class="pdw-credit">Photos: Hamraborg Festival</p>
+    <div class="pdw-next">
+      <figure><img src="assets/pdw/dark-data-worlds.jpg" alt="Render of a cast data sculpture with light passing through it" loading="lazy"><figcaption>Render</figcaption></figure>
+      <div>
+        <div class="pdw-k">Next · in development · coming soon</div>
+        <h3>Dark Data Worlds</h3>
+        <p>Miguel Angel Crozzoli and Thomas Pausz, in collaboration with AIRLab, IT University of Copenhagen.</p>
+      </div>
+    </div>
   </div>
 </section>
 
