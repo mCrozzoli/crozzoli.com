@@ -503,6 +503,13 @@ image-slot{--slot-bg:var(--bg-alt)}
 .li-prec-grid .muted{margin-top:0}
 a.ccard{text-decoration:none; color:inherit; display:block}
 @media(max-width:980px){ .li-prec-grid{grid-template-columns:1fr} }
+.catpanel .li-root .li-grid{margin-top:18px}
+.catpanel .li-stage{position:static}
+.catpanel .li-poem{margin:14px 0 0}
+.psi-hero .catpanel .li-ph{background:rgba(255,255,255,.06)}
+.psi-hero .catpanel .li-shown a,.psi-hero .catpanel .li-credit{color:var(--faint)}
+.psi-hero .catpanel .li-shown a{color:#ff9a9a}
+.psi-hero .catpanel .li-yr{color:#ff9a9a}
 .li-credit{font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin:0 0 clamp(32px,5vw,56px)}
 .li-yr{font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; color:var(--ac)}
 @media(max-width:980px){ .li-grid{grid-template-columns:1fr} .li-stage{position:static} .li-photos{grid-template-columns:repeat(2,minmax(0,1fr))} }
@@ -763,7 +770,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
     <div class="cards-lab">Catalog · open a poster to explore each installation</div>
     <div class="cat-cards posters" id="inst-cards">
       <button class="ccard poster" data-cd="in-forest" style="--ac:oklch(0.50 0.10 150)"><img src="assets/forest-poster.jpg" alt="I Am The Forest poster"><span class="cinfo"><span class="ct">I Am The Forest</span><span class="cy">2022</span></span></button>
-      <a class="ccard poster" href="#loveis" style="--ac:oklch(0.55 0.16 25)"><img src="assets/loveis/poster-2024.jpg" alt="Love Is (2024) poster"><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2024 ↓</span></span></a>
+      <button class="ccard poster" id="loveis" data-cd="in-love" style="--ac:oklch(0.55 0.16 25)"><img src="assets/loveis/glow.jpg" alt="Love Is (2024): a hand holding a glowing heart-machine"><span class="cinfo"><span class="ct">Love Is</span><span class="cy">2024</span></span></button>
       <button class="ccard poster" data-cd="in-pulsars" style="--ac:oklch(0.55 0.16 30)"><img src="assets/poster-pulsars.jpg" alt="Radio Pulsars poster"><span class="cinfo"><span class="ct">Radio Pulsars</span><span class="cy">2020</span></span></button>
       <button class="ccard poster" data-cd="in-ocean" style="--ac:oklch(0.52 0.10 230)"><img src="assets/ocean-installation.jpg" alt="I Am The Ocean installation" style="aspect-ratio:724/1024"><span class="cinfo"><span class="ct">I Am The Ocean</span><span class="cy">in progress</span></span></button>
     </div>
@@ -771,11 +778,9 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
   </div>
 </section>
 
-<!-- ============ LOVE IS (2024) — the heart-machines ============ -->
-<section class="detail loveis" id="loveis" style="--ac:oklch(0.58 0.17 22)">
-  <div class="wrap">
-    <div class="eyebrow">Participatory Sound Installation · 2024</div>
-    <h2 class="title">Love Is.</h2>
+
+<template id="in-forest"><h3>I Am The Forest</h3><div class="pmeta">2022 · Installation · climate emergencies</div><p class="desc">An installation on climate emergencies inviting the audience to listen to the health of our world's forests while engaging in a deforestation micro-activism practice. The sonifications use 20 years of data from <a href="https://www.globalforestwatch.org/" target="_blank" rel="noopener">Global Forest Watch</a>. Resilient by design: it works in gardens, forests, greenhouses — or a lonely tree in a shopping center.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/9JUZJV5tmdM?rel=0" style="aspect-ratio:16/9;height:auto" title="I Am The Forest teaser" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><blockquote class="ritual">Walk around and listen, this is your environment. See the colors and feel the textures surrounding you. <b>.breathe.</b> Put your ear against the trunk of the tree. <b>hear.</b> <b>.breathe again.</b> Plant some seeds with your bare hands.</blockquote><ol class="steps"><li><b>Entering the space.</b> People scan a QR code to access an online PDF with an introduction, instructions, and a reflective, informative text about deforestation.</li><li><b>Accessing the PDF.</b> Page one: introduction and instructions. Page two: a scientific text next to a poetic reflection on deforestation.</li><li><b>Hugging a tree.</b> The sonifications play through transducers connected to trees — the tree works as an amplifier. Hug it to feel the vibration; press your ear to the trunk to <b>hear</b> the sounds of deforestation.</li><li><b>Planting seeds.</b> Pots with soil and bags of seeds lie around the trees — plant them, water them, or take a pot home to grow a new potential forest.</li><li><b>After the installation.</b> The whole piece reduces to a box, so participants can take it home and plant a forest wherever they want.</li></ol><ul class="specs"><li class="k">Materials</li><li>Transducers + amplifier</li><li>Plant pots</li><li>Native seeds</li><li>Soil</li><li>MP3 player</li><li class="k">Coding</li><li>SuperCollider</li></ul></template>
+<template id="in-love"><div class="li-root loveis"><h3>Love Is</h3><div class="pmeta">2024 · Installation · heart-machines · Hamraborg Festival &amp; Gallery Kannski</div>
     <p class="li-poem">heartbeats spanning heartbeats<br>traversing spaces<br>crossing bodies<br>in presence<br>as love is</p>
     <div class="li-grid">
       <div class="li-stage">
@@ -820,7 +825,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
       <div class="li-yr">Precedent · 2021</div>
       <h3>Love Is, in the dark room</h3>
       <div class="li-prec-grid">
-        <iframe loading="lazy" referrerpolicy="origin" src="https://www.youtube.com/embed/RPfHJgMJKGQ?rel=0" title="Love Is (2021): participatory sound installation" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/RPfHJgMJKGQ?rel=0" title="Love Is (2021): participatory sound installation" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
         <div>
           <p class="muted">The first <i>Love Is</i>: an installation on the perception of our body and the power of our hearts. Presence becomes movement, emotion becomes the beating of our hearts. It needs only a dark room with space to move and a PA system: very simple and very powerful.</p>
           <ol class="steps"><li><b>Entering the space.</b> People scan a QR code to access an online PDF with an introduction, instructions, and quotes from Argentinian writer Julio Cortázar about love.</li><li><b>Accessing the PDF.</b> Introduction and instructions, next to a scientific text and a poetic reflection reinforcing the artwork's message.</li><li><b>Wearing the heartbeat monitor.</b> The monitor sends the heart rate to the computer once every second; each beat transforms the qualities of the soundscape being played.</li><li><b>Exploring the space.</b> Ultrasound sensors around the room trigger new sounds when a participant crosses them, flooding the dark with new-sounding textures.</li></ol>
@@ -828,10 +833,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<template id="in-forest"><h3>I Am The Forest</h3><div class="pmeta">2022 · Installation · climate emergencies</div><p class="desc">An installation on climate emergencies inviting the audience to listen to the health of our world's forests while engaging in a deforestation micro-activism practice. The sonifications use 20 years of data from <a href="https://www.globalforestwatch.org/" target="_blank" rel="noopener">Global Forest Watch</a>. Resilient by design: it works in gardens, forests, greenhouses — or a lonely tree in a shopping center.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/9JUZJV5tmdM?rel=0" style="aspect-ratio:16/9;height:auto" title="I Am The Forest teaser" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><blockquote class="ritual">Walk around and listen, this is your environment. See the colors and feel the textures surrounding you. <b>.breathe.</b> Put your ear against the trunk of the tree. <b>hear.</b> <b>.breathe again.</b> Plant some seeds with your bare hands.</blockquote><ol class="steps"><li><b>Entering the space.</b> People scan a QR code to access an online PDF with an introduction, instructions, and a reflective, informative text about deforestation.</li><li><b>Accessing the PDF.</b> Page one: introduction and instructions. Page two: a scientific text next to a poetic reflection on deforestation.</li><li><b>Hugging a tree.</b> The sonifications play through transducers connected to trees — the tree works as an amplifier. Hug it to feel the vibration; press your ear to the trunk to <b>hear</b> the sounds of deforestation.</li><li><b>Planting seeds.</b> Pots with soil and bags of seeds lie around the trees — plant them, water them, or take a pot home to grow a new potential forest.</li><li><b>After the installation.</b> The whole piece reduces to a box, so participants can take it home and plant a forest wherever they want.</li></ol><ul class="specs"><li class="k">Materials</li><li>Transducers + amplifier</li><li>Plant pots</li><li>Native seeds</li><li>Soil</li><li>MP3 player</li><li class="k">Coding</li><li>SuperCollider</li></ul></template>
+</div></template>
 <template id="in-pulsars"><h3>Radio Pulsars</h3><div class="pmeta">2020 · Installation · neutron stars</div><p class="desc">An installation about neutron stars, inspired by the scientific sonifications of the <a href="https://www.jodrellbank.net/explore/science/telescopes/" target="_blank" rel="noopener">Jodrell Bank Observatory</a>, using data from the European Pulsar Timing Array. A dark room, four speakers, and the playful side of scientific sound.</p><iframe referrerpolicy="origin" data-src="https://www.youtube.com/embed/_FfB5UmXyoQ?rel=0" style="aspect-ratio:16/9;height:auto" title="Radio Pulsars — participatory sound installation" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><ol class="steps"><li><b>Entering the space.</b> A QR code opens a PDF with instructions and poetic and scientific texts about neutron stars.</li><li><b>Accessing the PDF.</b> Introduction and instructions, plus science beside poetry to reinforce the message.</li><li><b>Entering a playful starry night.</b> Two MIDI controllers face each other; each button plays a star's sonification, and the knobs bend the data-reading speed — percussive pulses become strange melodies through curious interaction.</li><li><b>(in)Between the sounds of science.</b> The sounds are the same ones used in scientific research — the MIDI controllers build the bridge between the scientific and interactive potential of sonification.</li></ol><ul class="specs"><li class="k">Materials</li><li>Raspberry Pi</li><li>MIDI controllers</li><li>Pulsar data sets</li><li class="k">Coding</li><li>SuperCollider</li></ul></template>
 <template id="in-ocean"><h3>I Am The Ocean</h3><div class="pmeta">Work in progress · Installation · CO₂ &amp; the ocean</div><p class="desc">A forceful, immersive, and mysterious experience: listeners feel the changing, rising tides of our world through a live sonification driven by CO₂ measurement. Inspired by <i>Hyperobjects</i> (Timothy Morton); data from the EU Global Surface Water centre and NASA Goddard. Currently seeking funding — and a sound company concerned about climate emergencies willing to lend 10+ waterproof speakers.</p><audio data-src="assets/inst-ocean.mp3" controls preload="none"></audio><ol class="steps"><li><b>Floating speakers.</b> Ten waterproof speakers float in shallow waters (a lake, the sea, a pool), attached to plastic-bottle buoys and connected via Bluetooth to a Raspberry Pi playing the live sonification.</li><li><b>Measuring CO₂.</b> A sensor beside the computer captures the CO₂ in the atmosphere — the measurement drives the sonification in real time.</li><li><b>Immersing.</b> Participants walk among the speakers in the water, feel the vibration, scan a QR code for instructions — and can dive to hear the predictive sonifications underwater.</li></ol><ul class="specs"><li class="k">Materials</li><li>CO₂ sensor</li><li>Bluetooth waterproof speakers</li><li>Raspberry Pi</li><li class="k">Coding</li><li>SuperCollider</li><li>Machine learning</li></ol></template>
 
@@ -1374,6 +1376,11 @@ const radio = (function(){
   if('IntersectionObserver' in window) new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) v.play().catch(()=>{}); else v.pause(); }),{threshold:.25}).observe(v);
 })();
 
+// ---- #loveis (log entries, catalog) opens the Love Is panel in the installations catalog ----
+function openLoveIs(){ const c = document.getElementById('loveis'); if(c && c.getAttribute('aria-expanded')!=='true'){ c.click(); setTimeout(()=> c.scrollIntoView({behavior:'smooth', block:'start'}), 60); } }
+addEventListener('hashchange', ()=>{ if(location.hash==='#loveis') openLoveIs(); });
+if(location.hash==='#loveis') addEventListener('load', openLoveIs);
+
 // ---- landing: measure what sits above the mosaic so the tiles fill the rest of the screen ----
 const setMtop=()=> document.documentElement.style.setProperty('--mtop', document.getElementById('explore').getBoundingClientRect().top + scrollY + 'px');
 setMtop(); addEventListener('resize', setMtop); document.fonts && document.fonts.ready.then(setMtop);
@@ -1392,18 +1399,20 @@ function wireCards(gridId, panelId){
   const panel = document.getElementById(panelId);
   let open = null;
   const cards = document.querySelectorAll('#'+gridId+' .ccard');
-  const close = (card)=>{ panel.classList.remove('open'); panel.innerHTML=''; if(card) card.setAttribute('aria-expanded','false'); open=null; };
+  const close = (card)=>{ window.LoveIs && window.LoveIs.unmount(); panel.classList.remove('open'); panel.innerHTML=''; if(card) card.setAttribute('aria-expanded','false'); open=null; };
   cards.forEach(card=>{
     if(!card.dataset.cd) return;   // a card that links somewhere instead of opening a panel
     card.addEventListener('click', ()=>{
       if(open === card) return close(card);
       cards.forEach(c=> c.setAttribute('aria-expanded','false'));
       const tpl = document.getElementById(card.dataset.cd);
+      window.LoveIs && window.LoveIs.unmount();
       panel.innerHTML = '<button class="close">Close ×</button>';
       panel.appendChild(tpl.content.cloneNode(true));
       panel.querySelectorAll('iframe[data-src],video[data-src],audio[data-src]').forEach(f=> f.src = f.dataset.src); // lazy: load only when opened
       panel.style.setProperty('--ac', getComputedStyle(card).getPropertyValue('--ac'));
       panel.classList.add('open');
+      const li = panel.querySelector('.li-root'); if(li && window.LoveIs) window.LoveIs.mount(li);
       card.setAttribute('aria-expanded','true'); open = card;
       panel.querySelector('.close').addEventListener('click', ()=> close(card));
     });
@@ -1424,6 +1433,6 @@ if('IntersectionObserver' in window){
 <template id="__bundler_thumbnail">
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#0b0f17"/><rect x="20" y="20" width="26" height="34" rx="3" fill="#1b2336" stroke="#7fd6e8" stroke-width="1.5"/><rect x="52" y="20" width="28" height="22" rx="3" fill="#1b2336" stroke="#e8c97f" stroke-width="1.5"/><rect x="52" y="48" width="28" height="32" rx="3" fill="#1b2336" stroke="#7fd6e8" stroke-width="1.5"/><rect x="20" y="60" width="26" height="20" rx="3" fill="#1b2336" stroke="#e8c97f" stroke-width="1.5"/></svg>
 </template>
-<script src="loveis.js" defer></script>
+<script src="loveis.js?v=2" defer></script>
 </body>
 </html>

@@ -12,13 +12,11 @@
 //   - the heartbeat repeats every 60/bpm s (pdef.scd used (60/bpm).reciprocal, i.e. bpm/60 s)
 //   - a soft saturation adds overtones to the 50/70 Hz thump so laptop speakers can carry it
 //   - layer levels are balanced for a browser (the SC amps assume an installation PA)
-(function(){
-  const root = document.getElementById('loveis');
-  if(!root) return;
-  const hearts = [...root.querySelectorAll('.li-heart')];
-  const hint = root.querySelector('.li-hint');
-  const photo = root.querySelector('.li-pulse');
+// The page opens Love Is in an expanding catalog panel: LoveIs.mount(root) wires a freshly
+// cloned panel, LoveIs.unmount() lets the hearts go quiet when the panel closes.
+window.LoveIs = (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let hint = null, photo = null, H = [], io = null;
 
   // ---------- helpers mirroring SC's mapping methods ----------
   const clip = (x,a,b)=> Math.min(b, Math.max(a, x));
@@ -175,16 +173,16 @@
   }
 
   // ---------- the hearts ----------
-  const H = hearts.map((el,i)=>({ el, i, state:'idle', bpm:0, warm:0, held:false, t:null, beatT:null, heldSince:0, pan:[-0.6,0.6,-0.3,0.3][i]||0 }));
   const beating = ()=> H.filter(h=> h.state==='beating' || h.state==='fading');
   function bpmNow(){ const b = beating(); return b.length ? b.reduce((s,h)=>s+h.bpm,0)/b.length : 60; }
 
   function setState(h, s){
     h.state = s; h.el.dataset.state = s;
-    h.el.setAttribute('aria-pressed', s==='beating' ? 'true' : 'false');
+    if(h.el) h.el.setAttribute('aria-pressed', s==='beating' ? 'true' : 'false');
     updateHint();
   }
   function updateHint(){
+    if(!hint) return;
     const n = H.filter(h=>h.state==='beating').length, l = H.some(h=>h.state==='listening');
     hint.textContent = n ? (n===1 ? 'It hears you. This is not your pulse, but the pulse you give it. Hold another heart too.' : n+' hearts beating together, talking to each other, and to you.')
                      : l ? 'Listening… be patient, let the machine listen to you.'
@@ -222,18 +220,26 @@
     const cool = setInterval(()=>{ if(h.held) return clearInterval(cool); h.warm = Math.max(0, h.warm-0.02); h.el.style.setProperty('--warm', h.warm); if(!h.warm) clearInterval(cool); }, 400);
   }
 
-  H.forEach(h=>{
-    h.el.addEventListener('pointerdown', e=>{ e.preventDefault(); try{ h.el.setPointerCapture(e.pointerId); }catch(_){} hold(h, e); });
-    ['pointerup','pointercancel','lostpointercapture'].forEach(ev=> h.el.addEventListener(ev, ()=> release(h)));
-    h.el.addEventListener('keydown', e=>{ if((e.key===' '||e.key==='Enter') && !e.repeat){ e.preventDefault(); hold(h, e); } });
-    h.el.addEventListener('keyup', e=>{ if(e.key===' '||e.key==='Enter') release(h); });
-    h.el.addEventListener('blur', ()=> release(h));
-    h.el.addEventListener('contextmenu', e=> e.preventDefault());
-  });
-
-  // leaving the section lets the hearts go quiet
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(es=> es.forEach(en=>{ if(!en.isIntersecting){ H.forEach(h=>{ h.held=false; clearTimeout(h.t); clearTimeout(h.beatT); setState(h,'idle'); }); stopEngine(); } }), {threshold:0}).observe(root);
+  function mount(root){
+    unmount();
+    hint = root.querySelector('.li-hint'); photo = root.querySelector('.li-pulse');
+    H = [...root.querySelectorAll('.li-heart')].map((el,i)=>({ el, i, state:'idle', bpm:0, warm:0, held:false, t:null, beatT:null, heldSince:0, pan:[-0.6,0.6,-0.3,0.3][i]||0 }));
+    H.forEach(h=>{
+      h.el.addEventListener('pointerdown', e=>{ e.preventDefault(); try{ h.el.setPointerCapture(e.pointerId); }catch(_){} hold(h, e); });
+      ['pointerup','pointercancel','lostpointercapture'].forEach(ev=> h.el.addEventListener(ev, ()=> release(h)));
+      h.el.addEventListener('keydown', e=>{ if((e.key===' '||e.key==='Enter') && !e.repeat){ e.preventDefault(); hold(h, e); } });
+      h.el.addEventListener('keyup', e=>{ if(e.key===' '||e.key==='Enter') release(h); });
+      h.el.addEventListener('blur', ()=> release(h));
+      h.el.addEventListener('contextmenu', e=> e.preventDefault());
+    });
+    // scrolling the panel away lets the hearts go quiet
+    if('IntersectionObserver' in window){
+      io = new IntersectionObserver(es=> es.forEach(en=>{ if(!en.isIntersecting) quiet(); }), {threshold:0});
+      io.observe(root);
+    }
+    updateHint();
   }
-  updateHint();
+  function quiet(){ H.forEach(h=>{ h.held=false; clearTimeout(h.t); clearTimeout(h.beatT); setState(h,'idle'); }); stopEngine(); }
+  function unmount(){ if(io){ io.disconnect(); io = null; } quiet(); H = []; hint = null; photo = null; }
+  return { mount, unmount };
 })();
