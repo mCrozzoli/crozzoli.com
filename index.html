@@ -504,6 +504,24 @@ image-slot{--slot-bg:var(--bg-alt)}
 .li-where a{font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; color:var(--accent); border-bottom:1px solid currentColor}
 @media(max-width:980px){ .li-grid{grid-template-columns:1fr} .li-stage{position:static} .li-photos{grid-template-columns:repeat(2,minmax(0,1fr))} .li-versions{grid-template-columns:1fr} }
 @media(prefers-reduced-motion:reduce){ .li-pulse{animation:none; opacity:.35} .li-heart[data-state="listening"] .li-eye::after{animation:none} }
+
+/* ============ COLLABORATIONS ============ */
+.co-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:clamp(24px,4vw,40px)}
+.co-card{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--panel); display:flex; flex-direction:column}
+.co-img{aspect-ratio:16/9; overflow:hidden; background:var(--bg-alt)} .co-img.co-dark{background:#05101c}
+.co-img img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s}
+.co-card:hover .co-img img{transform:scale(1.03)}
+.co-body{padding:18px 20px 20px; display:flex; flex-direction:column; gap:8px; flex:1}
+.co-meta{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent)}
+.co-body h3{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); font-size:clamp(22px,2.2vw,28px); line-height:1.1; margin:0}
+.co-with{font-size:15px; color:var(--muted); font-style:italic}
+.co-body p{font-size:15px; line-height:1.55; color:var(--ink); margin:4px 0}
+.co-roles{display:flex; flex-wrap:wrap; gap:6px; list-style:none; margin:auto 0 0; padding:6px 0 0}
+.co-roles li{font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); border:1px solid var(--line); border-radius:100px; padding:4px 10px}
+.co-links a{font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); border-bottom:1px solid currentColor}
+.rel-early{margin-top:clamp(40px,6vw,72px); padding-top:clamp(28px,4vw,44px); border-top:1px solid var(--line)}
+.rel-early-h{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); font-size:clamp(28px,3.4vw,42px); margin:6px 0 20px}
+@media(max-width:760px){ .co-grid{grid-template-columns:1fr} }
 /* ============ RESPONSIVE ============ */
 @media(max-width:980px){ .mosaic{columns:2} .bio-hero .inner{grid-template-columns:1fr; align-content:end} .bio-hero .dim{background:linear-gradient(180deg, rgba(8,9,12,.2), rgba(8,9,12,.72) 60%)} .strange .grid{grid-template-columns:1fr} .psi-hero .vgrid{grid-template-columns:1fr} .improv .igrid,.band .bgrid,.ds-grid{grid-template-columns:1fr !important} nav.links{gap:18px} }
 @media(max-width:760px){
@@ -612,9 +630,9 @@ image-slot{--slot-bg:var(--bg-alt)}
     <span class="tile-label"><a href="#sonora">Sonora Digital <span class="arr">→</span></a></span>
   </figure>
   <figure class="tile">
-    <image-slot id="t-early" style="aspect-ratio:2/3" fit="cover" src="assets/early-work.jpg" placeholder="Early work cover"></image-slot>
-    <span class="kind">Music</span>
-    <span class="tile-label"><a href="#early">Early Work <span class="arr">→</span></a></span>
+    <image-slot id="t-collab" style="aspect-ratio:3/2" fit="cover" src="assets/collab/pdw-table.jpg" placeholder="Collaborations"></image-slot>
+    <span class="kind">Music Technology</span>
+    <span class="tile-label"><a href="#collab">Collaborations <span class="arr">→</span></a></span>
   </figure>
 </main>
 
@@ -857,6 +875,59 @@ image-slot{--slot-bg:var(--bg-alt)}
   </div>
 </section>
 
+<!-- ============ COLLABORATIONS · MUSIC TECHNOLOGY ============ -->
+<section class="detail" id="collab">
+  <div class="wrap">
+    <div class="eyebrow">Music technology · Collaborations</div>
+    <h2 class="title">Collaborations.</h2>
+    <p class="lead">Working alongside artists and researchers as a music technology collaborator: composing and performing, and building the technology that makes the work sound: data pipelines, sonification engines, electronics and software.</p>
+    <div class="co-grid">
+      <article class="co-card">
+        <div class="co-img"><img src="assets/collab/pdw-table.jpg" alt="Plant Data Worlds: a banana plant on a round table surrounded by small white sculptures" loading="lazy"></div>
+        <div class="co-body">
+          <div class="co-meta">2026 · Hamraborg Festival · Náttúrusafn Kópavogs</div>
+          <h3>Plant Data Worlds</h3>
+          <div class="co-with">with Thomas Pausz</div>
+          <p>Sensors and microphones among the living plants of a greenhouse capture the hidden pulse of a plant ecosystem. Machine learning shapes that data into small sculptures, each unique to its ecosystem and each with its own voice: a sound-world derived from the harmonic structure of the data. Hold it, listen to it, navigate it.</p>
+          <ul class="co-roles"><li>Sound design</li><li>Data</li><li>Software</li></ul>
+          <div class="co-links"><a href="https://www.hamraborgfestival.is/en/event/gagnaverold-plantna" target="_blank" rel="noopener">Hamraborg Festival ↗</a></div>
+        </div>
+      </article>
+      <article class="co-card">
+        <div class="co-img co-dark"><img src="assets/collab/whale.jpg" alt="A Whale's Heart: depth profile and heart rate of a diving whale" loading="lazy"></div>
+        <div class="co-body">
+          <div class="co-meta">2026 · in development</div>
+          <h3>A Whale's Heart</h3>
+          <div class="co-with">with Snæbjörnsdóttir/Wilson</div>
+          <p>A multichannel sound installation where a whale's heart beats through the space. Tag data from a whale diving off Iceland drives it: near the surface the heart is loud and fast; as the whale dives it slows, from 30 down to 2 beats per minute, and grows quiet.</p>
+          <ul class="co-roles"><li>Sonification</li><li>Sound system</li><li>Software</li></ul>
+        </div>
+      </article>
+      <article class="co-card">
+        <div class="co-img co-dark"><img src="assets/collab/florianotron.jpg" alt="Sonic Weathering: layered weather visualization in yellow and teal" loading="lazy"></div>
+        <div class="co-body">
+          <div class="co-meta">2026 · in development</div>
+          <h3>Sonic Weathering</h3>
+          <div class="co-with">with Florian Goeschke · the "Florianotron"</div>
+          <p>A shape-shifting sound sculpture that listens to its immediate environment. A small weather station (CO₂, temperature, humidity, light) feeds Dark Sonification, which slowly moves the motors of Florian's <i>un:fold</i>, a plywood jitterbug-tensegrity held by strings, and plays through transducers on its panels. As the body folds, string tensions shift and the whole object re-tunes: local weather heard as a wooden body that, over days, quietly inhales, detunes and re-settles.</p>
+          <ul class="co-roles"><li>Sonification</li><li>Machine learning</li><li>Software</li></ul>
+        </div>
+      </article>
+      <article class="co-card">
+        <div class="co-img"><img src="assets/collab/calum-organ.jpg" alt="Pipe Madness: the step sequencer for Calum Builder's pipe organ" loading="lazy"></div>
+        <div class="co-body">
+          <div class="co-meta">2026 · v1.1</div>
+          <h3>Pipe Madness</h3>
+          <div class="co-with">with Calum Builder</div>
+          <p>A pipe organ built from solenoid valves, played from the browser. Paint a rhythm on the grid and each of up to eight pipes gets its row over ESP-NOW, ticking in perfect sync; the audience can join from their phones by QR code, and a simulated organ plays when no pipes are around.</p>
+          <ul class="co-roles"><li>Software</li><li>Electronics</li><li>Sound</li></ul>
+          <div class="co-links"><a href="https://mcrozzoli.github.io/calum-organ/" target="_blank" rel="noopener">Open the sequencer ↗</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FEEDBACK SAXOPHONE ============ -->
 <section class="detail" id="live">
   <div class="wrap">
@@ -942,46 +1013,43 @@ image-slot{--slot-bg:var(--bg-alt)}
         <div class="rel-links"><a href="https://nendodango.bandcamp.com/album/immerse" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
       </article>
     </div>
+    <div class="rel-early" id="early">
+      <div class="eyebrow">Early work · Argentina</div>
+      <h3 class="rel-early-h">Early work.</h3>
+      <div class="early-video">
+        <iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/aQchke4_ji0?rel=0" title="Miguel Crozzoli Cuarteto — M (KUAI MUSIC)" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <div class="rel-meta" style="margin-top:10px">Miguel Crozzoli Cuarteto · Buenos Aires jazz quartet · “M”</div>
+      </div>
+      <div class="rel-grid four">
+        <article class="rel-card">
+          <a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-luz" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3868692366_10.jpg" alt="Ciclos de Luz cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
+          <div class="rel-body"><h3>Ciclos de Luz</h3><div class="rel-meta">2013 · Miguel Crozzoli · KUAI MUSIC</div>
+          <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=4130369726/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Ciclos de Luz on Bandcamp"></iframe>
+          <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-luz" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
+        </article>
+        <article class="rel-card">
+          <a href="https://miguelcrozzoli.bandcamp.com/album/i-serie-gr-fica-equilibrios-colapsados" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3600449326_10.jpg" alt="I serie gráfica. Equilibrios Colapsados. cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
+          <div class="rel-body"><h3>I serie gráfica. Equilibrios Colapsados.</h3><div class="rel-meta">2014 · Graphic scores · images by Carmen Villa</div>
+          <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=4234447536/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="I serie gráfica. Equilibrios Colapsados. on Bandcamp"></iframe>
+          <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/i-serie-gr-fica-equilibrios-colapsados" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
+        </article>
+        <article class="rel-card">
+          <a href="https://miguelcrozzoli.bandcamp.com/album/bosque-viento" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3851216881_10.jpg" alt="Bosque Viento cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
+          <div class="rel-body"><h3>Bosque Viento</h3><div class="rel-meta">2014 · Miguel Crozzoli / Francisco Cossavella</div>
+          <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=1586142588/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Bosque Viento on Bandcamp"></iframe>
+          <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/bosque-viento" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
+        </article>
+        <article class="rel-card">
+          <a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-estrellas" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a0714951892_10.jpg" alt="Ciclos de Estrellas cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
+          <div class="rel-body"><h3>Ciclos de Estrellas</h3><div class="rel-meta">2015 · Miguel Crozzoli · a Fran Cossavella</div>
+          <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=3039918872/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Ciclos de Estrellas on Bandcamp"></iframe>
+          <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-estrellas" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============ EARLY WORK ============ -->
-<section class="detail" id="early">
-  <div class="wrap">
-    <div class="eyebrow">Early work · Argentina</div>
-    <h2 class="title">Early work.</h2>
-    <div class="early-video">
-      <iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/aQchke4_ji0?rel=0" title="Miguel Crozzoli Cuarteto — M (KUAI MUSIC)" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      <div class="rel-meta" style="margin-top:10px">Miguel Crozzoli Cuarteto · Buenos Aires jazz quartet · “M”</div>
-    </div>
-    <div class="rel-grid four">
-      <article class="rel-card">
-        <a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-luz" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3868692366_10.jpg" alt="Ciclos de Luz cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
-        <div class="rel-body"><h3>Ciclos de Luz</h3><div class="rel-meta">2013 · Miguel Crozzoli · KUAI MUSIC</div>
-        <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=4130369726/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Ciclos de Luz on Bandcamp"></iframe>
-        <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-luz" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
-      </article>
-      <article class="rel-card">
-        <a href="https://miguelcrozzoli.bandcamp.com/album/i-serie-gr-fica-equilibrios-colapsados" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3600449326_10.jpg" alt="I serie gráfica. Equilibrios Colapsados. cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
-        <div class="rel-body"><h3>I serie gráfica. Equilibrios Colapsados.</h3><div class="rel-meta">2014 · Graphic scores · images by Carmen Villa</div>
-        <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=4234447536/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="I serie gráfica. Equilibrios Colapsados. on Bandcamp"></iframe>
-        <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/i-serie-gr-fica-equilibrios-colapsados" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
-      </article>
-      <article class="rel-card">
-        <a href="https://miguelcrozzoli.bandcamp.com/album/bosque-viento" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a3851216881_10.jpg" alt="Bosque Viento cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
-        <div class="rel-body"><h3>Bosque Viento</h3><div class="rel-meta">2014 · Miguel Crozzoli / Francisco Cossavella</div>
-        <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=1586142588/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Bosque Viento on Bandcamp"></iframe>
-        <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/bosque-viento" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
-      </article>
-      <article class="rel-card">
-        <a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-estrellas" target="_blank" rel="noopener"><img src="https://f4.bcbits.com/img/a0714951892_10.jpg" alt="Ciclos de Estrellas cover" loading="lazy"><span class="rel-tag">Jazz</span></a>
-        <div class="rel-body"><h3>Ciclos de Estrellas</h3><div class="rel-meta">2015 · Miguel Crozzoli · a Fran Cossavella</div>
-        <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=3039918872/size=small/bgcol=ffffff/linkcol=b8651f/transparent=true/" title="Ciclos de Estrellas on Bandcamp"></iframe>
-        <div class="rel-links"><a href="https://miguelcrozzoli.bandcamp.com/album/ciclos-de-estrellas" target="_blank" rel="noopener">Bandcamp ↗</a></div></div>
-      </article>
-    </div>
-  </div>
-</section>
 
 <!-- ============ SONORA DIGITAL ============ -->
 <section class="detail sonora" id="sonora">
