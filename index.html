@@ -610,6 +610,14 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 @media(max-width:980px){ .pdw-grid{grid-template-columns:1fr} .pdw-side{border-left:0; padding-left:0; border-top:1px solid var(--line); padding-top:20px} }
 @media(max-width:760px){ .pdw-photos{grid-template-columns:repeat(2,minmax(0,1fr))} .p-room{grid-column:span 2} .p-mirror,.p-worlds,.p-leaf,.p-shadow{grid-column:span 2} .p-worlds,.p-leaf{grid-row:span 2} }
 /* ============ RESPONSIVE ============ */
+/* phones: the tiles follow the desktop rows (left to right, top to bottom) instead of the column order */
+@media(max-width:760px){
+  .mosaic{display:flex; flex-direction:column; columns:auto}
+  .mosaic .tile:nth-child(1){order:0}  .mosaic .tile:nth-child(5){order:1}  .mosaic .tile:nth-child(9){order:2}
+  .mosaic .tile:nth-child(2){order:3}  .mosaic .tile:nth-child(6){order:4}  .mosaic .tile:nth-child(10){order:5}
+  .mosaic .tile:nth-child(3){order:6}  .mosaic .tile:nth-child(7){order:7}  .mosaic .tile:nth-child(11){order:8}
+  .mosaic .tile:nth-child(4){order:9}  .mosaic .tile:nth-child(8){order:10} .mosaic .tile:nth-child(12){order:11}
+}
 /* phones: room above each section for the floating ← Home button */
 @media(max-width:760px){ section.detail{padding-top:84px !important} }
 @media(max-width:980px){ .mosaic{columns:2} .bio-hero .inner{grid-template-columns:1fr; align-content:end} .bio-hero .dim{background:linear-gradient(180deg, rgba(8,9,12,.2), rgba(8,9,12,.72) 60%)} .strange .grid{grid-template-columns:1fr} .psi-hero .vgrid{grid-template-columns:1fr} .improv .igrid,.band .bgrid,.ds-grid{grid-template-columns:1fr !important} nav.links{gap:18px} }
