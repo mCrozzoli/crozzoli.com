@@ -565,6 +565,25 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 .wh-btn.is-soon{background:transparent; color:var(--wh-blue); border:1px dashed var(--wh-blue); cursor:default}
 .whale .home-btn{color:var(--ink); border-color:var(--line); background:rgba(255,255,255,.04)}
 @media(max-width:980px){ .wh-grid{grid-template-columns:1fr} }
+
+/* ============ PLANT DATA WORLDS ============ */
+.pdw-q{font-family:var(--font-display); font-style:italic; font-size:clamp(19px,2vw,24px); line-height:1.4; color:var(--muted); max-width:46ch; margin:-6px 0 clamp(26px,4vw,40px)}
+.pdw-grid{display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr); gap:clamp(28px,5vw,64px); align-items:start}
+.pdw-text .lead{margin-top:0} .pdw-text p{max-width:62ch}
+.pdw-side{border-left:1px solid var(--line); padding-left:clamp(18px,2.5vw,28px)}
+.pdw-side p{font-size:15px; line-height:1.55; color:var(--muted); margin:0 0 18px} .pdw-side b{color:var(--ink); font-weight:500}
+.pdw-side a{color:var(--accent); border-bottom:1px solid currentColor}
+.pdw-k{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin:0 0 8px}
+.pdw-side .co-roles{margin:0 0 18px; padding:0}
+.pdw-photos{display:grid; grid-auto-flow:dense; grid-template-columns:repeat(4,minmax(0,1fr)); grid-auto-rows:clamp(130px,14vw,230px); gap:12px; margin:clamp(36px,5vw,60px) 0 10px}
+.pdw-photos figure{margin:0; overflow:hidden; border-radius:12px; background:var(--bg-alt)}
+.pdw-photos img{width:100%; height:100%; object-fit:cover; display:block}
+.p-room{grid-column:span 3; grid-row:span 2} .p-room img{object-position:75% 50%} .p-vitrine{grid-row:span 2}
+.p-mirror{grid-column:span 2; grid-row:span 2} .p-world{grid-row:span 2} .p-shadow{grid-row:span 2}
+.p-worlds,.p-leaf{grid-column:span 2}
+.pdw-credit{font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin:0}
+@media(max-width:980px){ .pdw-grid{grid-template-columns:1fr} .pdw-side{border-left:0; padding-left:0; border-top:1px solid var(--line); padding-top:20px} }
+@media(max-width:760px){ .pdw-photos{grid-template-columns:repeat(2,minmax(0,1fr))} .p-room{grid-column:span 2} .p-mirror,.p-worlds,.p-leaf,.p-shadow{grid-column:span 2} }
 /* ============ RESPONSIVE ============ */
 /* phones: room above each section for the floating ← Home button */
 @media(max-width:760px){ section.detail{padding-top:84px !important} }
@@ -940,7 +959,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
           <p>Sensors and microphones among the living plants of a greenhouse capture the hidden pulse of a plant ecosystem. Machine learning shapes that data into small sculptures, each unique to its ecosystem and each with its own voice: a sound-world derived from the harmonic structure of the data. Hold it, listen to it, navigate it.</p>
           <ul class="co-roles"><li>Sound design</li><li>Software</li><li>3D mesh design</li><li>Data analysis</li></ul>
           <div class="co-credit">Photo: Hamraborg Festival</div>
-          <div class="co-links"><a href="https://www.hamraborgfestival.is/en/event/gagnaverold-plantna" target="_blank" rel="noopener">Hamraborg Festival ↗</a></div>
+          <div class="co-links"><a href="#pdw">More about the piece ↓</a> &nbsp; <a href="https://www.hamraborgfestival.is/en/event/gagnaverold-plantna" target="_blank" rel="noopener">Hamraborg Festival ↗</a></div>
         </div>
       </article>
       <article class="co-card">
@@ -977,6 +996,42 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
         </div>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- ============ PLANT DATA WORLDS ============ -->
+<section class="detail pdw" id="pdw">
+  <div class="wrap">
+    <div class="eyebrow">Artistic research · data sculptures · Hamraborg Festival 2026</div>
+    <h2 class="title">Plant Data Worlds.</h2>
+    <p class="pdw-q">What becomes possible to perceive when we listen and sense more-than-human life through considered technology?</p>
+    <div class="pdw-grid">
+      <div class="pdw-text">
+        <p class="lead">Ecological data and field recordings from living ecosystems become small, sounding, tactile sculptures: a three-dimensional signature of an inhabited space.</p>
+        <p>In the botanical greenhouse of the Garden School in Hveragerði, plant roots stretch, bacteria and insects make soil, bees pollinate, sunlight falls across the banana leaves; most of this life unfolds too slowly, too quietly, or at frequencies we aren't built to notice. Plant sensors and microphones gather its traces: growth rhythms, environmental changes, insect presence. Several machine learning algorithms shape the data into a unique digital form, which is then made into a small sculpture.</p>
+        <p>The data also gives each object its voice: a sound design derived from the harmonic structure of the data. The result is a data sculpture, held and felt, listened to as it voices itself, and navigated as a digital world, so that what was an abstract dataset becomes something to relate to with care.</p>
+      </div>
+      <aside class="pdw-side">
+        <div class="pdw-k">A collaboration</div>
+        <p><b>Thomas Pausz</b> (FR/IS), speculative designer and media artist, and <b>Miguel Angel Crozzoli</b> (AR/DK), sound artist and composer, artist-researchers at the Intelligent Instruments Lab, University of Iceland, working together since 2024.</p>
+        <div class="pdw-k">Miguel's part</div>
+        <ul class="co-roles"><li>Sound design</li><li>Software</li><li>3D mesh design</li><li>Data analysis</li></ul>
+        <div class="pdw-k">Shown at</div>
+        <p><a href="https://www.hamraborgfestival.is/en/event/gagnaverold-plantna" target="_blank" rel="noopener">Hamraborg Festival · Náttúrusafn Kópavogs (Natural History Museum of Kópavogur) · 28 Aug – 4 Sep 2026 ↗</a></p>
+        <div class="pdw-k">Next · in development</div>
+        <p><b>Dark Data Worlds</b>, growing out of Plant Data Worlds, again with Thomas Pausz: seasonal datasets cast as sculptures that visitors lift and hold, each sounding through a speaker array and resonating in the hand. At AIRLab, IT University of Copenhagen, 2026–27.</p>
+      </aside>
+    </div>
+    <div class="pdw-photos">
+      <figure class="p-room"><img src="assets/pdw/room.jpg" alt="The installation room: vitrines of dried banana leaves and the table of data sculptures around a banana plant" loading="lazy"></figure>
+      <figure class="p-vitrine"><img src="assets/pdw/vitrine.jpg" alt="Dried banana leaves in a mesh vitrine" loading="lazy"></figure>
+      <figure class="p-mirror"><img src="assets/pdw/mirror.jpg" alt="The banana plant and its sculptures in front of a round mirror" loading="lazy"></figure>
+      <figure class="p-world"><img src="assets/pdw/world.jpg" alt="A single data sculpture on its stem" loading="lazy"></figure>
+      <figure class="p-shadow"><img src="assets/pdw/shadow.jpg" alt="A dried leaf and its shadow in a dark room" loading="lazy"></figure>
+      <figure class="p-worlds"><img src="assets/pdw/worlds.jpg" alt="Two data sculptures" loading="lazy"></figure>
+      <figure class="p-leaf"><img src="assets/pdw/leaf.jpg" alt="An arching dried leaf in a vitrine" loading="lazy"></figure>
+    </div>
+    <p class="pdw-credit">Photos: Hamraborg Festival</p>
   </div>
 </section>
 
