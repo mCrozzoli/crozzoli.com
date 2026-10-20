@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 250"><defs>
+    <filter id="ink" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/>
+    </filter>
+    <filter id="wash" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency=".011" numOctaves="3" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="46" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="1.4"/>
+    </filter>
+    <radialGradient id="olive" r="60%"><stop offset="0" stop-color="#b9c98a" stop-opacity=".55"/><stop offset="1" stop-color="#8aa24f" stop-opacity=".62"/></radialGradient>
+    <radialGradient id="magma" r="60%"><stop offset="0" stop-color="#e3876b" stop-opacity=".78"/><stop offset=".6" stop-color="#d9534f" stop-opacity=".5"/><stop offset="1" stop-color="#c0463f" stop-opacity=".32"/></radialGradient>
+  </defs>
+      <ellipse cx="240" cy="112" rx="214" ry="70" fill="url(#olive)" filter="url(#wash)" opacity=".7"/>
+      <ellipse cx="236" cy="152" rx="74" ry="28" fill="url(#magma)" filter="url(#wash)"/>
+      <g fill="none" stroke="#c6922c" stroke-linecap="round" filter="url(#ink)">
+        <path d="M150 152 A 86 34 0 0 1 322 152" stroke-width="1.7"/>
+        <path d="M118 152 A 118 48 0 0 1 354 152" stroke-width="1.4" opacity=".75"/>
+        <path d="M84 152 A 152 62 0 0 1 388 152" stroke-width="1.1" opacity=".5"/>
+      </g>
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#ink)">
+        <path d="M186 98 L 204 92 L 214 97 L 230 88 L 242 93 L 258 84 L 272 89 L 290 80" stroke="#e3876b" stroke-width="11" opacity=".35" filter="url(#wash)"/>
+        <path d="M186 98 L 204 92 L 214 97 L 230 88 L 242 93 L 258 84 L 272 89 L 290 80" stroke="#d9534f" stroke-width="5.5" opacity=".8"/>
+        <path d="M186 98 L 204 92 L 214 97 L 230 88 L 242 93 L 258 84 L 272 89 L 290 80" stroke="#33203a" stroke-width="1.6"/>
+      </g>
+      <g fill="#33203a" filter="url(#ink)">
+        <circle cx="142" cy="112" r="1.6"/><circle cx="158" cy="106" r="2.4"/><circle cx="170" cy="111" r="1.3"/><circle cx="178" cy="104" r="1.9"/>
+        <circle cx="196" cy="108" r="3"/><circle cx="208" cy="102" r="1.5"/><circle cx="222" cy="105" r="2.2"/><circle cx="236" cy="99" r="1.4"/>
+        <circle cx="250" cy="103" r="2.6"/><circle cx="264" cy="97" r="1.7"/><circle cx="280" cy="100" r="2"/><circle cx="296" cy="94" r="1.3"/>
+        <circle cx="310" cy="99" r="2.3"/><circle cx="326" cy="95" r="1.5"/>
+        <circle cx="60" cy="42" r="1.4"/><circle cx="214" cy="34" r="1.2"/><circle cx="356" cy="30" r="1.5"/><circle cx="448" cy="48" r="1.3"/>
+      </g>
+      <g fill="#3a82aa" stroke="#1d4a66" stroke-width="1.5" stroke-linejoin="round" filter="url(#ink)">
+        <path d="M100 76 l 7 -12 l 7 12 z"/><path d="M372 62 l 7 -12 l 7 12 z"/><path d="M414 124 l 6 -10 l 6 10 z"/>
+      </g>
+      <g filter="url(#ink)">
+        <circle cx="196" cy="108" r="9.5" fill="none" stroke="#c6922c" stroke-width="2"/>
+      </g>
+      <path d="M26 214 C 60 213, 92 215, 120 214 L 128 208 L 134 220 L 140 205 L 146 222 L 152 209 L 158 216 L 164 213 C 196 214, 232 212, 262 214
+               C 290 215, 310 213, 330 214 L 338 196 L 346 232 L 354 190 L 362 236 L 370 198 L 378 228 L 386 206 L 394 220 L 402 212 C 424 213, 440 215, 456 214"
+            fill="none" stroke="#33203a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#ink)"/>
+    </svg>
