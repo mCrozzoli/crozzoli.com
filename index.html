@@ -229,9 +229,9 @@ p{max-width:64ch}
 .band .bname{font-family:var(--font-display); font-weight:var(--dw); letter-spacing:var(--dt); font-size:22px; margin:0 0 6px}
 .band .bname em{color:var(--accent2); font-style:normal}
 .band .btag{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-bottom:14px}
-.band .bgrid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(18px,3vw,36px); align-items:center}
+.band .bgrid{display:grid; grid-template-columns:1fr; gap:clamp(18px,3vw,36px); align-items:center}
 .band iframe{width:100%; height:120px; border:0; border-radius:8px; display:block}
-.band blockquote{margin:0; font-style:italic; font-size:14.5px; color:var(--muted); border-left:3px solid var(--accent2); padding-left:16px; line-height:1.7}
+.band blockquote{margin:0; max-width:85ch; font-style:italic; font-size:14.5px; color:var(--muted); border-left:3px solid var(--accent2); padding-left:16px; line-height:1.7}
 .band blockquote cite{display:block; margin-top:8px; font-style:normal; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em; color:var(--faint)}
 .band .bdesc{font-size:14.5px; color:var(--muted); margin:14px 0 0; max-width:85ch}
 .band .blink{margin-top:12px}
@@ -285,7 +285,7 @@ section.detail[hidden]{display:none}
 /* Improviser video playlist */
 .vplaylist{display:flex; flex-direction:column; gap:10px}
 .vp-main iframe{display:block; width:100%; aspect-ratio:16/9; border:0; border-radius:14px; background:#000}
-.vp-list{display:flex; gap:10px}
+.vp-list{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
 .vp-item{flex:1; display:flex; align-items:center; gap:10px; padding:6px; border:1px solid var(--line); border-radius:10px; background:var(--panel); cursor:pointer; font:inherit; color:var(--muted); text-align:left; transition:.2s}
 .vp-item img{width:72px; aspect-ratio:16/9; object-fit:cover; border-radius:6px; display:block}
 .vp-item span{font-family:var(--font-mono); font-size:10px; letter-spacing:.04em; line-height:1.4}
@@ -634,7 +634,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 }
 /* phones: photos in the two-column detail sections keep their own shape instead of a window-height block */
 @media(max-width:760px){ .ds-grid > image-slot{height:auto !important; aspect-ratio:4/3} }
-@media(max-width:760px){ .vp-list{flex-direction:column; gap:8px} .vp-item img{width:96px} .vp-item span{font-size:10.5px} }
+@media(max-width:760px){ .vp-list{grid-template-columns:1fr; gap:8px} .vp-item img{width:96px} .vp-item span{font-size:10.5px} }
 @media(max-width:760px){ #sonifications .ds-grid > .ds-gallery{order:2} #sonifications .ds-grid > div:not(.ds-gallery){order:1} }
 @media(max-width:760px){ .ds-cards{grid-template-columns:1fr; gap:10px; padding:10px} .ds-card,.ds-lib{display:grid; grid-template-columns:96px minmax(0,1fr); align-items:center; gap:12px; padding:8px; grid-column:auto} .ds-card img{width:96px; aspect-ratio:1; object-fit:cover; border-radius:4px} .ds-ct,.ds-lib .ds-ct{padding:0; gap:3px} .ds-h{font-size:18px; gap:6px} .ds-stamp{font-size:9px; padding:3px 6px 2px} .ds-l{font-size:13px; line-height:1.35} .ds-go{font-size:14px; padding-top:6px; padding-bottom:3px} }
 @media(max-width:760px){ .strange .unmute{position:static; display:flex; justify-content:center; width:100%; border:0; border-top:1px solid rgba(255,255,255,.15); border-radius:0; background:#111; padding:11px 14px; -webkit-backdrop-filter:none; backdrop-filter:none} .strange .collab{flex-direction:column; gap:6px} .strange .collab .k{padding-top:0} }
@@ -927,6 +927,12 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
         <div class="vp-list">
           <button class="vp-item" aria-current="true" data-id="VdVb2VRQbOQ" data-start="271"><img src="https://i.ytimg.com/vi/VdVb2VRQbOQ/mqdefault.jpg" alt=""><span>Builder · Dyrnes · Crozzoli · Goodwin — Primi 2021</span></button>
           <button class="vp-item" data-id="PYnzVl_I8jM" data-start="450"><img src="https://i.ytimg.com/vi/PYnzVl_I8jM/mqdefault.jpg" alt=""><span>Crozzoli · Muruaga · Filip · Lähdesmäki — Copenhagen Jazz Festival 2022</span></button>
+          <button class="vp-item" data-id="ll9bh5vBC9g" data-start="0"><img src="https://i.ytimg.com/vi/ll9bh5vBC9g/mqdefault.jpg" alt=""><span>Crozzoli · Gubbins — FIMARA 2023</span></button>
+          <button class="vp-item" data-id="9zZ4iZcFCSM" data-start="0"><img src="https://i.ytimg.com/vi/9zZ4iZcFCSM/mqdefault.jpg" alt=""><span>Crozzoli · Shocron — duo with Paula Shocron</span></button>
+          <button class="vp-item" data-id="XirV6eHwZns" data-start="0"><img src="https://i.ytimg.com/vi/XirV6eHwZns/mqdefault.jpg" alt=""><span>Bosque Viento — Ponita</span></button>
+          <button class="vp-item" data-id="qs93N1doeNU" data-start="0"><img src="https://i.ytimg.com/vi/qs93N1doeNU/mqdefault.jpg" alt=""><span>Crozzoli · Díaz — Registros Creativos 2015</span></button>
+          <button class="vp-item" data-id="sEij5TvF65s" data-start="79"><img src="https://i.ytimg.com/vi/sEij5TvF65s/mqdefault.jpg" alt=""><span>Intervenciones 2014 — Creatividad en Movimiento</span></button>
+          <button class="vp-item" data-id="P9jiERNQPIo" data-start="10"><img src="https://i.ytimg.com/vi/P9jiERNQPIo/mqdefault.jpg" alt=""><span>Registros Creativos · Cinética — Creatividad en Movimiento</span></button>
         </div>
       </div>
       <div class="copy">
@@ -941,7 +947,6 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
       <h3 class="bname"><em>Duende</em></h3>
       <div class="btag">South-American–Scandinavian free improvising group</div>
       <div class="bgrid">
-        <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=996934546/size=large/bgcol=ffffff/linkcol=de270f/tracklist=false/artwork=small/transparent=true/" title="Melting Point by Duende"></iframe>
         <blockquote>“The whole album got me in tension, under a sort of unpredictability spell; these two South American musicians took one tradition and created a sort of newborn genre using improvisation as the main process.”<cite>Sergio Castrillón — cellist, PhD in Philosophy</cite></blockquote>
       </div>
       <p class="bdesc">We explore the meaning of <strong>presence</strong> and <strong>space</strong>. Through our saxophones, guitar, and electronics, we shape a sound world unique to the place, in intimate relation to the audience's energy: Duende, the audience, the stage, the city, the forest — <strong>all breathing together</strong>. An electronic soundscape traveling between distorted high peaks and smooth immersive waves, the roots of our South-American tradition translated into abstraction.</p>
@@ -951,7 +956,6 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
       <h3 class="bname"><em>Unless We</em></h3>
       <div class="btag">Experimental South American duo · Crozzoli / Díaz</div>
       <div class="bgrid">
-        <iframe loading="lazy" src="https://bandcamp.com/EmbeddedPlayer/album=558928402/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" title="Immerse by Unless We"></iframe>
         <blockquote>“Their music draws from the ‘spiritual’ well, as their every note seems to form from somewhere deep and intangible, rising to the surface in expressive waves.”<cite>Paul Aqcuaro — FreeForm</cite></blockquote>
       </div>
       <p class="bdesc">An experimental and improvised duo rooted in the belief that art can transcend any physicality through music. The distance between Europe and South America is difficult to overcome — our performance activity happens when we visit each other.</p>
