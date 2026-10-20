@@ -644,6 +644,13 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 .colophon .nw,.roles .nw{white-space:nowrap}
 @media(max-width:760px){ .colophon{flex-direction:column; align-items:center; text-align:center; gap:8px} }
 @media(max-width:360px){ .nb-lab{display:none} .nb-radio{padding-left:8px} }   /* small phones: the track title gets the room */
+.reviews{columns:2; column-gap:18px}
+.rv{break-inside:avoid; margin:0 0 18px; border:1px solid var(--line); border-left:3px solid var(--accent2); border-radius:12px; background:var(--panel); padding:20px 22px}
+.rv blockquote{margin:0; font-style:italic; font-size:16px; line-height:1.6; color:var(--ink)}
+.rv figcaption{margin-top:12px; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em; color:var(--faint)}
+.rv figcaption em{font-style:italic; font-family:var(--font-body,inherit); letter-spacing:0}
+.rv figcaption a{color:var(--accent)}
+@media(max-width:760px){ .reviews{columns:1} .rv{padding:16px 18px} .rv blockquote{font-size:15px} }
 /* phones: room above each section for the floating ← Home button */
 @media(max-width:760px){ section.detail{padding-top:84px !important} }
 @media(max-width:980px){ .mosaic{columns:2} .bio-hero .inner{grid-template-columns:1fr; align-content:end} .bio-hero .dim{background:linear-gradient(180deg, rgba(8,9,12,.2), rgba(8,9,12,.72) 60%)} .strange .grid{grid-template-columns:1fr} .psi-hero .vgrid{grid-template-columns:1fr} .improv .igrid,.band .bgrid,.ds-grid{grid-template-columns:1fr !important} nav.links{gap:18px} }
@@ -942,23 +949,13 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
         <p class="credit">photo: Silvia Musorzky</p>
       </div>
     </div>
-    <div class="shelf" style="margin-top:0">Established projects</div>
-    <div class="band">
-      <h3 class="bname"><em>Duende</em></h3>
-      <div class="btag">South-American–Scandinavian free improvising group</div>
-      <div class="bgrid">
-        <blockquote>“The whole album got me in tension, under a sort of unpredictability spell; these two South American musicians took one tradition and created a sort of newborn genre using improvisation as the main process.”<cite>Sergio Castrillón — cellist, PhD in Philosophy</cite></blockquote>
-      </div>
-      <p class="bdesc">We explore the meaning of <strong>presence</strong> and <strong>space</strong>. Through our saxophones, guitar, and electronics, we shape a sound world unique to the place, in intimate relation to the audience's energy: Duende, the audience, the stage, the city, the forest — <strong>all breathing together</strong>. An electronic soundscape traveling between distorted high peaks and smooth immersive waves, the roots of our South-American tradition translated into abstraction.</p>
-      <div class="blink"><a href="https://linktr.ee/exploreduende" target="_blank" rel="noopener">linktr.ee/exploreduende ↗</a></div>
-    </div>
-    <div class="band">
-      <h3 class="bname"><em>Unless We</em></h3>
-      <div class="btag">Experimental South American duo · Crozzoli / Díaz</div>
-      <div class="bgrid">
-        <blockquote>“Their music draws from the ‘spiritual’ well, as their every note seems to form from somewhere deep and intangible, rising to the surface in expressive waves.”<cite>Paul Aqcuaro — FreeForm</cite></blockquote>
-      </div>
-      <p class="bdesc">An experimental and improvised duo rooted in the belief that art can transcend any physicality through music. The distance between Europe and South America is difficult to overcome — our performance activity happens when we visit each other.</p>
+    <div class="shelf" style="margin-top:0">Reviews</div>
+    <div class="reviews">
+      <figure class="rv"><blockquote>“Inspired by such people as Anthony Braxton, Miguel Crozzoli makes music that is both highly intellectual and emotional.”</blockquote><figcaption><a href="https://www.allaboutjazz.com/nendodango-records-reinventing-tradition-by-jakob-baekgaard/" target="_blank" rel="noopener">Jakob Baekgaard · All About Jazz ↗</a></figcaption></figure>
+      <figure class="rv"><blockquote lang="fr">“Miguel Crozzoli, saxophoniste ténor, nous rappelle au bon souvenir des saxophonistes ardents de la free music…”</blockquote><figcaption><a href="http://grisli.canalblog.com/archives/2020/01/13/37937912.html" target="_blank" rel="noopener">Le Son Du Grisli · 2020 ↗</a></figcaption></figure>
+      <figure class="rv"><blockquote>“The whole album got me in tension, under a sort of unpredictability spell; these two South American musicians took one tradition and created a sort of newborn genre using improvisation as the main process.”</blockquote><figcaption>Sergio Castrillón, cellist, PhD in Philosophy · on <em>Melting Point</em> by Duende</figcaption></figure>
+      <figure class="rv"><blockquote>“Their music draws from the ‘spiritual’ well, as their every note seems to form from somewhere deep and intangible, rising to the surface in expressive waves.”</blockquote><figcaption>Paul Aqcuaro · FreeForm · on <em>Immerse</em> by Unless We</figcaption></figure>
+      <figure class="rv"><blockquote lang="es">“Gran trabajo de los tres músicos, destacándose especialmente el saxo de Crozzoli.”</blockquote><figcaption><a href="https://info135.com.ar/2024/09/01/trios-noruegos-ucranianos-y-argentinos-con-el-mejor-jazz/" target="_blank" rel="noopener">info135 · Sep 2024 · on <em>Distant Lights</em> ↗</a></figcaption></figure>
     </div>
   </div>
 </section>
