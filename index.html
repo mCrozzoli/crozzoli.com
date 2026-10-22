@@ -649,6 +649,7 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
 .rv figcaption em{font-style:italic; font-family:var(--font-body,inherit); letter-spacing:0}
 .rv figcaption a{color:var(--accent)}
 @media(max-width:760px){ .reviews{columns:1} .rv{padding:16px 18px} .rv blockquote{font-size:15px} }
+@media(max-width:760px){ .co-card.co-wide{grid-template-columns:96px minmax(0,1fr)} .co-card.co-wide .co-img{min-height:0} .co-card.co-wide .co-body{padding:0} }
 /* phones: room above each section for the floating ← Home button */
 @media(max-width:760px){ section.detail{padding-top:84px !important} }
 @media(max-width:980px){ .mosaic{columns:2} .bio-hero .inner{grid-template-columns:1fr; align-content:end} .bio-hero .dim{background:linear-gradient(180deg, rgba(8,9,12,.2), rgba(8,9,12,.72) 60%)} .strange .grid{grid-template-columns:1fr} .psi-hero .vgrid{grid-template-columns:1fr} .improv .igrid,.band .bgrid,.ds-grid{grid-template-columns:1fr !important} nav.links{gap:18px} }
@@ -1053,6 +1054,18 @@ a.wh-btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
           <p>A pipe organ built from solenoid valves, played from the browser. Paint a rhythm on the grid and each of up to eight pipes gets its row over ESP-NOW, ticking in perfect sync; the audience can join from their phones by QR code, and a simulated organ plays when no pipes are around.</p>
           <ul class="co-roles"><li>Software</li><li>ESP32 firmware</li><li>Simulated organ sound</li></ul>
           <div class="co-links"><a href="https://mcrozzoli.github.io/calum-organ/" target="_blank" rel="noopener">Open the sequencer ↗</a></div>
+        </div>
+      </article>
+      <article class="co-card co-wide co-soon">
+        <div class="co-img"><img src="assets/collab/dark-music-corpus.svg" alt="Drawing: a scatter of coloured dots joined by a gold route, above a row of clip slots" loading="lazy"></div>
+        <div class="co-body">
+          <div class="co-meta">In development · coming soon</div>
+          <h3>Dark Music Corpus</h3>
+          <div class="co-with">Miguel Angel Crozzoli in collaboration with Christian Høgh, Rhythmic Music Conservatory, Copenhagen</div>
+          <p>A tool to navigate a music corpus of your own, by ear and by eye, and play it into Ableton Live. The analysis runs in the browser, so your audio never leaves your computer; Max for Live devices bring the clips into Live.</p>
+          <ul class="co-roles"><li>Design</li><li>Browser analysis</li><li>Max for Live</li></ul>
+          <div class="co-links"><a href="https://mcrozzoli.github.io/dark-music-corpus/" target="_blank" rel="noopener">Project page ↗</a><a href="https://github.com/mCrozzoli/dark-music-corpus" target="_blank" rel="noopener">Source code ↗</a></div>
+          <div class="co-credit">Built with DarkSonification · designed by Miguel Angel Crozzoli, implemented with Claude AI agents</div>
         </div>
       </article>
     </div>
